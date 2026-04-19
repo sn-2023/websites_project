@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M6169WPEGY"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-M6169WPEGY');</script>
+
+<title>Free vCard QR Code Generator — Digital Business Card | QRMake</title>
+<meta name="description" content="Create a vCard QR code with name, phone, email, company and website. Scan to save contact instantly to any phone. Free, no sign-up required.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://qrmake.org/vcard-qr-code-generator/">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a vCard QR code?","acceptedAnswer":{"@type":"Answer","text":"A vCard QR code encodes contact information — name, phone, email, company, job title, and website — in the vCard (VCF) format directly inside the QR code. When scanned, the phone displays an 'Add Contact' prompt. One tap saves all the details to the phone's address book, with no typing required."}},{"@type":"Question","name":"Which phones support vCard QR codes?","acceptedAnswer":{"@type":"Answer","text":"The vCard format (RFC 6350) is supported natively by iOS Contacts, Android Contacts, Outlook, and Gmail — covering over 95% of smartphone users worldwide. Any iPhone (iOS 11+) or Android phone with a built-in camera app can scan a vCard QR code without installing any additional software."}},{"@type":"Question","name":"What information can I store in a vCard QR code?","acceptedAnswer":{"@type":"Answer","text":"A vCard QR code can store your first and last name, phone number, email address, company or organization name, job title, and website URL. All fields are optional — include only what you want to share. These fields cover 99% of real-world contact sharing needs."}},{"@type":"Question","name":"Is a vCard QR code different from a regular QR code?","acceptedAnswer":{"@type":"Answer","text":"A vCard QR code uses the same visual QR format but encodes data in the vCard (VCF) contact format rather than a URL or plain text. When scanned, phones recognize the vCard format and open the native contacts app instead of a browser. A URL QR code opens a website; a vCard QR code saves contact details directly."}},{"@type":"Question","name":"Can I update my vCard QR code after printing?","acceptedAnswer":{"@type":"Answer","text":"A static vCard QR code cannot be updated after printing — it encodes your information permanently. If your contact details change, you need to regenerate the QR code and reprint or redistribute it. For frequently changing information, consider linking to an online contact page using a URL QR code instead."}},{"@type":"Question","name":"Is a vCard QR code free to create?","acceptedAnswer":{"@type":"Answer","text":"Yes. QRMake generates vCard QR codes completely free with no sign-up, no watermarks, and no expiration. Your contact data is processed entirely in your browser — it is never stored on any server."}}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"vCard QR Code Generator — QRMake","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Create a free vCard QR code — a digital business card. Scan to instantly save contact details including name, phone, email, company, and website to any phone.","url":"https://qrmake.org/vcard-qr-code-generator/"}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>:root{--bg:#06060b;--surface:#0d0d14;--card:#111119;--border:rgba(255,255,255,0.06);--border-hover:rgba(255,255,255,0.12);--text:#eeeef3;--dim:#c0c0d4;--accent:#6c5ce7;--accent-glow:rgba(108,92,231,0.3);--mint:#00d2b4;--pink:#ff6b9d;--orange:#ffa44f;--radius:16px}
+*{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',sans-serif;min-height:100vh;overflow-x:hidden}
+.ambient{position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:0}.ambient .orb{position:absolute;border-radius:50%;filter:blur(120px);opacity:0.12;animation:float 20s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(30px,-30px) scale(1.05)}66%{transform:translate(-20px,20px) scale(0.95)}}
+.app{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:24px}
+.header{display:flex;justify-content:space-between;align-items:center;padding:16px 0;margin-bottom:48px}.logo-link{text-decoration:none}.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:24px;background:linear-gradient(135deg,var(--accent),var(--mint));-webkit-background-clip:text;-webkit-text-fill-color:transparent}.logo-sub{font-size:11px;color:var(--dim);letter-spacing:2px;text-transform:uppercase;margin-top:2px;font-family:'DM Mono',monospace}.breadcrumb{font-size:13px;color:var(--dim);font-family:'DM Mono',monospace}.breadcrumb a{color:var(--dim);text-decoration:none}.breadcrumb a:hover{color:var(--accent)}.breadcrumb span{color:var(--text)}
+.hero-text{text-align:center;margin-bottom:56px}.hero-text h1{font-family:'Syne',sans-serif;font-size:clamp(28px,5vw,52px);font-weight:800;line-height:1.1;margin-bottom:16px;letter-spacing:-2px}.hero-text p{color:var(--dim);font-size:17px;max-width:560px;margin:0 auto;line-height:1.6}
+.workspace{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}@media(max-width:1200px){.workspace{grid-template-columns:1fr}}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px}.panel:hover{border-color:var(--border-hover)}.panel-title{font-family:'DM Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--dim);margin-bottom:24px}
+.input-group{margin-bottom:16px}.input-label{font-size:12px;color:var(--dim);font-family:'DM Mono',monospace;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;display:block}.input-field{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 16px;color:var(--text);font-size:14px;font-family:'Space Grotesk',sans-serif;outline:none;transition:all 0.25s}.input-field:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}.input-field::placeholder{color:var(--dim)}.input-field:-webkit-autofill,.input-field:-webkit-autofill:hover,.input-field:-webkit-autofill:focus{-webkit-text-fill-color:var(--text)!important;-webkit-box-shadow:0 0 0 100px var(--surface) inset!important;transition:background-color 5000s ease}
+.row-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.preview-panel{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;position:sticky;top:24px}
+.qr-display{background:#fff;border-radius:14px;padding:32px;display:flex;align-items:center;justify-content:center;min-height:300px;margin-bottom:24px;box-shadow:0 20px 60px rgba(0,0,0,0.3)}.qr-display #qrcode{display:flex;align-items:center;justify-content:center}.qr-placeholder{display:flex;flex-direction:column;align-items:center;gap:12px;color:#555565}.qr-placeholder .ph-icon{font-size:48px;opacity:0.5}.qr-placeholder .ph-text{font-size:14px;color:#333348;font-weight:500}
+.download-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.dl-btn{padding:14px;border-radius:12px;border:none;cursor:pointer;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;transition:all 0.25s;display:flex;align-items:center;justify-content:center;gap:8px}.dl-btn.primary{background:linear-gradient(135deg,var(--accent),#8b5cf6);color:#fff;box-shadow:0 4px 20px var(--accent-glow)}.dl-btn.primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px var(--accent-glow)}.dl-btn.secondary{background:var(--surface);color:var(--text);border:1px solid var(--border)}
+.seo-content{max-width:1200px;margin:48px auto;padding:0 16px}.seo-content h2{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;margin-top:40px;margin-bottom:16px}.seo-content h2:first-child{margin-top:0}.seo-content h3{font-size:18px;font-weight:600;margin-top:28px;margin-bottom:10px}.seo-content p{color:var(--dim);font-size:15px;line-height:1.7;margin-bottom:14px}.seo-content strong{color:var(--text)}.seo-content a{color:var(--accent);text-decoration:none}.seo-content a:hover{text-decoration:underline}
+.site-footer{border-top:1px solid var(--border);margin-top:48px;padding:48px 0 32px}.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;max-width:1000px;margin:0 auto;padding:0 16px}@media(max-width:700px){.footer-grid{grid-template-columns:1fr 1fr}}@media(max-width:480px){.footer-grid{grid-template-columns:1fr}}.footer-brand p{font-size:13px;color:var(--dim);line-height:1.6}.footer-col h4{font-family:'DM Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--dim);margin-bottom:16px}.footer-col a{display:block;color:var(--dim);font-size:13px;text-decoration:none;padding:4px 0}.footer-col a:hover{color:var(--accent)}.footer-bottom{text-align:center;margin-top:40px;padding-top:24px;border-top:1px solid var(--border);font-size:12px;color:var(--dim)}
+.toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 24px;font-size:14px;z-index:200;display:flex;align-items:center;gap:10px;box-shadow:0 12px 40px rgba(0,0,0,0.4);transition:transform 0.4s cubic-bezier(0.16,1,0.3,1)}.toast.show{transform:translateX(-50%) translateY(0)}
+.fade-in{opacity:0;transform:translateY(20px);animation:fadeUp 0.6s ease forwards}@keyframes fadeUp{to{opacity:1;transform:none}}
+.tip-box{background:rgba(108,92,231,0.08);border:1px solid rgba(108,92,231,0.2);border-radius:10px;padding:14px;font-size:13px;color:#a89be0;line-height:1.5;margin-bottom:20px}
+.geo-stats{background:rgba(108,92,231,0.06);border:1px solid rgba(108,92,231,0.15);border-radius:12px;padding:20px;margin:24px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
+.geo-stat{text-align:center}.geo-stat .stat-num{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--accent);display:block}.geo-stat .stat-label{font-size:12px;color:var(--dim);line-height:1.4}.geo-stat .stat-source{font-size:11px;color:var(--dim);opacity:0.6;font-family:'DM Mono',monospace;margin-top:4px}
+.cta-box{background:linear-gradient(135deg,rgba(108,92,231,0.1),rgba(0,210,180,0.1));border:1px solid rgba(108,92,231,0.2);border-radius:var(--radius);padding:32px;text-align:center;margin:40px 0}.cta-box h3{margin-top:0;font-size:20px;margin-bottom:8px;font-family:'Syne',sans-serif;font-weight:700}.cta-box p{margin-bottom:16px;color:var(--dim);font-size:15px}
+.cta-btn{display:inline-block;background:linear-gradient(135deg,var(--accent),#8b5cf6);color:#fff !important;padding:12px 28px;border-radius:12px;text-decoration:none;font-weight:600;transition:all 0.25s}.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px var(--accent-glow);text-decoration:none !important;color:#fff !important}
+
+.ambient .orb:nth-child(1){width:500px;height:500px;background:var(--accent);top:-200px;right:-100px}
+.ambient .orb:nth-child(2){width:400px;height:400px;background:var(--mint);bottom:-200px;left:-100px;animation-delay:-7s}
+</style>
+</head>
+<body>
+<div class="ambient"><div class="orb"></div><div class="orb"></div></div>
+<div class="app">
+  <header class="header fade-in"><a href="/" class="logo-link"><div class="logo">QRMake</div><div class="logo-sub">free qr generator</div></a><nav class="breadcrumb"><a href="/">Home</a> / <span>vCard QR Code</span></nav></header>
+  <div class="hero-text fade-in"><h1 style="background:linear-gradient(135deg,var(--accent),var(--mint));-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:inline">vCard QR Code Generator</h1><p>Create a digital business card QR code. Scan to instantly save your contact details — name, phone, email, company, and website.</p></div>
+  <div class="workspace">
+    <div class="panel fade-in">
+      <div class="panel-title">Contact Details</div>
+      <div class="tip-box">Fill in as many fields as you like. All fields are optional except at least one contact method.</div>
+      <div class="row-2">
+        <div class="input-group"><label class="input-label">First Name</label><input class="input-field" id="fname" placeholder="Jane" oninput="gen()"></div>
+        <div class="input-group"><label class="input-label">Last Name</label><input class="input-field" id="lname" placeholder="Smith" oninput="gen()"></div>
+      </div>
+      <div class="input-group"><label class="input-label">Phone Number</label><input class="input-field" id="phone" placeholder="+1 555-123-4567" oninput="gen()"></div>
+      <div class="input-group"><label class="input-label">Email Address</label><input class="input-field" id="email" placeholder="jane@example.com" oninput="gen()"></div>
+      <div class="input-group"><label class="input-label">Company / Organisation</label><input class="input-field" id="org" placeholder="Acme Inc." oninput="gen()"></div>
+      <div class="input-group"><label class="input-label">Job Title</label><input class="input-field" id="title" placeholder="Marketing Director" oninput="gen()"></div>
+      <div class="input-group"><label class="input-label">Website</label><input class="input-field" id="website" placeholder="https://example.com" oninput="gen()"></div>
+    </div>
+    <div class="preview-panel fade-in"><div class="panel-title">Your vCard QR Code</div><div class="qr-display"><div id="qrcode"></div><div class="qr-placeholder" id="ph"><div class="ph-icon">👤</div><div class="ph-text">Enter contact details to start</div></div></div>
+      <div class="download-row"><button class="dl-btn primary" onclick="dlPNG('vcard-qr')"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> PNG</button><button class="dl-btn secondary" onclick="dlPNG('vcard-qr')"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> SVG</button></div>
+    </div>
+  </div>
+
+  <div class="seo-content">
+    <h2>What Is a vCard QR Code?</h2>
+
+    <div class="geo-stats">
+      <div class="geo-stat">
+        <span class="stat-num">80%</span>
+        <div class="stat-label">of professionals consider in-person networking critical to career success</div>
+        <div class="stat-source">LinkedIn</div>
+      </div>
+      <div class="geo-stat">
+        <span class="stat-num">88%</span>
+        <div class="stat-label">of paper business cards are discarded within a week of receipt</div>
+        <div class="stat-source">Adobe Study</div>
+      </div>
+      <div class="geo-stat">
+        <span class="stat-num">95%+</span>
+        <div class="stat-label">of smartphone users have native vCard support (iOS, Android, Outlook, Gmail)</div>
+        <div class="stat-source">RFC 6350 Coverage</div>
+      </div>
+      <div class="geo-stat">
+        <span class="stat-num">$33.1B</span>
+        <div class="stat-label">projected global QR code market size by 2030</div>
+        <div class="stat-source">Grand View Research, 2023</div>
+      </div>
+    </div>
+
+    <p>A vCard QR code stores your contact information in the <strong>vCard format</strong> (also called VCF), which is universally supported by iPhone, Android, and all major contact apps. When someone scans it, they see an "Add Contact" prompt — one tap and your details are saved. No app download, no typing. According to LinkedIn, 80% of professionals consider in-person networking critical to career success, making frictionless contact sharing more valuable than ever.</p>
+    <p>This is the digital evolution of the paper business card. An Adobe study found that 88% of paper business cards are discarded within a week of receipt — a vCard QR code ensures your contact details survive digitally even when the physical card is lost. You can put your vCard QR code on a physical business card, email signature, presentation slide, trade show badge, or website.</p>
+
+    <h3>What Fields Can You Include?</h3>
+    <p>Our vCard QR code generator supports the most important contact fields: <strong>first and last name, phone number, email address, company, job title, and website.</strong> The vCard format (RFC 6350) is supported natively by iOS Contacts, Android Contacts, Outlook, and Gmail — covering over 95% of smartphone users worldwide. These fields cover 99% of real-world use cases and keep the QR code compact enough to scan reliably.</p>
+
+    <h3>How to Use Your vCard QR Code</h3>
+    <p><strong>1. Fill in your details</strong> — add as many or as few fields as you want. <strong>2. Download your QR code</strong> as a high-resolution PNG. <strong>3. Add it to your business card</strong> next to your printed contact info, or use it anywhere digital.</p>
+    <p>When someone scans the code with their phone camera, the contact card appears instantly. They tap "Add Contact" and you're saved to their phone book — without any manual typing. According to Statista, 89 million US smartphone users scanned a QR code in 2022, so the habit is already widespread.</p>
+
+    <h3>vCard vs URL QR Code</h3>
+    <p>A URL QR code just opens a website. A vCard QR code encodes your contact information directly — no server, no link to break, works offline. The tradeoff: if your details change, you need to regenerate the QR code. For frequently changing information, consider linking to an online contact page instead.</p>
+
+    <h3>Best Practices</h3>
+    <p><strong>Print size:</strong> Use at least 2 cm × 2 cm (0.8 inch) for reliable scanning. Include a small margin around the code. <strong>Test before printing:</strong> Always scan your QR code with multiple phones before sending to print. <strong>Label it:</strong> Add "Scan to save contact" below the QR code — it dramatically increases scan rates.</p>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <h3>What is a vCard QR code?</h3>
+    <p>A vCard QR code encodes your contact details — name, phone, email, company, job title, website — in the universal vCard (VCF) format inside a QR code. When scanned, the phone's contacts app opens with an "Add Contact" prompt. One tap saves everything permanently, with no manual entry required.</p>
+
+    <h3>Which phones support vCard QR codes?</h3>
+    <p>The vCard format (RFC 6350) is supported natively by iOS Contacts, Android Contacts, Outlook, and Gmail — covering over 95% of smartphone users worldwide. Any iPhone running iOS 11 or later and any modern Android phone can scan a vCard QR code with the built-in camera, no app needed.</p>
+
+    <h3>What information can I store in a vCard QR code?</h3>
+    <p>You can store first and last name, phone number, email address, company name, job title, and website URL. All fields are optional — include only what you want to share. These cover the vast majority of professional contact sharing needs while keeping the QR code compact and scannable.</p>
+
+    <h3>Is a vCard QR code different from a regular QR code?</h3>
+    <p>It uses the same visual QR format but encodes data in the vCard contact format rather than a URL or plain text. Phones recognize the vCard format and open the contacts app rather than a browser. A URL QR code opens a website; a vCard QR code saves contact details directly to your address book.</p>
+
+    <h3>Can I update my vCard QR code after printing?</h3>
+    <p>A static vCard QR code encodes your information permanently and cannot be edited after creation. If your contact details change, regenerate the QR code and reprint or redistribute it. For frequently changing details, consider a URL QR code pointing to an online contact page you control.</p>
+
+    <div class="cta-box">
+      <h3>Need a QR code for your website or social media?</h3>
+      <p>Use the main QRMake generator for URLs, text, WiFi, and email — all free, no limits.</p>
+      <a href="/" class="cta-btn">Open QR Code Generator →</a>
+    </div>
+
+    <h2>Related Tools</h2>
+    <p>Explore more free QR code tools: <a href="/business-card-qr-code/">business card QR code tips</a>, <a href="/sms-qr-code-generator/">SMS QR code generator</a>, <a href="/phone-number-qr-code/">phone number QR code</a>, <a href="/social-media-qr-code/">social media QR code</a>, and <a href="/how-to-make-qr-code-for-link/">how to make a QR code for any link</a>.</p>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand"><div class="logo">QRMake</div><p>Free QR code generator. No sign-up, no limits, no watermarks.</p></div>
+      <div class="footer-col"><h4>QR Tools</h4><a href="/wifi-qr-code-generator/">WiFi QR Code</a><a href="/business-card-qr-code/">Business Card QR</a><a href="/restaurant-menu-qr-code/">Restaurant Menu QR</a><a href="/google-form-qr-code/">Google Form QR</a><a href="/vcard-qr-code-generator/">vCard QR Code</a><a href="/sms-qr-code-generator/">SMS QR Code</a><a href="/phone-number-qr-code/">Phone Number QR</a><a href="/pdf-qr-code-generator/">PDF QR Code</a><a href="/social-media-qr-code/">Social Media QR</a><a href="/whatsapp-qr-code/">WhatsApp QR Code</a><a href="/youtube-qr-code/">YouTube QR Code</a><a href="/linkedin-qr-code/">LinkedIn QR Code</a><a href="/email-qr-code-generator/">Email QR Code</a><a href="/qr-code-for-location/">Location QR Code</a><a href="/upi-qr-code-generator/">UPI QR Code</a><a href="/gpay-qr-code-generator/">Google Pay QR</a><a href="/phonepe-qr-code-generator/">PhonePe QR</a><a href="/bhim-qr-code-generator/">BHIM QR Code</a></div>
+      <div class="footer-col"><h4>Guides</h4><a href="/how-to-scan-qr-code-iphone/">Scan QR on iPhone</a><a href="/dynamic-vs-static-qr-code/">Dynamic vs Static QR</a><a href="/qr-code-png-download/">QR Code PNG Download</a><a href="/qr-code-size-guide/">QR Code Size Guide</a><a href="/qr-code-for-google-reviews/">QR Code for Google Reviews</a><a href="/how-to-create-qr-code-for-pdf/">QR Code for PDF</a><a href="/qr-code-for-instagram/">QR Code for Instagram</a><a href="/how-to-make-qr-code-for-link/">QR Code for Any Link</a><a href="/qr-code-marketing/">QR Code Marketing</a><a href="/qr-code-vs-barcode/">QR Code vs Barcode</a><a href="/qr-code-on-business-card/">QR Code on Business Card</a><a href="/how-to-track-qr-code/">How to Track QR Code</a><a href="/qr-code-error-correction/">QR Code Error Correction</a></div>
+      <div class="footer-col"><h4>QRMake</h4><a href="/">Home</a><a href="mailto:hello@qrmake.org">Contact</a></div>
+    </div>
+    <div class="footer-bottom">© 2025 QRMake. Free QR Code Generator.</div>
+  </footer>
+</div>
+
+<div class="toast" id="toast"><span class="toast-icon">✓</span><span id="toastText">Done</span></div>
+<script>
+function gen(){
+  const fn=document.getElementById('fname').value.trim();
+  const ln=document.getElementById('lname').value.trim();
+  const ph=document.getElementById('phone').value.trim();
+  const em=document.getElementById('email').value.trim();
+  const org=document.getElementById('org').value.trim();
+  const ti=document.getElementById('title').value.trim();
+  const web=document.getElementById('website').value.trim();
+  if(!fn&&!ln&&!ph&&!em){
+    document.getElementById('qrcode').innerHTML='';
+    document.getElementById('ph').style.display='flex';
+    return;
+  }
+  document.getElementById('ph').style.display='none';
+  document.getElementById('qrcode').innerHTML='';
+  let v='BEGIN:VCARD\nVERSION:3.0\n';
+  v+='N:'+ln+';'+fn+';;;\n';
+  v+='FN:'+[fn,ln].filter(Boolean).join(' ')+'\n';
+  if(org)v+='ORG:'+org+'\n';
+  if(ti)v+='TITLE:'+ti+'\n';
+  if(ph)v+='TEL;TYPE=CELL:'+ph+'\n';
+  if(em)v+='EMAIL:'+em+'\n';
+  if(web)v+='URL:'+web+'\n';
+  v+='END:VCARD';
+  new QRCode(document.getElementById('qrcode'),{text:v,width:256,height:256,colorDark:'#000',colorLight:'#fff',correctLevel:QRCode.CorrectLevel.M});
+}
+function dlPNG(name){
+  const c=document.querySelector('#qrcode canvas');
+  if(!c){showToast('⚠️','Fill in at least one field first');return;}
+  const s=4,h=document.createElement('canvas');
+  h.width=c.width*s;h.height=c.height*s;
+  const x=h.getContext('2d');x.imageSmoothingEnabled=false;
+  x.drawImage(c,0,0,h.width,h.height);
+  const a=document.createElement('a');a.download=name+'-qrmake.png';
+  a.href=h.toDataURL('image/png');a.click();
+  showToast('✓','QR code downloaded as PNG');
+}
+function showToast(i,t){
+  const toast=document.getElementById('toast');
+  document.getElementById('toastText').textContent=t;
+  toast.querySelector('.toast-icon').textContent=i;
+  toast.classList.add('show');
+  setTimeout(()=>toast.classList.remove('show'),3000);
+}
+</script>
+</body></html>
