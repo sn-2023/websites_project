@@ -1,0 +1,6 @@
+{
+  "trailingSlash": true,
+  "redirects": [
+    { "source": "/PPFCalculator.html", "destination": "/", "permanent": false }
+  ]
+}

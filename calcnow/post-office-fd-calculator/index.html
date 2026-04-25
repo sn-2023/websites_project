@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Post Office FD Calculator 2026 — Calculate Fixed Deposit Interest & Maturity | CalcNow</title>
+<meta name="description" content="Free Post Office FD calculator. Calculate maturity amount, interest earned on India Post fixed deposits. Updated with latest Q1 FY2026-27 interest rates — 6.9% to 7.5%.">
+<link rel="canonical" href="https://calcnow.in/post-office-fd-calculator/">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Post Office FD Calculator","description":"Calculate maturity amount for India Post fixed deposits with latest rates.","url":"https://calcnow.in/post-office-fd-calculator/","applicationCategory":"FinanceApplication","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the post office FD interest rate in 2026?","acceptedAnswer":{"@type":"Answer","text":"Post Office FD rates for Q1 FY 2026-27 (April-June 2026), as notified by the Ministry of Finance on March 31, 2026: 1 year — 6.9%, 2 years — 7.0%, 3 years — 7.1%, 5 years — 7.5%. Important: Unlike banks, Post Office Time Deposit rates are the same for all age groups — no senior citizen bonus applies. Senior citizens seeking higher rates should consider the separate SCSS scheme at 8.2%."}},{"@type":"Question","name":"Is post office FD safe?","acceptedAnswer":{"@type":"Answer","text":"Yes. Post Office FDs are backed by the Government of India, making them one of the safest investment options. Unlike bank FDs which are insured only up to ₹5 lakh by DICGC, post office deposits carry sovereign guarantee with zero credit risk."}},{"@type":"Question","name":"What is the minimum deposit for post office FD?","acceptedAnswer":{"@type":"Answer","text":"The minimum deposit for a Post Office Time Deposit is ₹1,000, with no maximum limit. Deposits must be in multiples of ₹100. You can open an account at any of India's 1.55 lakh post office branches."}},{"@type":"Question","name":"Is post office FD interest taxable?","acceptedAnswer":{"@type":"Answer","text":"Yes, interest earned on post office FDs is fully taxable as per your income tax slab. TDS is deducted at 10% if total interest exceeds ₹40,000 per year (₹50,000 for senior citizens) under Section 194A. The 5-year FD qualifies for Section 80C deduction up to ₹1.5 lakh."}},{"@type":"Question","name":"What is SCSS and is it better than Post Office FD for senior citizens?","acceptedAnswer":{"@type":"Answer","text":"Senior Citizens Savings Scheme (SCSS) is a government-backed scheme for those aged 60+ (55+ for VRS retirees, 50+ for defence retirees) offering 8.2% p.a. with quarterly payouts — higher than Post Office TD's 7.5% for 5 years. SCSS provides regular quarterly income, Section 80C benefit, and sovereign guarantee. Maximum deposit is ₹30 lakh."}},{"@type":"Question","name":"What is the SCSS interest rate for 2026?","acceptedAnswer":{"@type":"Answer","text":"SCSS interest rate for Q1 FY 2026-27 is 8.2% per annum (effective April 1, 2026), as notified by the Ministry of Finance on March 31, 2026. Interest is paid quarterly. For ₹5 lakh invested, quarterly payout is ₹10,250 and annual income is ₹41,000. The 8.2% rate has remained unchanged since April 2023."}},{"@type":"Question","name":"Who is eligible for SCSS?","acceptedAnswer":{"@type":"Answer","text":"SCSS is available to: (1) Indian residents aged 60+; (2) Retired employees aged 55-60 under VRS/superannuation — must open within 1 month of receiving retirement benefits; (3) Retired defence personnel aged 50-60 — must open within 1 month. NRIs and HUFs are not eligible. Accounts can be opened at post offices or 28+ authorized banks including SBI, HDFC, ICICI, and Axis Bank."}}]}</script>
+<style>/* CalcNow.in — Shared Design System v3 */
+/* Plus Jakarta Sans + IBM Plex Mono loaded via HTML */
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes numberPop{0%{transform:scale(0.8);opacity:0}60%{transform:scale(1.05)}100%{transform:scale(1);opacity:1}}
+@keyframes slideRight{from{transform:translateX(-8px);opacity:0}to{transform:translateX(0);opacity:1}}
+@keyframes glow{0%,100%{box-shadow:0 0 20px rgba(16,185,129,0.1)}50%{box-shadow:0 0 40px rgba(16,185,129,0.2)}}
+
+:root{
+--bg:#F9FAFB;--surface:#FFF;--surface-warm:#FDFCFA;--text:#0F172A;--text2:#475569;--text3:#94A3B8;
+--emerald:#10B981;--emerald-dark:#059669;--teal:#14B8A6;--cyan:#06B6D4;
+--violet:#8B5CF6;--amber:#F59E0B;--rose:#F43F5E;--blue:#3B82F6;
+--g1:linear-gradient(135deg,#10B981 0%,#06B6D4 100%);
+--g2:linear-gradient(135deg,#F0FDF4 0%,#ECFEFF 50%,#F0F9FF 100%);
+--border:#E2E8F0;--border-l:#F1F5F9;
+--r:16px;--r-sm:12px;--r-xs:8px;
+--font:'Plus Jakarta Sans',system-ui,sans-serif;
+--mono:'IBM Plex Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased}
+::selection{background:rgba(16,185,129,0.15)}
+
+/* NAV */
+nav{background:rgba(255,255,255,0.72);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid rgba(0,0,0,0.04);padding:0 24px;position:sticky;top:0;z-index:100}
+.nav-in{max-width:1140px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-weight:800;font-size:24px;text-decoration:none;letter-spacing:-1.5px;background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-pills{display:flex;gap:4px;background:var(--bg);padding:4px;border-radius:28px}
+.nav-pill{padding:7px 16px;font-size:13px;font-weight:600;color:var(--text3);text-decoration:none;border-radius:24px;transition:all 0.25s}
+.nav-pill:hover{color:var(--text2)}
+.nav-pill.on{background:var(--surface);color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,0.06)}
+.nav-m{display:none;border:none;background:none;cursor:pointer;width:40px;height:40px;border-radius:10px;align-items:center;justify-content:center}
+.nav-m svg{width:22px;height:22px;stroke:var(--text);fill:none;stroke-width:2}
+
+/* HERO */
+.hero-section{position:relative;overflow:hidden;padding:48px 24px 56px;background:var(--g2)}
+.hero-section::before{content:'';position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(16,185,129,0.08),transparent 70%);top:-200px;right:-100px}
+.hero-section::after{content:'';position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(6,182,212,0.06),transparent 70%);bottom:-150px;left:-100px}
+.hero-in{max-width:1140px;margin:0 auto;position:relative;z-index:1}
+.crumb{font-size:13px;color:var(--text3);margin-bottom:20px}
+.crumb a{color:var(--text2);text-decoration:none}
+.crumb a:hover{color:var(--emerald)}
+.hero-in h1{font-size:clamp(30px,5.5vw,48px);font-weight:800;letter-spacing:-1.5px;line-height:1.1;margin-bottom:14px}
+.hero-in h1 em{font-style:normal;background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-p{font-size:17px;color:var(--text2);max-width:520px;margin-bottom:20px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;background:rgba(255,255,255,0.8);backdrop-filter:blur(8px);border:1px solid rgba(16,185,129,0.08);border-radius:24px;font-size:12px;font-weight:600;color:var(--emerald-dark)}
+.chip i{width:6px;height:6px;border-radius:50%;background:var(--emerald);animation:glow 3s infinite}
+
+/* CALCULATOR CARD */
+.main{max-width:1140px;margin:-24px auto 0;padding:0 24px;position:relative;z-index:10}
+.calc{background:var(--surface);border:1px solid var(--border);border-radius:24px;box-shadow:0 8px 40px rgba(0,0,0,0.04),0 0 0 1px rgba(0,0,0,0.02);overflow:hidden;animation:fadeIn 0.5s ease}
+.tabs{display:flex;padding:6px;margin:20px 24px 0;background:var(--bg);border-radius:14px}
+.tab{flex:1;padding:12px;text-align:center;font-size:14px;font-weight:700;cursor:pointer;border:none;background:none;color:var(--text3);border-radius:10px;transition:all 0.3s;font-family:var(--font)}
+.tab.on{background:var(--surface);color:var(--text);box-shadow:0 2px 8px rgba(0,0,0,0.06)}
+.calc-body{padding:24px 28px 28px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:20px}
+.fld label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--text3);margin-bottom:8px}
+.fld .inp-wrap{position:relative}
+.fld input{width:100%;height:56px;border:2px solid var(--border);border-radius:var(--r-sm);padding:0 48px 0 20px;font-size:22px;font-family:var(--mono);font-weight:700;color:var(--text);background:var(--bg);transition:all 0.3s}
+.fld input:focus{outline:none;border-color:var(--emerald);background:#fff;box-shadow:0 0 0 4px rgba(16,185,129,0.08)}
+.fld .unit{position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:13px;font-weight:700;color:var(--text3);pointer-events:none}
+.fld select{width:100%;height:56px;border:2px solid var(--border);border-radius:var(--r-sm);padding:0 40px 0 20px;font-size:15px;font-family:var(--font);font-weight:600;color:var(--text);background:var(--bg);transition:all 0.3s;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394A3B8' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+.fld select:focus{outline:none;border-color:var(--emerald);box-shadow:0 0 0 4px rgba(16,185,129,0.08)}
+.fld input.sm-input{font-size:18px;height:52px}
+
+/* RESULTS */
+.results{background:linear-gradient(180deg,#F8FAFC,#F1F5F9);border-top:1px solid var(--border-l);padding:28px}
+.result-top{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+.res-visual{display:flex;align-items:center;justify-content:center;padding:20px}
+.res-numbers{display:flex;flex-direction:column;gap:10px}
+.num-card{padding:14px 18px;background:var(--surface);border-radius:var(--r-sm);border:1px solid var(--border-l);animation:slideRight 0.4s ease both}
+.num-card:nth-child(2){animation-delay:0.1s}
+.num-card:nth-child(3){animation-delay:0.15s}
+.num-card:nth-child(4){animation-delay:0.2s}
+.num-card:nth-child(5){animation-delay:0.25s}
+.num-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text3);display:flex;align-items:center;gap:6px}
+.num-label .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.num-val{font-family:var(--mono);font-size:22px;font-weight:700;color:var(--text);animation:numberPop 0.5s ease}
+.num-card.total-card{background:var(--g1);border:none}
+.num-card.total-card .num-label{color:rgba(255,255,255,0.7)}
+.num-card.total-card .num-label .dot{background:rgba(255,255,255,0.5)}
+.num-card.total-card .num-val{color:#fff}
+
+/* Full-width result cards (no donut) */
+.result-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:20px}
+
+/* BREAKDOWN TABLE */
+.breakdown-table{background:var(--surface);border-radius:var(--r-sm);border:1px solid var(--border-l);overflow:hidden;margin-bottom:16px}
+.breakdown-table table{width:100%;border-collapse:collapse}
+.breakdown-table th{padding:10px 18px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--text3);background:var(--bg);border-bottom:1px solid var(--border-l)}
+.breakdown-table td{padding:14px 18px;border-bottom:1px solid var(--border-l);font-size:14px;color:var(--text2)}
+.breakdown-table .mn{font-family:var(--mono);font-weight:700;color:var(--text)}
+.breakdown-table tr:last-child td{border:none;background:linear-gradient(135deg,#F0FDF4,#ECFEFF);font-weight:700}
+.breakdown-table tr:hover:not(:last-child){background:var(--bg)}
+
+/* SHARE BUTTONS */
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.act-btn{display:inline-flex;align-items:center;gap:7px;padding:10px 20px;border:1.5px solid var(--border);border-radius:28px;background:var(--surface);font-size:13px;font-weight:600;cursor:pointer;color:var(--text2);font-family:var(--font);transition:all 0.25s}
+.act-btn:hover{border-color:var(--emerald);color:var(--emerald);transform:translateY(-1px);box-shadow:0 4px 12px rgba(16,185,129,0.08)}
+.act-btn svg{width:15px;height:15px}
+
+/* CONTENT */
+.content-area{max-width:1140px;margin:64px auto;padding:0 24px}
+.content-grid{display:grid;grid-template-columns:1fr 340px;gap:56px}
+.art h2{font-size:24px;font-weight:800;letter-spacing:-0.5px;margin:48px 0 14px;display:flex;align-items:center;gap:10px}
+.art h2:first-child{margin-top:0}
+.art h2 .h-icon{width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.art h3{font-size:18px;font-weight:700;margin:32px 0 10px}
+.art p{font-size:15.5px;color:var(--text2);margin-bottom:18px;line-height:1.85}
+.art ul,.art ol{margin:0 0 18px 20px;color:var(--text2);font-size:15.5px}
+.art li{margin-bottom:10px;line-height:1.8}
+.formula{background:linear-gradient(135deg,#F0FDF4,#ECFEFF);border:1px solid rgba(16,185,129,0.1);border-radius:var(--r-sm);padding:20px 24px;margin:20px 0;font-family:var(--mono);font-size:14px;font-weight:600;line-height:2.2;position:relative;overflow:hidden}
+.formula::before{content:'f(x)';position:absolute;top:8px;right:12px;font-size:11px;color:var(--emerald);opacity:0.4;font-weight:700}
+.quick-answer{background:var(--g2);border:1px solid rgba(16,185,129,0.08);border-radius:var(--r-sm);padding:18px 22px;margin:20px 0}
+.quick-answer strong{display:block;font-size:14px;color:var(--text);margin-bottom:6px}
+.quick-answer p{font-size:14px;color:var(--text2);margin:0;line-height:1.7}
+.rate-tbl{width:100%;border-collapse:separate;border-spacing:0;margin:20px 0;border-radius:var(--r-sm);overflow:hidden;border:1px solid var(--border)}
+.rate-tbl th{background:var(--g1);color:#fff;padding:14px 18px;text-align:left;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px}
+.rate-tbl td{padding:13px 18px;border-bottom:1px solid var(--border-l);font-size:14px;color:var(--text2)}
+.rate-tbl tr:nth-child(even){background:#FAFBFC}
+.rate-tbl tr:hover td{background:rgba(16,185,129,0.03)}
+
+/* CTA */
+.cta{background:var(--g1);border-radius:20px;padding:40px;text-align:center;margin:48px 0;position:relative;overflow:hidden}
+.cta::before{content:'';position:absolute;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,0.05);top:-100px;right:-60px}
+.cta h3{font-size:22px;font-weight:800;color:#fff;margin-bottom:8px;position:relative}
+.cta p{color:rgba(255,255,255,0.8);font-size:15px;margin-bottom:20px;position:relative}
+.cta a{display:inline-block;background:#fff;color:var(--emerald-dark);padding:14px 36px;border-radius:28px;font-weight:800;font-size:15px;text-decoration:none;transition:all 0.3s;position:relative;box-shadow:0 4px 20px rgba(0,0,0,0.1)}
+.cta a:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 8px 30px rgba(0,0,0,0.15)}
+
+/* SIDEBAR */
+.side{position:sticky;top:84px;align-self:start}
+.s-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:24px;margin-bottom:14px;transition:all 0.3s}
+.s-card:hover{box-shadow:0 4px 20px rgba(0,0,0,0.04)}
+.s-card h3{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--text3);margin-bottom:14px}
+.s-link{display:flex;align-items:center;gap:12px;padding:10px 0;text-decoration:none;border-bottom:1px solid var(--border-l);transition:all 0.2s}
+.s-link:last-child{border:none}
+.s-link:hover{padding-left:6px}
+.s-link:hover .s-name{color:var(--emerald)}
+.s-ico{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;flex-shrink:0}
+.s-name{font-size:14px;font-weight:600;color:var(--text2);transition:color 0.2s}
+
+/* FAQ */
+.faq-section{max-width:1140px;margin:64px auto;padding:0 24px 80px}
+.faq-section>h2{font-size:24px;font-weight:800;margin-bottom:24px;letter-spacing:-0.5px}
+.fq{border:1px solid var(--border);border-radius:var(--r-sm);margin-bottom:8px;background:var(--surface);transition:all 0.3s;overflow:hidden}
+.fq:hover{border-color:rgba(16,185,129,0.2)}
+.fq.open{border-color:var(--emerald);box-shadow:0 0 0 3px rgba(16,185,129,0.04)}
+.fq-q{padding:18px 22px;font-size:15px;font-weight:700;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.fq-q:hover{background:var(--bg)}
+.fq-a{padding:0 22px 18px;font-size:14.5px;color:var(--text2);line-height:1.85;display:none}
+.fq.open .fq-a{display:block;animation:fadeIn 0.3s ease}
+.fq-arr{width:28px;height:28px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;transition:all 0.3s;flex-shrink:0}
+.fq.open .fq-arr{background:var(--emerald);transform:rotate(180deg)}
+.fq-arr svg{width:12px;height:12px;stroke:var(--text3);fill:none;stroke-width:2.5}
+.fq.open .fq-arr svg{stroke:#fff}
+
+/* FOOTER */
+footer{background:#0F172A;color:rgba(255,255,255,0.5);padding:56px 24px 32px}
+.ft-in{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px}
+.ft-brand{font-size:14px;line-height:1.9}
+.ft-logo{font-weight:800;font-size:26px;background:linear-gradient(135deg,#34D399,#22D3EE);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block;margin-bottom:12px}
+footer h4{color:rgba(255,255,255,0.8);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:14px}
+footer a{color:rgba(255,255,255,0.5);text-decoration:none;font-size:14px;display:block;padding:4px 0;transition:all 0.2s}
+footer a:hover{color:#34D399;padding-left:4px}
+.ft-bot{max-width:1140px;margin:36px auto 0;padding-top:24px;border-top:1px solid rgba(255,255,255,0.06);font-size:13px;text-align:center}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+.nav-pills{display:none}.nav-m{display:flex}
+.grid2,.grid3,.result-top{grid-template-columns:1fr}
+.calc-body,.results{padding:20px}
+.content-grid{grid-template-columns:1fr}
+.side{position:static}
+.ft-in{grid-template-columns:1fr 1fr}
+.hero-section{padding:32px 24px 40px}
+.res-visual{order:-1}
+}
+</style>
+<meta name="google-adsense-account" content="ca-pub-5117436545086471">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LS1QB97TKQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LS1QB97TKQ');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5117436545086471" crossorigin="anonymous"></script>
+</head><body>
+<nav><div class="nav-in"><a href="/" class="logo">CalcNow</a><div class="nav-pills"><a href="/gst-calculator/" class="nav-pill">GST</a><a href="/emi-calculator/" class="nav-pill">EMI</a><a href="/income-tax-calculator/" class="nav-pill">Income Tax</a><a href="/fd-calculator/" class="nav-pill on">FD</a><a href="/sip-calculator/" class="nav-pill">SIP</a><a href="/hra-calculator/" class="nav-pill">HRA</a><a href="/salary-hike-calculator/" class="nav-pill">Salary</a><a href="/tds-calculator/" class="nav-pill">TDS</a></div><button class="nav-m" onclick="let p=document.querySelector('.nav-pills');p.style.display=p.style.display==='flex'?'none':'flex'"><svg viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button></div></nav>
+<div class="hero-section"><div class="hero-in">
+<div class="crumb"><a href="/">Home</a> &rsaquo; <a href="/fd-calculator/">FD Calculator</a> &rsaquo; Post Office FD</div>
+<h1>Post Office FD Calculator<br><em>Government-backed fixed deposits</em></h1>
+<p class="hero-p">Calculate maturity amount and interest on India Post Time Deposits. Updated with Q1 FY 2026-27 rates: 6.9% to 7.5% — backed by sovereign guarantee.</p>
+<div class="chips"><span class="chip"><i></i>Govt guaranteed</span><span class="chip"><i></i>Latest rates</span><span class="chip"><i></i>Quarterly compounding</span><span class="chip"><i></i>80C eligible (5yr)</span></div>
+</div></div>
+
+<div class="main"><div class="calc"><div class="calc-body">
+<div class="grid2">
+<div class="fld"><label>Deposit amount</label><div class="inp-wrap"><input type="text" id="deposit" value="100000" oninput="calculate()" inputmode="decimal"><span class="unit">INR</span></div></div>
+<div class="fld"><label>Tenure</label>
+<select id="tenure" onchange="calculate()">
+<option value="1-6.9">1 Year — 6.9%</option>
+<option value="2-7.0">2 Years — 7.0%</option>
+<option value="3-7.1" selected>3 Years — 7.1%</option>
+<option value="5-7.5">5 Years — 7.5% (80C)</option>
+</select></div>
+</div>
+<div style="display:flex;align-items:flex-start;gap:10px;background:linear-gradient(135deg,#FFF7ED,#FFFBEB);border:1.5px solid #FCD34D;border-radius:var(--r-sm);padding:12px 18px;font-size:13.5px;color:#92400E;line-height:1.7;margin-bottom:8px">
+<span style="font-size:18px;flex-shrink:0;margin-top:1px">&#9888;</span>
+<span><strong>Same rate for all ages</strong> &mdash; Unlike bank FDs (which give 0.25&ndash;0.50% extra to seniors), Post Office Time Deposits have a uniform rate. Senior citizens (60+) can earn significantly more with <strong>SCSS at 8.2% p.a.</strong> &mdash; see the SCSS comparison section below.</span>
+</div>
+</div>
+<div class="results">
+<div class="result-cards" id="res-cards"></div>
+<div class="breakdown-table" id="bkdn"></div>
+<div class="actions"><button class="act-btn" onclick="copyR()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copy</button><button class="act-btn" onclick="shareWA()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>WhatsApp</button><button class="act-btn" onclick="window.print()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>Print</button></div>
+</div>
+<!-- SCSS Alternative Section -->
+<div style="border-top:1px solid var(--border-l)">
+<button id="scss-toggle" onclick="toggleSCSS()" style="width:100%;display:flex;align-items:center;justify-content:space-between;padding:18px 28px;border:none;background:none;cursor:pointer;font-family:var(--font);font-size:15px;font-weight:700;color:var(--text);text-align:left">
+<span style="display:flex;align-items:center;gap:12px">
+<span style="display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#ECFDF5,#EFF6FF);font-size:18px">&#x1F474;</span>
+Senior Citizens: SCSS Alternative &mdash; 8.2% p.a.
+</span>
+<svg id="scss-chevron" style="width:18px;height:18px;stroke:var(--text3);fill:none;stroke-width:2.5;transition:transform 0.3s;flex-shrink:0" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+</button>
+<div id="scss-content" style="display:none;padding:0 28px 28px">
+<div style="background:linear-gradient(135deg,#F0FDF4,#ECFEFF);border:1px solid rgba(16,185,129,0.12);border-radius:var(--r-sm);padding:16px 20px;margin-bottom:20px;font-size:13.5px;color:var(--text2);line-height:1.8">
+<strong style="color:var(--text);display:block;margin-bottom:6px">What is SCSS?</strong>
+Senior Citizens Savings Scheme (SCSS) is a government-backed small savings scheme offering <strong>8.2% p.a.</strong> with quarterly payouts &mdash; the highest guaranteed rate among all post office schemes. Eligible for Indian residents aged 60+ (or 55+ for VRS/superannuation retirees, 50+ for retired defence personnel). Max deposit: <strong>&#8377;30 lakh</strong>. Tenure: 5 years, extendable by 3 more years. Section 80C benefit available.
+</div>
+<div class="grid2" style="margin-bottom:20px">
+<div class="fld">
+<label>SCSS investment amount</label>
+<div class="inp-wrap"><input type="text" id="scss-amount" value="500000" oninput="calcSCSS()" inputmode="decimal"><span class="unit">INR</span></div>
+</div>
+<div class="fld">
+<label>Tenure</label>
+<select id="scss-tenure" onchange="calcSCSS()">
+<option value="5">5 Years (Standard)</option>
+<option value="8">8 Years (5 + 3 yr extension)</option>
+</select>
+</div>
+</div>
+<div id="scss-results" style="margin-bottom:20px"></div>
+<div style="margin-bottom:20px">
+<div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--text3);margin-bottom:12px">Post Office TD vs SCSS comparison</div>
+<div style="overflow-x:auto;border-radius:var(--r-sm);border:1px solid var(--border);overflow:hidden">
+<table style="width:100%;border-collapse:collapse;font-size:13.5px">
+<thead><tr style="background:var(--bg)">
+<th style="text-align:left;padding:10px 14px;border-bottom:2px solid var(--border);color:var(--text3);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px">Feature</th>
+<th style="text-align:left;padding:10px 14px;border-bottom:2px solid var(--border);color:var(--text3);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px">Post Office TD (5yr)</th>
+<th style="text-align:left;padding:10px 14px;border-bottom:2px solid var(--border);color:var(--emerald-dark);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px">SCSS &#10003; Better for Seniors</th>
+</tr></thead>
+<tbody>
+<tr><td style="padding:10px 14px;border-bottom:1px solid var(--border-l);color:var(--text2)">Interest rate</td><td style="padding:10px 14px;border-bottom:1px solid var(--border-l);color:var(--text2)">7.5%</td><td style="padding:10px 14px;border-bottom:1px solid var(--border-l);font-weight:700;color:var(--emerald-dark)">8.2% &#9650; Higher</td></tr>
+<tr style="background:#FAFBFC"><td style="padding:10px 14px;border-bottom:1px solid var(--border-l);color:var(--text2)">Interest payment</td><td style="padding:10px 14px;border-bottom:1px solid var(--border-l);color:var(--text2)">Annually (compounded quarterly)</td><td style="padding:10px 14px;border-bottom:1px solid var(--border-l);font-weight:600;color:var(--text)">Quarterly payout &#9650; Regular income</td></tr>
+<tr><td style="padding:10px 14px;border-bottom:1px solid var(--border-l);color:var(--text2)">Max deposit</td><td style="padding:10px 14px;border-bottom:1px solid var(--border-l);color:var(--text2)">No limit</td><td style="padding:10px 14px;border-bottom:1px solid var(--border-l);color:var(--text2)">&#8377;30 lakh</td></tr>
+<tr style="background:#FAFBFC"><td style="padding:10px 14px;border-bottom:1px solid var(--border-l);color:var(--text2)">Age eligibility</td><td style="padding:10px 14px;border-bottom:1px solid var(--border-l);color:var(--text2)">All ages (uniform rate)</td><td style="padding:10px 14px;border-bottom:1px solid var(--border-l);color:var(--text2)">60+ / 55+ VRS / 50+ Defence</td></tr>
+<tr><td style="padding:10px 14px;border-bottom:1px solid var(--border-l);color:var(--text2)">Tenure</td><td style="padding:10px 14px;border-bottom:1px solid var(--border-l);color:var(--text2)">1, 2, 3, 5 years</td><td style="padding:10px 14px;border-bottom:1px solid var(--border-l);color:var(--text2)">5 years (+ 3 yr extension = 8 yrs)</td></tr>
+<tr style="background:#FAFBFC"><td style="padding:10px 14px;border-bottom:1px solid var(--border-l);color:var(--text2)">Section 80C</td><td style="padding:10px 14px;border-bottom:1px solid var(--border-l);color:var(--text2)">5-year FD only</td><td style="padding:10px 14px;border-bottom:1px solid var(--border-l);font-weight:600;color:var(--text)">Yes &#10003;</td></tr>
+<tr><td style="padding:10px 14px;color:var(--text2)">TDS threshold</td><td style="padding:10px 14px;color:var(--text2)">&#8377;40,000/yr (&#8377;50K seniors)</td><td style="padding:10px 14px;color:var(--text2)">&#8377;50,000/yr per branch</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div style="font-size:12px;color:var(--text3);line-height:1.7;padding:12px 16px;background:var(--bg);border-radius:8px">
+<strong>Sources:</strong> Ministry of Finance small savings scheme notification dated March 31, 2026 (Q1 FY 2026-27). SCSS details per National Savings Institute (NSI), Government of India. &#8377;30 lakh limit per Finance Act 2023.
+</div>
+</div>
+</div>
+</div></div>
+
+<div class="content-area"><div class="content-grid">
+<article class="art">
+<h2><span class="h-icon" style="background:#ECFDF5;color:#059669">?</span>What is a Post Office FD?</h2>
+<p>A Post Office Fixed Deposit, officially called a "Time Deposit" under the India Post savings schemes, is a government-backed investment offered through India's network of over 1.55 lakh post office branches. Unlike bank FDs which are insured only up to ₹5 lakh by the Deposit Insurance and Credit Guarantee Corporation (DICGC), post office deposits carry a sovereign guarantee from the Government of India — meaning your principal and interest are 100% safe regardless of the amount deposited.</p>
+<p>According to the Department of Posts, over 42 crore savings accounts are held across India Post branches, with post office small savings schemes collectively holding deposits worth ₹16.2 lakh crore as of March 2025. The interest rates are set quarterly by the Ministry of Finance based on government bond yields.</p>
+
+<div class="quick-answer">
+<strong>Post Office FD rates for Q1 FY 2026-27</strong>
+<p>Current rates effective April 1, 2026: 1-year tenure at 6.9%, 2-year at 7.0%, 3-year at 7.1%, and 5-year at 7.5%. Interest is compounded quarterly but paid annually. The 5-year FD qualifies for tax deduction under Section 80C of the Income Tax Act, up to ₹1.5 lakh per year.</p>
+</div>
+
+<h2><span class="h-icon" style="background:#FFF7ED;color:#EA580C">%</span>Post Office FD rates 2026</h2>
+<table class="rate-tbl">
+<thead><tr><th>Tenure</th><th>Interest rate</th><th>Compounding</th><th>Tax benefit</th></tr></thead>
+<tbody>
+<tr><td>1 Year</td><td>6.9%</td><td>Quarterly</td><td>No 80C</td></tr>
+<tr><td>2 Years</td><td>7.0%</td><td>Quarterly</td><td>No 80C</td></tr>
+<tr><td>3 Years</td><td>7.1%</td><td>Quarterly</td><td>No 80C</td></tr>
+<tr><td>5 Years</td><td>7.5%</td><td>Quarterly</td><td>Section 80C (up to ₹1.5L)</td></tr>
+</tbody>
+</table>
+<p style="font-size:13px;color:var(--text3);margin-top:8px"><strong>Source:</strong> Ministry of Finance notification dated March 31, 2026, for Q1 FY 2026-27 (April–June 2026). Rates are the same for all depositors — Post Office Time Deposits do not offer separate senior citizen rates, unlike bank FDs. Rates have remained unchanged since Q4 FY 2023-24. <strong>Note:</strong> Senior citizens seeking higher rates can invest in the Senior Citizens Savings Scheme (SCSS) offered through post offices at 8.2% p.a. with quarterly payouts.</p>
+
+<h2><span class="h-icon" style="background:#F5F3FF;color:#7C3AED">vs</span>Post Office FD vs bank FD</h2>
+<p>While bank FDs may offer slightly higher rates (SBI offers 6.8-7.0%, HDFC Bank 6.6-7.25% as of April 2026), the post office FD has two key advantages: sovereign guarantee (no ₹5 lakh DICGC insurance cap like banks) and Section 80C tax benefit on 5-year deposits. According to PaisaBazaar, unlike banks which offer 0.25-0.50% additional interest to senior citizens, Post Office Time Deposits do not have a separate senior citizen rate. However, senior citizens can invest in the Senior Citizens Savings Scheme (SCSS) through post offices at 8.2% p.a. with quarterly interest payouts — making it one of the best options for retirees.</p>
+
+<div class="cta"><h3>Compare with bank FD rates</h3><p>See how post office FD compares with HDFC, SBI, and other bank fixed deposits.</p><a href="/hdfc-fd-calculator/">Compare HDFC FD rates &rarr;</a></div>
+</article>
+<aside class="side"><div class="s-card"><h3>Related calculators</h3><a href="/gst-calculator/" class="s-link"><span class="s-ico" style="background:#ECFDF5;color:#059669">G</span><span class="s-name">GST Calculator</span></a><a href="/income-tax-calculator/" class="s-link"><span class="s-ico" style="background:#FFF7ED;color:#EA580C">%</span><span class="s-name">Income Tax</span></a><a href="/hra-calculator/" class="s-link"><span class="s-ico" style="background:#F5F3FF;color:#7C3AED">H</span><span class="s-name">HRA Calculator</span></a><a href="/tds-calculator/" class="s-link"><span class="s-ico" style="background:#ECFDF5;color:#059669">T</span><span class="s-name">TDS Calculator</span></a><a href="/emi-calculator/" class="s-link"><span class="s-ico" style="background:#EFF6FF;color:#2563EB">E</span><span class="s-name">EMI Calculator</span></a><a href="/fd-calculator/" class="s-link"><span class="s-ico" style="background:#FFF7ED;color:#EA580C">F</span><span class="s-name">FD Calculator</span></a><a href="/sip-calculator/" class="s-link"><span class="s-ico" style="background:#F5F3FF;color:#7C3AED">S</span><span class="s-name">SIP Calculator</span></a><a href="/salary-hike-calculator/" class="s-link"><span class="s-ico" style="background:#ECFDF5;color:#059669">$</span><span class="s-name">Salary Hike</span></a><a href="/post-office-fd-calculator/" class="s-link"><span class="s-ico" style="background:#EFF6FF;color:#2563EB">P</span><span class="s-name">Post Office FD</span></a><a href="/hdfc-fd-calculator/" class="s-link"><span class="s-ico" style="background:#FFF7ED;color:#EA580C">H</span><span class="s-name">HDFC FD</span></a></div><div class="s-card"><h3>Guides</h3><a href="/pan-card-download/" class="s-link"><span class="s-name">PAN Card Download</span></a><a href="/aadhaar-card-download/" class="s-link"><span class="s-name">Aadhaar Download</span></a><a href="/income-tax-slab/" class="s-link"><span class="s-name">Tax Slabs 2026-27</span></a></div></aside>
+</div></div>
+
+<div class="faq-section"><h2>Frequently asked questions</h2>
+<div class="fq open"><div class="fq-q" onclick="toggleFaq(this)">What is the post office FD rate in 2026?<span class="fq-arr"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></div><div class="fq-a">Q1 FY 2026-27 rates: 1 year — 6.9%, 2 years — 7.0%, 3 years — 7.1%, 5 years — 7.5%. These rates are set quarterly by the Ministry of Finance and are effective April 1 to June 30, 2026.</div></div>
+<div class="fq"><div class="fq-q" onclick="toggleFaq(this)">Is post office FD safe?<span class="fq-arr"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></div><div class="fq-a">Yes. Post Office FDs carry sovereign guarantee from the Government of India — the safest deposit option available. Unlike bank FDs insured only up to ₹5 lakh by DICGC, post office deposits have zero credit risk regardless of the amount.</div></div>
+<div class="fq"><div class="fq-q" onclick="toggleFaq(this)">Minimum deposit for post office FD?<span class="fq-arr"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></div><div class="fq-a">Minimum deposit is ₹1,000 with no maximum limit. Deposits must be in multiples of ₹100. Accounts can be opened at any of India's 1.55 lakh post office branches with minimal documentation — Aadhaar and PAN are sufficient.</div></div>
+<div class="fq"><div class="fq-q" onclick="toggleFaq(this)">Is post office FD interest taxable?<span class="fq-arr"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></div><div class="fq-a">Yes, interest is taxable per your income tax slab. TDS at 10% applies if annual interest exceeds ₹40,000 (₹50,000 for seniors) per Section 194A. However, 5-year FDs qualify for Section 80C deduction up to ₹1.5 lakh.</div></div>
+<div class="fq"><div class="fq-q" onclick="toggleFaq(this)">What is SCSS and is it better than Post Office FD for senior citizens?<span class="fq-arr"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></div><div class="fq-a">Senior Citizens Savings Scheme (SCSS) is a government-backed scheme exclusively for those aged 60+ (55+ for VRS/superannuation retirees, 50+ for retired defence personnel). It offers <strong>8.2% p.a.</strong> vs Post Office TD's 7.5% for 5 years. Unlike Post Office TD, SCSS pays interest quarterly — providing regular income. For eligible seniors, SCSS is generally the better choice: higher rate, quarterly income, Section 80C benefit up to ₹1.5 lakh, and the same sovereign guarantee. Maximum deposit is ₹30 lakh. The Post Office TD applies the same rate to all ages with no senior citizen bonus.</div></div>
+<div class="fq"><div class="fq-q" onclick="toggleFaq(this)">What is the SCSS interest rate for 2026?<span class="fq-arr"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></div><div class="fq-a">SCSS interest rate for Q1 FY 2026-27 (April–June 2026) is <strong>8.2% per annum</strong>, as notified by the Ministry of Finance on March 31, 2026. Interest is paid out quarterly — not compounded. For ₹5 lakh invested, quarterly payout is ₹10,250 and annual income is ₹41,000. At maturity (5 years), the full principal of ₹5 lakh is returned. The 8.2% rate has remained unchanged since April 2023.</div></div>
+<div class="fq"><div class="fq-q" onclick="toggleFaq(this)">Who is eligible for SCSS and where can I open an account?<span class="fq-arr"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></div><div class="fq-a">SCSS eligibility: (1) Indian residents aged 60 years or above; (2) Retired employees aged 55–60 who retired under VRS or superannuation — must open within 1 month of receiving retirement benefits; (3) Retired defence personnel aged 50–60 — must open within 1 month of retirement. NRIs and HUFs are not eligible. SCSS can be opened at any post office branch or 28+ authorized banks including SBI, HDFC Bank, ICICI Bank, Axis Bank, and Bank of Baroda. A joint account is allowed only with the spouse; the ₹30 lakh limit applies to the first holder.</div></div>
+<div class="fq"><div class="fq-q" onclick="toggleFaq(this)">Can I have both a Post Office FD and SCSS account?<span class="fq-arr"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></div><div class="fq-a">Yes. If you are a senior citizen, you can hold both a Post Office Time Deposit and an SCSS account simultaneously. A common strategy is to invest up to ₹30 lakh in SCSS (maximum limit) for the higher 8.2% quarterly income, and invest the remaining amount in Post Office TD for longer tenures or lump-sum growth via quarterly compounding. Both are backed by the Government of India with sovereign guarantee. Both also qualify for Section 80C deduction (SCSS — all deposits; Post Office TD — only 5-year deposits).</div></div>
+</div>
+<footer><div class="ft-in"><div class="ft-brand"><span class="ft-logo">CalcNow</span>Free online calculators for India. GST, EMI, income tax, salary, FD, SIP — instant, accurate, no signup.</div><div><h4>Financial</h4><a href="/emi-calculator/">EMI</a><a href="/sip-calculator/">SIP</a><a href="/fd-calculator/">FD</a><a href="/post-office-fd-calculator/">Post Office FD</a><a href="/hdfc-fd-calculator/">HDFC FD</a></div><div><h4>Tax & salary</h4><a href="/gst-calculator/">GST</a><a href="/income-tax-calculator/">Income Tax</a><a href="/hra-calculator/">HRA</a><a href="/tds-calculator/">TDS</a><a href="/salary-hike-calculator/">Salary Hike</a></div><div><h4>Guides</h4><a href="/pan-card-download/">PAN Card</a><a href="/aadhaar-card-download/">Aadhaar</a><a href="/passport-status/">Passport</a></div></div><div class="ft-bot">&copy; 2026 CalcNow.in — Free calculators for India. Last updated: April 2026.</div></footer>
+<script>
+function fmt(n){return'\u20B9'+n.toLocaleString('en-IN',{minimumFractionDigits:0,maximumFractionDigits:0})}
+function val(id){return parseFloat(document.getElementById(id).value.replace(/[^0-9.]/g,''))||0}
+function calculate(){
+  const deposit=val('deposit');
+  const parts=document.getElementById('tenure').value.split('-');
+  const years=parseFloat(parts[0]);
+  let rate=parseFloat(parts[1]);
+  // Post Office Time Deposit: SAME rate for all depositors (no senior citizen bonus)
+  // Source: Ministry of Finance notification, March 31, 2026 (Q1 FY 2026-27)
+  // Verified: PaisaBazaar, ClearTax confirm no separate senior citizen rate for PO TD
+  const n=4; // quarterly compounding
+  const maturity=deposit*Math.pow(1+rate/(100*n),n*years);
+  const interest=maturity-deposit;
+
+  document.getElementById('res-cards').innerHTML=`
+    <div class="num-card"><div class="num-label"><span class="dot" style="background:#94A3B8"></span>Deposit amount</div><div class="num-val">${fmt(deposit)}</div></div>
+    <div class="num-card"><div class="num-label"><span class="dot" style="background:#10B981"></span>Interest earned</div><div class="num-val">${fmt(Math.round(interest))}</div></div>
+    <div class="num-card total-card"><div class="num-label"><span class="dot"></span>Maturity amount</div><div class="num-val">${fmt(Math.round(maturity))}</div></div>`;
+
+  document.getElementById('bkdn').innerHTML=`<table>
+    <tr><th>Detail</th><th>Value</th></tr>
+    <tr><td>Deposit amount</td><td class="mn">${fmt(deposit)}</td></tr>
+    <tr><td>Interest rate (p.a.)</td><td class="mn">${rate}% (same for all age groups)</td></tr>
+    <tr><td>Tenure</td><td class="mn">${years} year${years>1?'s':''}</td></tr>
+    <tr><td>Compounding</td><td>Quarterly</td></tr>
+    <tr><td>Interest earned</td><td class="mn">${fmt(Math.round(interest))}</td></tr>
+    <tr><td>Maturity amount</td><td class="mn">${fmt(Math.round(maturity))}</td></tr>
+    <tr><td colspan="2" style="font-size:12px;color:var(--text3);background:var(--bg)">Source: Ministry of Finance, Q1 FY 2026-27 notification (March 31, 2026). Post Office TD rates do not vary by age. Senior citizens may consider SCSS at 8.2% for higher returns.</td></tr>
+  </table>`;
+}
+function copyR(){const r=document.getElementById('bkdn').innerText;navigator.clipboard.writeText(r).then(()=>{event.target.closest('.act-btn').innerHTML='Copied!';setTimeout(()=>location.reload(),1500)})}
+function shareWA(){const r=document.getElementById('bkdn').innerText.substring(0,200);window.open('https://wa.me/?text='+encodeURIComponent('Post Office FD Calculation\n'+r+'\n\nhttps://calcnow.in/post-office-fd-calculator/'),'_blank')}
+function toggleFaq(el){el.parentElement.classList.toggle('open')}
+function calcSCSS(){
+  const a=parseFloat(document.getElementById('scss-amount').value.replace(/[^0-9.]/g,''))||0;
+  const yrs=parseInt(document.getElementById('scss-tenure').value)||5;
+  const rate=0.082;
+  const qPayout=Math.round(a*rate/4);
+  const annualPayout=Math.round(a*rate);
+  const totalIncome=Math.round(a*rate*yrs);
+  const tdsNote=annualPayout>50000?'TDS applicable at 10% (interest >&#8377;50,000/yr)':'No TDS (interest below &#8377;50,000/yr)';
+  document.getElementById('scss-results').innerHTML=`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:12px">
+    <div style="background:var(--surface);border-radius:10px;padding:14px 16px;border:1px solid var(--border-l)"><div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--text3);letter-spacing:0.5px;margin-bottom:4px">Quarterly payout</div><div style="font-family:var(--mono);font-size:22px;font-weight:700;color:var(--emerald-dark)">${fmt(qPayout)}</div></div>
+    <div style="background:var(--surface);border-radius:10px;padding:14px 16px;border:1px solid var(--border-l)"><div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--text3);letter-spacing:0.5px;margin-bottom:4px">Annual income</div><div style="font-family:var(--mono);font-size:22px;font-weight:700;color:var(--text)">${fmt(annualPayout)}</div></div>
+    <div style="background:var(--surface);border-radius:10px;padding:14px 16px;border:1px solid var(--border-l)"><div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--text3);letter-spacing:0.5px;margin-bottom:4px">Total income (${yrs}yr)</div><div style="font-family:var(--mono);font-size:22px;font-weight:700;color:var(--text)">${fmt(totalIncome)}</div></div>
+    <div style="background:linear-gradient(135deg,#F0FDF4,#ECFEFF);border-radius:10px;padding:14px 16px;border:1px solid rgba(16,185,129,0.12)"><div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--emerald-dark);letter-spacing:0.5px;margin-bottom:4px">TDS status</div><div style="font-size:13px;font-weight:600;color:var(--text)">${tdsNote}</div></div>
+  </div>
+  <div style="font-size:12px;color:var(--text3)">SCSS pays simple interest quarterly &mdash; your principal of ${fmt(a)} is returned at maturity. Rate: 8.2% p.a. (Q1 FY 2026-27, Ministry of Finance).</div>`;}
+function toggleSCSS(){
+  const c=document.getElementById('scss-content');
+  const ch=document.getElementById('scss-chevron');
+  const open=c.style.display==='block';
+  c.style.display=open?'none':'block';
+  ch.style.transform=open?'rotate(0deg)':'rotate(180deg)';
+  if(!open)calcSCSS();}
+calculate();
+</script></body></html>
