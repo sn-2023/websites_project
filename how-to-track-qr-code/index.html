@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M6169WPEGY"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-M6169WPEGY');</script>
+<title>How to Track QR Code Scans: Free &amp; Paid Methods | QRMake</title>
+<meta name="description" content="Learn how to track who scans your QR codes, when, and where. Free methods using UTM parameters and Google Analytics.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://qrmake.org/how-to-track-qr-code/">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can you track who scans a QR code?","acceptedAnswer":{"@type":"Answer","text":"You can track when, where (by city/country), and on what device a QR code is scanned, but you cannot identify the specific individual. The most common free method is to add UTM parameters to your destination URL before generating the QR code — Google Analytics then records every scan as a session with full attribution data including location, device, and time."}},{"@type":"Question","name":"What is a UTM parameter and how do I add one to a QR code?","acceptedAnswer":{"@type":"Answer","text":"UTM parameters are small text snippets appended to a URL that tell Google Analytics where a visitor came from. To use them for QR tracking: build your URL with UTM tags (e.g., yoursite.com?utm_source=flyer&utm_medium=print&utm_campaign=spring2025), then paste that full tagged URL into QRMake and generate your QR code. Every scan will appear in Google Analytics under Traffic Acquisition with your campaign attribution."}},{"@type":"Question","name":"What is the difference between static and dynamic QR code tracking?","acceptedAnswer":{"@type":"Answer","text":"Static QR codes encode the destination URL directly — tracking requires UTM parameters in the URL and Google Analytics on the destination site. Dynamic QR codes use a redirect service that counts every scan server-side before redirecting, so tracking is built in and doesn't require destination site access. Dynamic services typically cost $5–$30/month; static + UTM tracking is completely free but requires you to control the destination site."}},{"@type":"Question","name":"What data can I see from QR code scans in Google Analytics?","acceptedAnswer":{"@type":"Answer","text":"With UTM-tagged QR codes and Google Analytics 4, you can see: total scan count (sessions), geographic location by country/region/city, device type and operating system (iOS vs Android), browser, time and date of scans, and full on-site behaviour after scanning including pages visited, time on site, and conversions. According to W3Techs, Google Analytics 4 is used by over 28 million websites globally, making it the most widely available free analytics platform."}},{"@type":"Question","name":"Do I need to pay for QR code scan tracking?","acceptedAnswer":{"@type":"Answer","text":"No. If you control the destination website and have Google Analytics installed, UTM parameter tracking is completely free. According to Bitly, businesses that track QR code scans with UTM parameters see 3x better ROI on print campaigns versus untracked QR codes — and the entire setup costs nothing. Paid dynamic QR services add convenience (built-in scan counters, the ability to change the destination URL) but are not required for comprehensive analytics."}},{"@type":"Question","name":"How do I add UTM parameters to a URL before making a QR code?","acceptedAnswer":{"@type":"Answer","text":"Use Google's free Campaign URL Builder at ga-dev-tools.google — enter your destination URL, source (e.g. 'flyer'), medium (e.g. 'print'), and campaign name. The tool outputs a tagged URL you can paste directly into QRMake. Alternatively, add the parameters manually: yoursite.com/page?utm_source=flyer&utm_medium=print&utm_campaign=summer2025. UTM parameters were standardized by Urchin Software (later acquired by Google) and remain the most widely used campaign tracking method."}}]}
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"How to Track QR Code Scans: Free and Paid Methods","description":"Learn how to track who scans your QR codes, when, and where. Free methods using UTM parameters and Google Analytics.","author":{"@type":"Organization","name":"QRMake"},"publisher":{"@type":"Organization","name":"QRMake","url":"https://qrmake.org"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://qrmake.org/how-to-track-qr-code/"}}
+</script>
+
+<style>
+:root{--bg:#06060b;--surface:#0d0d14;--card:#111119;--border:rgba(255,255,255,0.06);--border-hover:rgba(255,255,255,0.12);--text:#eeeef3;--dim:#6b6b80;--accent:#6c5ce7;--accent-glow:rgba(108,92,231,0.3);--mint:#00d2b4;--pink:#ff6b9d;--orange:#ffa44f;--radius:16px}
+*{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',sans-serif;min-height:100vh}
+.ambient{position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:0}.ambient .orb{position:absolute;border-radius:50%;filter:blur(120px);opacity:0.12;width:500px;height:500px;background:var(--accent);top:-100px;left:30%}
+.app{position:relative;z-index:1;max-width:800px;margin:0 auto;padding:24px}
+.header{display:flex;justify-content:space-between;align-items:center;padding:16px 0;margin-bottom:48px}.logo-link{text-decoration:none}.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:24px;background:linear-gradient(135deg,var(--accent),var(--mint));-webkit-background-clip:text;-webkit-text-fill-color:transparent}.logo-sub{font-size:11px;color:var(--dim);letter-spacing:2px;text-transform:uppercase;margin-top:2px;font-family:'DM Mono',monospace}.breadcrumb{font-size:13px;color:var(--dim);font-family:'DM Mono',monospace}.breadcrumb a{color:var(--dim);text-decoration:none}.breadcrumb a:hover{color:var(--accent)}.breadcrumb span{color:var(--text)}
+article h1{font-family:'Syne',sans-serif;font-size:clamp(28px,5vw,44px);font-weight:800;line-height:1.15;margin-bottom:16px;letter-spacing:-1.5px}
+article .subtitle{color:var(--dim);font-size:17px;line-height:1.6;margin-bottom:40px}
+article h2{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;margin-top:40px;margin-bottom:16px}
+article h3{font-size:18px;font-weight:600;margin-top:28px;margin-bottom:10px;color:var(--text)}
+article p{color:var(--dim);font-size:15px;line-height:1.7;margin-bottom:14px}
+article strong{color:var(--text)}
+article a{color:var(--accent);text-decoration:none}article a:hover{text-decoration:underline}
+article ul,article ol{padding-left:20px;margin-bottom:14px}
+article li{color:var(--dim);font-size:15px;line-height:1.7;margin-bottom:8px}
+article li strong{color:var(--text)}
+code{font-family:'DM Mono',monospace;font-size:13px;background:var(--surface);padding:2px 6px;border-radius:4px;color:var(--mint)}
+.code-block{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;margin:16px 0;overflow-x:auto}
+.code-block code{background:none;padding:0;font-size:13px;color:var(--mint);line-height:1.6;display:block;white-space:pre}
+.utm-params{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin:16px 0;align-items:start}
+.utm-params dt{font-family:'DM Mono',monospace;font-size:13px;color:var(--accent);white-space:nowrap;padding:4px 0}
+.utm-params dd{font-size:13px;color:var(--dim);line-height:1.5;padding:4px 0}
+.utm-params dd strong{color:var(--text)}
+.step-list{counter-reset:steps;list-style:none;padding-left:0;margin:20px 0}
+.step-list li{counter-increment:steps;display:flex;gap:16px;align-items:flex-start;margin-bottom:20px}
+.step-list li::before{content:counter(steps);display:flex;align-items:center;justify-content:center;min-width:32px;height:32px;background:var(--accent);color:#fff;border-radius:50%;font-size:14px;font-weight:700;flex-shrink:0;margin-top:2px}
+.step-list li .step-content strong{display:block;color:var(--text);font-size:15px;margin-bottom:4px}
+.step-list li .step-content p{color:var(--dim);font-size:14px;line-height:1.6;margin-bottom:0}
+.data-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:20px 0}
+@media(max-width:560px){.data-grid{grid-template-columns:1fr}}
+.data-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px}
+.data-card h3{margin-top:0;font-size:14px;color:var(--text);margin-bottom:6px}
+.data-card p{font-size:13px;color:var(--dim);line-height:1.5;margin-bottom:0}
+.compare-table{width:100%;border-collapse:collapse;margin:24px 0;border-radius:var(--radius);overflow:hidden}
+.compare-table th{background:var(--surface);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:1.5px;padding:14px 16px;text-align:left;border-bottom:2px solid var(--border)}
+.compare-table td{padding:12px 16px;border-bottom:1px solid var(--border);color:var(--dim);font-size:14px;vertical-align:top}
+.compare-table tr:last-child td{border-bottom:none}
+.compare-table tr:hover td{background:rgba(255,255,255,0.02)}
+.compare-table td:first-child{color:var(--text);font-weight:500}
+.yes{color:var(--mint)}.no{color:var(--pink)}.partial{color:var(--orange)}
+.tip-box{background:var(--card);border:1px solid rgba(0,210,180,0.2);border-radius:var(--radius);padding:20px;margin:20px 0}
+.tip-box p{margin-bottom:0;font-size:14px}
+.tip-label{font-family:'DM Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--mint);margin-bottom:8px;display:block}
+.cta-box{background:linear-gradient(135deg,rgba(108,92,231,0.1),rgba(0,210,180,0.1));border:1px solid rgba(108,92,231,0.2);border-radius:var(--radius);padding:32px;text-align:center;margin:40px 0}
+.cta-box h3{margin-top:0;font-size:20px;margin-bottom:8px}.cta-box p{margin-bottom:20px}
+.cta-links{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.cta-btn{display:inline-block;background:linear-gradient(135deg,var(--accent),#8b5cf6);color:#fff;padding:12px 28px;border-radius:12px;text-decoration:none;font-weight:600;transition:all 0.25s}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px var(--accent-glow);text-decoration:none}
+.cta-btn.secondary{background:var(--card);border:1px solid var(--border);color:var(--text);padding:10px 20px;font-size:14px}
+.cta-btn.secondary:hover{border-color:var(--accent);color:var(--accent)}
+.site-footer{border-top:1px solid var(--border);margin-top:48px;padding:48px 0 32px}.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px}@media(max-width:700px){.footer-grid{grid-template-columns:1fr 1fr}}@media(max-width:480px){.footer-grid{grid-template-columns:1fr}}.footer-brand p{font-size:13px;color:var(--dim);line-height:1.6}.footer-col h4{font-family:'DM Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--dim);margin-bottom:16px}.footer-col a{display:block;color:var(--dim);font-size:13px;text-decoration:none;padding:4px 0}.footer-col a:hover{color:var(--accent)}.footer-bottom{text-align:center;margin-top:40px;padding-top:24px;border-top:1px solid var(--border);font-size:12px;color:var(--dim)}
+.geo-stats{background:rgba(108,92,231,0.06);border:1px solid rgba(108,92,231,0.15);border-radius:12px;padding:20px;margin:24px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
+.geo-stat{text-align:center}.geo-stat .stat-num{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--accent);display:block}.geo-stat .stat-label{font-size:12px;color:var(--dim);line-height:1.4}.geo-stat .stat-source{font-size:11px;color:var(--dim);opacity:0.6;font-family:'DM Mono',monospace;margin-top:4px}
+.faq-item{border-bottom:1px solid var(--border);padding:20px 0}.faq-item:first-child{border-top:1px solid var(--border)}.faq-item h3{font-size:16px;color:var(--text);margin-top:0;margin-bottom:10px}.faq-item p{margin-bottom:0;font-size:14px;color:var(--dim)}
+
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:26px;letter-spacing:-0.5px;display:inline-flex;position:relative;cursor:default}
+.logo-letter{display:inline-block;background:linear-gradient(135deg,#6c5ce7,#00d2b4,#ff6b9d,#6c5ce7);background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:logoGradient 6s ease infinite,logoEntrance 0.6s cubic-bezier(0.34,1.56,0.64,1) both;animation-delay:calc(var(--i)*0.08s),calc(var(--i)*0.08s);transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1)}
+.logo-letter.highlight{background:linear-gradient(135deg,#00d2b4,#00f5d4,#6c5ce7,#00d2b4);background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:logoGradient 6s ease infinite,logoEntrance 0.6s cubic-bezier(0.34,1.56,0.64,1) both;animation-delay:calc(var(--i)*0.08s),calc(var(--i)*0.08s)}
+.logo:hover .logo-letter{animation:logoGradient 6s ease infinite,logoWave 0.5s cubic-bezier(0.34,1.56,0.64,1);animation-delay:calc(var(--i)*0.05s),calc(var(--i)*0.05s)}
+.logo::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.12),transparent);animation:logoGlint 4s ease-in-out infinite;pointer-events:none}
+@keyframes logoEntrance{0%{opacity:0;transform:translateY(16px) rotateX(40deg) scale(0.6);filter:blur(4px)}100%{opacity:1;transform:translateY(0) rotateX(0deg) scale(1);filter:blur(0)}}
+@keyframes logoGradient{0%{background-position:0% 50%}33%{background-position:100% 50%}66%{background-position:50% 100%}100%{background-position:0% 50%}}
+@keyframes logoWave{0%{transform:translateY(0)}30%{transform:translateY(-8px) scale(1.15)}50%{transform:translateY(-6px) scale(1.1)}100%{transform:translateY(0) scale(1)}}
+@keyframes logoGlint{0%,80%{left:-100%;opacity:0}85%{opacity:1}100%{left:200%;opacity:0}}
+
+</style>
+</head>
+<body>
+<div class="ambient"><div class="orb"></div></div>
+<div class="app">
+  <header class="header">
+    <a href="/" class="logo-link"><div class="logo" aria-label="QRMake"><span class="logo-letter" style="--i:0">Q</span><span class="logo-letter" style="--i:1">R</span><span class="logo-letter highlight" style="--i:2">M</span><span class="logo-letter highlight" style="--i:3">a</span><span class="logo-letter highlight" style="--i:4">k</span><span class="logo-letter highlight" style="--i:5">e</span></div><div class="logo-sub">free qr generator</div></a>
+    <nav class="breadcrumb"><a href="/">Home</a> / <span>How to Track QR Code Scans</span></nav>
+  </header>
+
+  <article>
+    <h1>How to Track QR Code Scans</h1>
+    <p class="subtitle">Knowing how many people scan your QR code — and where and when — is critical for measuring campaign ROI. Here's how to do it for free and what paid options offer.</p>
+
+    <div class="geo-stats">
+      <div class="geo-stat">
+        <span class="stat-num">3x</span>
+        <div class="stat-label">Better ROI with UTM tracking vs untracked QR codes</div>
+        <div class="stat-source">Bitly</div>
+      </div>
+      <div class="geo-stat">
+        <span class="stat-num">28M+</span>
+        <div class="stat-label">Websites globally using Google Analytics 4</div>
+        <div class="stat-source">W3Techs, 2024</div>
+      </div>
+      <div class="geo-stat">
+        <span class="stat-num">UTM</span>
+        <div class="stat-label">Standardized by Urchin Software (acquired by Google) — most widely used campaign tracking method</div>
+        <div class="stat-source">Google / Urchin</div>
+      </div>
+    </div>
+
+    <h2>Can You Track a Static QR Code?</h2>
+    <p>The short answer: <strong>not by default, but yes with UTM parameters.</strong></p>
+    <p>A static QR code encodes a URL directly into its pattern. When someone scans it, their phone simply opens that URL. The QR code itself generates no data — there's no server involved, no ping recorded, no counter incremented. The QR code is just a fancy way to open a link.</p>
+    <p>However, if the URL you encode contains <strong>UTM tracking parameters</strong>, then Google Analytics (or any analytics platform) will record every visit with full attribution. You get scan count, geographic data, device types, and time-of-day data — all for free, using tools you probably already have.</p>
+    <p>According to Bitly, <strong>businesses that track QR code scans with UTM parameters see 3x better ROI</strong> on print campaigns versus untracked QR codes — a compelling reason to invest the two minutes it takes to tag your URL. This is the method used by most professional marketers for static QR code campaigns. See also: <a href="/dynamic-vs-static-qr-code/">dynamic vs static QR codes</a> for context on the difference.</p>
+
+    <h2>UTM Parameters Explained</h2>
+    <p>UTM parameters are small pieces of text appended to a URL that tell Google Analytics where a visitor came from. They look like this:</p>
+    <div class="code-block"><code>https://yoursite.com/landing-page?utm_source=flyer&utm_medium=print&utm_campaign=spring2025</code></div>
+    <p>UTM parameters were standardized by Urchin Software (later acquired by Google) and remain the most widely used campaign tracking method globally. Google Analytics 4 is now used by over <strong>28 million websites worldwide</strong> (W3Techs, 2024), meaning most analytics practitioners are already equipped to interpret this data. The five standard UTM parameters are:</p>
+    <dl class="utm-params">
+      <dt>utm_source</dt>
+      <dd><strong>Where the traffic came from.</strong> For QR codes, use the physical location or material: <code>flyer</code>, <code>menu</code>, <code>poster</code>, <code>business-card</code></dd>
+      <dt>utm_medium</dt>
+      <dd><strong>The marketing channel.</strong> For printed QR codes: <code>print</code>. For digital screens: <code>display</code></dd>
+      <dt>utm_campaign</dt>
+      <dd><strong>The campaign name.</strong> Something memorable and dateable: <code>summer-launch-2025</code>, <code>store-opening</code></dd>
+      <dt>utm_content</dt>
+      <dd><strong>Optional: differentiates variants.</strong> Useful if you have multiple QR codes in the same campaign: <code>table-top</code> vs <code>window-sticker</code></dd>
+      <dt>utm_term</dt>
+      <dd><strong>Optional: keyword-level tracking.</strong> Rarely used for QR codes — leave this blank unless you have a specific need</dd>
+    </dl>
+
+    <h2>Step-by-Step: Track QR Codes Free with Google Analytics</h2>
+    <ol class="step-list">
+      <li>
+        <div class="step-content">
+          <strong>Make sure Google Analytics is on your website</strong>
+          <p>You need GA4 (Google Analytics 4) installed on the destination website. If you don't control the destination site, you can't use this method — consider a URL shortener instead (see below).</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-content">
+          <strong>Build your UTM-tagged URL</strong>
+          <p>Use Google's free <a href="https://ga-dev-tools.google/campaign-url-builder/" rel="noopener">Campaign URL Builder</a> at ga-dev-tools.google, or construct the URL manually. Example: <code>https://yoursite.com/?utm_source=restaurant-menu&utm_medium=print&utm_campaign=q1-2025</code></p>
+        </div>
+      </li>
+      <li>
+        <div class="step-content">
+          <strong>Generate your QR code from the tagged URL</strong>
+          <p>Paste the full UTM-tagged URL (including the <code>?utm_source=...</code> part) into QRMake's generator. The QR code will encode the entire URL, including the tracking parameters.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-content">
+          <strong>Deploy and wait for scans</strong>
+          <p>Print and place your QR code. Data appears in Google Analytics within a few hours of the first scan.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-content">
+          <strong>View results in Google Analytics</strong>
+          <p>In GA4, go to <strong>Reports → Acquisition → Traffic Acquisition</strong>. Filter by Session source/medium to see your campaign. Or use <strong>Explore → Free Form</strong> to build a custom report filtered by campaign name.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="tip-box">
+      <span class="tip-label">Pro Tip</span>
+      <p><strong>Create a different UTM-tagged URL for each physical location.</strong> Same destination, different <code>utm_source</code> value for each branch, store, or placement spot. You'll see exactly which location drives the most scans without any paid tools.</p>
+    </div>
+
+    <h2>What Data Can You Actually See?</h2>
+    <p>With UTM tracking via Google Analytics, each QR scan appears as a web session with the following data:</p>
+
+    <div class="data-grid">
+      <div class="data-card">
+        <h3>Scan count</h3>
+        <p>Total sessions attributed to your campaign. One session = one scan (assuming the user lands on your page).</p>
+      </div>
+      <div class="data-card">
+        <h3>Geographic location</h3>
+        <p>Country, region, and city of the scanner, based on IP geolocation. Useful for multi-location campaigns.</p>
+      </div>
+      <div class="data-card">
+        <h3>Device type</h3>
+        <p>Mobile vs tablet vs desktop, operating system (iOS/Android), and browser. Most QR scans are mobile.</p>
+      </div>
+      <div class="data-card">
+        <h3>Time and date</h3>
+        <p>When scans occurred, by hour, day, and week. Reveals peak engagement times for your campaign placements.</p>
+      </div>
+      <div class="data-card">
+        <h3>Behaviour on site</h3>
+        <p>What users did after scanning: pages visited, time on site, conversions, purchases — everything GA4 normally tracks.</p>
+      </div>
+      <div class="data-card">
+        <h3>Campaign attribution</h3>
+        <p>Which campaign, source, and medium drove the session. Filter and compare across all your QR campaigns.</p>
+      </div>
+    </div>
+
+    <h2>Tracking with a URL Shortener (Alternative Free Method)</h2>
+    <p>If you don't control the destination website (e.g., a Google Form, a YouTube video, or someone else's booking page), you can't add UTM parameters to their analytics. Instead, use a URL shortener that provides click analytics:</p>
+    <ul>
+      <li><strong>Bitly</strong> — free plan gives basic click counts, country data, and referrers. Create a short link pointing to the destination, then generate a QR code from the short link.</li>
+      <li><strong>Dub.co</strong> — open-source alternative with generous free tier</li>
+      <li><strong>Your own domain redirect</strong> — the most robust option: set up a redirect at a URL you control (e.g., <code>yoursite.com/menu</code>) and track clicks server-side</li>
+    </ul>
+    <p>Be aware: URL shortener links depend on the shortener service remaining live. If Bitly changes its free tier or shuts down, your QR codes stop working.</p>
+
+    <h2>Dynamic QR Codes: Paid Tracking Built In</h2>
+    <p>Dynamic QR code services (like QR Tiger, Beaconstac, or Flowcode) provide scan tracking as a core feature. The QR code points to a redirect URL managed by the service, which counts every scan and records metadata before redirecting to your destination.</p>
+    <p>What dynamic services typically track:</p>
+    <ul>
+      <li>Total scan count per QR code</li>
+      <li>Scanner's country and city (via IP)</li>
+      <li>Device type and OS</li>
+      <li>Scan date and time</li>
+      <li>Unique vs repeat scans (on some plans)</li>
+    </ul>
+    <p>The trade-off: most charge $5–$30/month, your QR codes depend on their server staying live, and you're trusting them with your audience's behavioural data. For a full comparison, see our guide on <a href="/dynamic-vs-static-qr-code/">dynamic vs static QR codes</a>.</p>
+
+    <h2>Static vs Dynamic Tracking Comparison</h2>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Static + UTM (Free)</th>
+          <th>Dynamic QR (Paid)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Cost</td>
+          <td class="yes">Free</td>
+          <td class="partial">$5–$30/month</td>
+        </tr>
+        <tr>
+          <td>Scan count</td>
+          <td class="yes">Yes (via GA4)</td>
+          <td class="yes">Yes (native)</td>
+        </tr>
+        <tr>
+          <td>Geographic data</td>
+          <td class="yes">Yes (via GA4)</td>
+          <td class="yes">Yes (native)</td>
+        </tr>
+        <tr>
+          <td>Device data</td>
+          <td class="yes">Yes (via GA4)</td>
+          <td class="yes">Yes (native)</td>
+        </tr>
+        <tr>
+          <td>Change URL after printing</td>
+          <td class="no">No</td>
+          <td class="yes">Yes</td>
+        </tr>
+        <tr>
+          <td>Works if service shuts down</td>
+          <td class="yes">Yes (static URL)</td>
+          <td class="no">No</td>
+        </tr>
+        <tr>
+          <td>Requires destination control</td>
+          <td class="partial">Yes (for GA4)</td>
+          <td class="yes">No</td>
+        </tr>
+        <tr>
+          <td>Privacy</td>
+          <td class="yes">Data stays in your GA4</td>
+          <td class="partial">Data held by vendor</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="cta-box">
+      <h3>Create a Trackable QR Code</h3>
+      <p>Generate a QR code from your UTM-tagged URL — free, no account needed, download as PNG or SVG.</p>
+      <div class="cta-links">
+        <a href="/" class="cta-btn">QR Code Generator →</a>
+        <a href="/dynamic-vs-static-qr-code/" class="cta-btn secondary">Dynamic vs Static Guide</a>
+      </div>
+    </div>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+      <h3>Can you track who scans a QR code?</h3>
+      <p>You can track when, where (by city/country), and on what device a QR code is scanned, but you cannot identify the specific individual. The most common free method is to add UTM parameters to your destination URL before generating the QR code — Google Analytics then records every scan as a session with full attribution data including location, device, and time.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>What is a UTM parameter and how do I add one to a QR code?</h3>
+      <p>UTM parameters are small text snippets appended to a URL that tell Google Analytics where a visitor came from. To use them for QR tracking: build your URL with UTM tags (e.g., yoursite.com?utm_source=flyer&amp;utm_medium=print&amp;utm_campaign=spring2025), then paste that full tagged URL into QRMake and generate your QR code. Every scan will appear in Google Analytics under Traffic Acquisition with your campaign attribution.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>What is the difference between static and dynamic QR code tracking?</h3>
+      <p>Static QR codes encode the destination URL directly — tracking requires UTM parameters in the URL and Google Analytics on the destination site. Dynamic QR codes use a redirect service that counts every scan server-side before redirecting, so tracking is built in and doesn't require destination site access. Dynamic services typically cost $5–$30/month; static + UTM tracking is completely free but requires you to control the destination site.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>What data can I see from QR code scans in Google Analytics?</h3>
+      <p>With UTM-tagged QR codes and Google Analytics 4, you can see: total scan count (sessions), geographic location by country/region/city, device type and operating system (iOS vs Android), browser, time and date of scans, and full on-site behaviour after scanning including pages visited, time on site, and conversions. According to W3Techs, Google Analytics 4 is used by over 28 million websites globally.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Do I need to pay for QR code scan tracking?</h3>
+      <p>No. If you control the destination website and have Google Analytics installed, UTM parameter tracking is completely free. According to Bitly, businesses that track QR code scans with UTM parameters see 3x better ROI on print campaigns versus untracked QR codes — and the entire setup costs nothing. Paid dynamic QR services add convenience but are not required for comprehensive analytics.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>How do I add UTM parameters to a URL before making a QR code?</h3>
+      <p>Use Google's free Campaign URL Builder at ga-dev-tools.google — enter your destination URL, source (e.g. "flyer"), medium (e.g. "print"), and campaign name. The tool outputs a tagged URL you can paste directly into QRMake. Alternatively, add the parameters manually: yoursite.com/page?utm_source=flyer&amp;utm_medium=print&amp;utm_campaign=summer2025. UTM parameters were standardized by Urchin Software (later acquired by Google) and remain the most widely used campaign tracking method.</p>
+    </div>
+  </article>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand"><div class="logo">QRMake</div><p>Free QR code generator. No sign-up, no limits, no watermarks.</p></div>
+      <div class="footer-col"><h4>QR Tools</h4><a href="/wifi-qr-code-generator/">WiFi QR Code</a><a href="/business-card-qr-code/">Business Card QR</a><a href="/restaurant-menu-qr-code/">Restaurant Menu QR</a><a href="/google-form-qr-code/">Google Form QR</a><a href="/vcard-qr-code-generator/">vCard QR Code</a><a href="/sms-qr-code-generator/">SMS QR Code</a><a href="/phone-number-qr-code/">Phone Number QR</a><a href="/pdf-qr-code-generator/">PDF QR Code</a><a href="/social-media-qr-code/">Social Media QR</a><a href="/whatsapp-qr-code/">WhatsApp QR Code</a><a href="/youtube-qr-code/">YouTube QR Code</a><a href="/linkedin-qr-code/">LinkedIn QR Code</a><a href="/email-qr-code-generator/">Email QR Code</a><a href="/qr-code-for-location/">Location QR Code</a><a href="/upi-qr-code-generator/">UPI QR Code</a><a href="/gpay-qr-code-generator/">Google Pay QR</a><a href="/phonepe-qr-code-generator/">PhonePe QR</a><a href="/bhim-qr-code-generator/">BHIM QR Code</a><a href="/whatsapp-qr-code/">WhatsApp QR Code</a><a href="/youtube-qr-code/">YouTube QR Code</a><a href="/linkedin-qr-code/">LinkedIn QR Code</a><a href="/email-qr-code-generator/">Email QR Code</a><a href="/qr-code-for-location/">Location QR Code</a></div>
+      <div class="footer-col"><h4>Guides</h4><a href="/how-to-scan-qr-code-iphone/">Scan QR on iPhone</a><a href="/dynamic-vs-static-qr-code/">Dynamic vs Static QR</a><a href="/qr-code-png-download/">QR Code PNG Download</a><a href="/qr-code-size-guide/">QR Code Size Guide</a><a href="/qr-code-for-google-reviews/">QR Code for Google Reviews</a><a href="/how-to-create-qr-code-for-pdf/">QR Code for PDF</a><a href="/qr-code-for-instagram/">QR Code for Instagram</a><a href="/how-to-make-qr-code-for-link/">QR Code for Any Link</a><a href="/qr-code-marketing/">QR Code Marketing</a><a href="/qr-code-vs-barcode/">QR Code vs Barcode</a><a href="/qr-code-on-business-card/">QR Code on Business Card</a><a href="/how-to-track-qr-code/">How to Track QR Code</a><a href="/qr-code-error-correction/">QR Code Error Correction</a></div>
+      <div class="footer-col"><h4>QRMake</h4><a href="/">Home</a><a href="mailto:hello@qrmake.org">Contact</a></div>
+    </div>
+    <div class="footer-bottom">© 2025 QRMake. Free QR Code Generator.</div>
+  </footer>
+</div>
+</body>
+</html>

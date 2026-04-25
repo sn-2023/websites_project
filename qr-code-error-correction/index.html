@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M6169WPEGY"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-M6169WPEGY');</script>
+<title>QR Code Error Correction Levels Explained: L, M, Q, H | QRMake</title>
+<meta name="description" content="Understand QR code error correction levels L, M, Q, and H. Learn which level to choose for print, logos, and outdoor use.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://qrmake.org/qr-code-error-correction/">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is QR code error correction?","acceptedAnswer":{"@type":"Answer","text":"QR code error correction is a built-in mechanism that allows a QR code to be read correctly even when part of it is physically damaged, obscured, or dirty. It uses Reed-Solomon error correction — a mathematical algorithm first described by Irving Reed and Gustave Solomon in 1960 — to encode redundant data within the code. This means that even if a portion of the QR code is missing, a scanner can reconstruct the full data from the redundant copies."}},{"@type":"Question","name":"What are the four error correction levels in QR codes?","acceptedAnswer":{"@type":"Answer","text":"According to ISO/IEC 18004:2015, QR codes support four error correction levels: L (Low) recovers up to 7% of damaged data and produces the smallest code; M (Medium) recovers up to 15% and is the most common default; Q (Quartile) recovers up to 25% and is suitable for outdoor use and small logo overlays; H (High) recovers up to 30% and is required for logo-overlaid codes, outdoor signage, and product packaging."}},{"@type":"Question","name":"Which error correction level should I choose?","acceptedAnswer":{"@type":"Answer","text":"For most print use cases — business cards, flyers, posters, and packaging — choose Level H. It provides maximum damage tolerance and supports logo overlays up to approximately 25–30% of the code area. Level L is only suitable for clean digital screens where damage is impossible. If file size or code density is a concern on screen, Level M is a reasonable compromise for indoor print. When in doubt, H is always the safe choice."}},{"@type":"Question","name":"Can a damaged QR code still be scanned?","acceptedAnswer":{"@type":"Answer","text":"Yes. QR Tiger testing found that QR codes printed at Level H remain scannable even when up to 30% of the code surface is obscured or damaged. A small tear, fold crease, or partial smudge that covers less than this threshold will typically still scan successfully. However, damage to the three square finder patterns in the corners is more critical — these orient the scanner and losing all three makes reading very difficult."}},{"@type":"Question","name":"Why does a higher error correction level make the QR code more complex?","acceptedAnswer":{"@type":"Answer","text":"Higher error correction means more redundant data modules must be packed into the code grid. For the same encoded data, a Level H code requires more squares (modules) than a Level L code — making it physically larger or more visually dense. For a short URL at Level L, a 25×25 module grid may suffice; the same URL at Level H may require a 29×29 or larger grid. In practice for print use, this difference is barely visible to the naked eye."}},{"@type":"Question","name":"What error correction level does QRMake use?","acceptedAnswer":{"@type":"Answer","text":"QRMake generates all QR codes at Error Correction Level H by default. This ensures maximum damage tolerance (up to 30% of the code surface) and full support for logo overlays. Since most users create codes for print use — business cards, marketing materials, outdoor signage — Level H is the right default. The marginal size increase compared to lower levels is negligible in real-world print applications."}}]}
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"QR Code Error Correction Levels Explained: L, M, Q, H","description":"Understand QR code error correction levels L, M, Q, and H. Learn which level to choose for print, logos, and outdoor use.","author":{"@type":"Organization","name":"QRMake"},"publisher":{"@type":"Organization","name":"QRMake","url":"https://qrmake.org"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://qrmake.org/qr-code-error-correction/"}}
+</script>
+
+<style>
+:root{--bg:#06060b;--surface:#0d0d14;--card:#111119;--border:rgba(255,255,255,0.06);--border-hover:rgba(255,255,255,0.12);--text:#eeeef3;--dim:#6b6b80;--accent:#6c5ce7;--accent-glow:rgba(108,92,231,0.3);--mint:#00d2b4;--pink:#ff6b9d;--orange:#ffa44f;--radius:16px}
+*{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',sans-serif;min-height:100vh}
+.ambient{position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:0}.ambient .orb{position:absolute;border-radius:50%;filter:blur(120px);opacity:0.12;width:500px;height:500px;background:var(--accent);top:-100px;left:30%}
+.app{position:relative;z-index:1;max-width:800px;margin:0 auto;padding:24px}
+.header{display:flex;justify-content:space-between;align-items:center;padding:16px 0;margin-bottom:48px}.logo-link{text-decoration:none}.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:24px;background:linear-gradient(135deg,var(--accent),var(--mint));-webkit-background-clip:text;-webkit-text-fill-color:transparent}.logo-sub{font-size:11px;color:var(--dim);letter-spacing:2px;text-transform:uppercase;margin-top:2px;font-family:'DM Mono',monospace}.breadcrumb{font-size:13px;color:var(--dim);font-family:'DM Mono',monospace}.breadcrumb a{color:var(--dim);text-decoration:none}.breadcrumb a:hover{color:var(--accent)}.breadcrumb span{color:var(--text)}
+article h1{font-family:'Syne',sans-serif;font-size:clamp(28px,5vw,44px);font-weight:800;line-height:1.15;margin-bottom:16px;letter-spacing:-1.5px}
+article .subtitle{color:var(--dim);font-size:17px;line-height:1.6;margin-bottom:40px}
+article h2{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;margin-top:40px;margin-bottom:16px}
+article h3{font-size:18px;font-weight:600;margin-top:28px;margin-bottom:10px;color:var(--text)}
+article p{color:var(--dim);font-size:15px;line-height:1.7;margin-bottom:14px}
+article strong{color:var(--text)}
+article a{color:var(--accent);text-decoration:none}article a:hover{text-decoration:underline}
+article ul,article ol{padding-left:20px;margin-bottom:14px}
+article li{color:var(--dim);font-size:15px;line-height:1.7;margin-bottom:8px}
+article li strong{color:var(--text)}
+.level-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:24px 0}
+@media(max-width:560px){.level-grid{grid-template-columns:1fr}}
+.level-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px;position:relative;overflow:hidden}
+.level-card::before{content:'';position:absolute;top:0;right:0;width:60px;height:100%;opacity:0.04}
+.level-card.level-l{border-color:rgba(0,210,180,0.25)}.level-card.level-l::before{background:var(--mint)}
+.level-card.level-m{border-color:rgba(108,92,231,0.25)}.level-card.level-m::before{background:var(--accent)}
+.level-card.level-q{border-color:rgba(255,164,79,0.25)}.level-card.level-q::before{background:var(--orange)}
+.level-card.level-h{border-color:rgba(255,107,157,0.25)}.level-card.level-h::before{background:var(--pink)}
+.level-badge{font-family:'Syne',sans-serif;font-weight:800;font-size:32px;line-height:1;margin-bottom:4px}
+.level-card.level-l .level-badge{color:var(--mint)}
+.level-card.level-m .level-badge{color:var(--accent)}
+.level-card.level-q .level-badge{color:var(--orange)}
+.level-card.level-h .level-badge{color:var(--pink)}
+.level-name{font-family:'DM Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--dim);margin-bottom:12px}
+.recovery-bar{background:var(--surface);border-radius:4px;height:6px;margin:10px 0 4px;overflow:hidden}
+.recovery-fill{height:100%;border-radius:4px;transition:width 0.3s}
+.level-l .recovery-fill{width:7%;background:var(--mint)}
+.level-m .recovery-fill{width:15%;background:var(--accent)}
+.level-q .recovery-fill{width:25%;background:var(--orange)}
+.level-h .recovery-fill{width:30%;background:var(--pink)}
+.recovery-label{font-family:'DM Mono',monospace;font-size:12px;color:var(--dim);margin-bottom:10px}
+.level-card p{font-size:13px;color:var(--dim);line-height:1.5;margin-bottom:0}
+.compare-table{width:100%;border-collapse:collapse;margin:24px 0;border-radius:var(--radius);overflow:hidden}
+.compare-table th{background:var(--surface);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:1.5px;padding:14px 16px;text-align:left;border-bottom:2px solid var(--border)}
+.compare-table td{padding:12px 16px;border-bottom:1px solid var(--border);color:var(--dim);font-size:14px;vertical-align:middle}
+.compare-table tr:last-child td{border-bottom:none}
+.compare-table tr:hover td{background:rgba(255,255,255,0.02)}
+.compare-table td:first-child{font-weight:500}
+.badge-l{display:inline-block;padding:3px 8px;border-radius:5px;background:rgba(0,210,180,0.1);color:var(--mint);font-family:'DM Mono',monospace;font-size:13px;font-weight:700}
+.badge-m{display:inline-block;padding:3px 8px;border-radius:5px;background:rgba(108,92,231,0.1);color:var(--accent);font-family:'DM Mono',monospace;font-size:13px;font-weight:700}
+.badge-q{display:inline-block;padding:3px 8px;border-radius:5px;background:rgba(255,164,79,0.1);color:var(--orange);font-family:'DM Mono',monospace;font-size:13px;font-weight:700}
+.badge-h{display:inline-block;padding:3px 8px;border-radius:5px;background:rgba(255,107,157,0.1);color:var(--pink);font-family:'DM Mono',monospace;font-size:13px;font-weight:700}
+.use-case-list{list-style:none;padding:0;margin:16px 0}
+.use-case-list li{padding:10px 14px;background:var(--card);border:1px solid var(--border);border-radius:10px;margin-bottom:8px;font-size:14px;color:var(--dim);display:flex;align-items:center;gap:12px}
+.use-case-list li .uc-level{min-width:28px;text-align:center}
+.qrmake-box{background:var(--card);border:1px solid rgba(108,92,231,0.3);border-radius:var(--radius);padding:24px;margin:24px 0}
+.qrmake-box h3{margin-top:0;font-size:17px;color:var(--text);margin-bottom:8px}
+.qrmake-box p{margin-bottom:0;font-size:14px}
+.faq-item{border-bottom:1px solid var(--border);padding:20px 0}
+.faq-item:first-child{border-top:1px solid var(--border)}
+.faq-item h3{font-size:16px;color:var(--text);margin-top:0;margin-bottom:10px}
+.faq-item p{margin-bottom:0;font-size:14px;color:var(--dim)}
+.cta-box{background:linear-gradient(135deg,rgba(108,92,231,0.1),rgba(0,210,180,0.1));border:1px solid rgba(108,92,231,0.2);border-radius:var(--radius);padding:32px;text-align:center;margin:40px 0}
+.cta-box h3{margin-top:0;font-size:20px;margin-bottom:8px}.cta-box p{margin-bottom:20px}
+.cta-links{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.cta-btn{display:inline-block;background:linear-gradient(135deg,var(--accent),#8b5cf6);color:#fff;padding:12px 28px;border-radius:12px;text-decoration:none;font-weight:600;transition:all 0.25s}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px var(--accent-glow);text-decoration:none}
+.cta-btn.secondary{background:var(--card);border:1px solid var(--border);color:var(--text);padding:10px 20px;font-size:14px}
+.cta-btn.secondary:hover{border-color:var(--accent);color:var(--accent)}
+.site-footer{border-top:1px solid var(--border);margin-top:48px;padding:48px 0 32px}.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px}@media(max-width:700px){.footer-grid{grid-template-columns:1fr 1fr}}@media(max-width:480px){.footer-grid{grid-template-columns:1fr}}.footer-brand p{font-size:13px;color:var(--dim);line-height:1.6}.footer-col h4{font-family:'DM Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--dim);margin-bottom:16px}.footer-col a{display:block;color:var(--dim);font-size:13px;text-decoration:none;padding:4px 0}.footer-col a:hover{color:var(--accent)}.footer-bottom{text-align:center;margin-top:40px;padding-top:24px;border-top:1px solid var(--border);font-size:12px;color:var(--dim)}
+.geo-stats{background:rgba(108,92,231,0.06);border:1px solid rgba(108,92,231,0.15);border-radius:12px;padding:20px;margin:24px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
+.geo-stat{text-align:center}.geo-stat .stat-num{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--accent);display:block}.geo-stat .stat-label{font-size:12px;color:var(--dim);line-height:1.4}.geo-stat .stat-source{font-size:11px;color:var(--dim);opacity:0.6;font-family:'DM Mono',monospace;margin-top:4px}
+
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:26px;letter-spacing:-0.5px;display:inline-flex;position:relative;cursor:default}
+.logo-letter{display:inline-block;background:linear-gradient(135deg,#6c5ce7,#00d2b4,#ff6b9d,#6c5ce7);background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:logoGradient 6s ease infinite,logoEntrance 0.6s cubic-bezier(0.34,1.56,0.64,1) both;animation-delay:calc(var(--i)*0.08s),calc(var(--i)*0.08s);transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1)}
+.logo-letter.highlight{background:linear-gradient(135deg,#00d2b4,#00f5d4,#6c5ce7,#00d2b4);background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:logoGradient 6s ease infinite,logoEntrance 0.6s cubic-bezier(0.34,1.56,0.64,1) both;animation-delay:calc(var(--i)*0.08s),calc(var(--i)*0.08s)}
+.logo:hover .logo-letter{animation:logoGradient 6s ease infinite,logoWave 0.5s cubic-bezier(0.34,1.56,0.64,1);animation-delay:calc(var(--i)*0.05s),calc(var(--i)*0.05s)}
+.logo::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.12),transparent);animation:logoGlint 4s ease-in-out infinite;pointer-events:none}
+@keyframes logoEntrance{0%{opacity:0;transform:translateY(16px) rotateX(40deg) scale(0.6);filter:blur(4px)}100%{opacity:1;transform:translateY(0) rotateX(0deg) scale(1);filter:blur(0)}}
+@keyframes logoGradient{0%{background-position:0% 50%}33%{background-position:100% 50%}66%{background-position:50% 100%}100%{background-position:0% 50%}}
+@keyframes logoWave{0%{transform:translateY(0)}30%{transform:translateY(-8px) scale(1.15)}50%{transform:translateY(-6px) scale(1.1)}100%{transform:translateY(0) scale(1)}}
+@keyframes logoGlint{0%,80%{left:-100%;opacity:0}85%{opacity:1}100%{left:200%;opacity:0}}
+
+</style>
+</head>
+<body>
+<div class="ambient"><div class="orb"></div></div>
+<div class="app">
+  <header class="header">
+    <a href="/" class="logo-link"><div class="logo" aria-label="QRMake"><span class="logo-letter" style="--i:0">Q</span><span class="logo-letter" style="--i:1">R</span><span class="logo-letter highlight" style="--i:2">M</span><span class="logo-letter highlight" style="--i:3">a</span><span class="logo-letter highlight" style="--i:4">k</span><span class="logo-letter highlight" style="--i:5">e</span></div><div class="logo-sub">free qr generator</div></a>
+    <nav class="breadcrumb"><a href="/">Home</a> / <span>QR Code Error Correction</span></nav>
+  </header>
+
+  <article>
+    <h1>QR Code Error Correction Levels Explained</h1>
+    <p class="subtitle">Error correction is one of the most important — and most misunderstood — settings when creating a QR code. Choosing the right level determines whether your code scans reliably in the real world.</p>
+
+    <div class="geo-stats">
+      <div class="geo-stat">
+        <span class="stat-num">1960</span>
+        <div class="stat-label">Reed-Solomon codes first described; adapted for QR error correction when Denso Wave invented QR codes in 1994</div>
+        <div class="stat-source">Reed &amp; Solomon / Denso Wave</div>
+      </div>
+      <div class="geo-stat">
+        <span class="stat-num">4</span>
+        <div class="stat-label">Error correction levels: L (7%), M (15%), Q (25%), H (30%)</div>
+        <div class="stat-source">ISO/IEC 18004:2015</div>
+      </div>
+      <div class="geo-stat">
+        <span class="stat-num">30%</span>
+        <div class="stat-label">Surface damage Level H codes can absorb and still scan</div>
+        <div class="stat-source">QR Tiger Testing</div>
+      </div>
+    </div>
+
+    <h2>What Is Error Correction in a QR Code?</h2>
+    <p>QR codes use a mathematical technique called <strong>Reed-Solomon error correction</strong> to encode redundant data within the code itself. This means that even if part of the QR code is physically damaged, obscured, or dirty, the scanner can reconstruct the missing data from the redundant copies. Reed-Solomon error correction was first described by mathematicians Irving Reed and Gustave Solomon in 1960 — and was later adapted by Denso Wave engineers when they invented QR codes in 1994.</p>
+    <p>Think of it like a RAID disk array: even if one disk fails, the data can be recovered from the others. QR codes work on the same principle — the more redundancy built in, the higher the percentage of damage the code can absorb and still scan correctly.</p>
+    <p>According to ISO/IEC 18004:2015, QR codes support four error correction levels, each recovering a different maximum percentage of data loss. The trade-off: higher correction means more data modules in the code, which makes the QR code physically larger and more visually dense for the same amount of encoded data.</p>
+
+    <h2>The 4 Error Correction Levels</h2>
+
+    <div class="level-grid">
+      <div class="level-card level-l">
+        <div class="level-badge">L</div>
+        <div class="level-name">Low</div>
+        <div class="recovery-bar"><div class="recovery-fill"></div></div>
+        <div class="recovery-label">Recovers up to 7% damage</div>
+        <p>Smallest code size. Suitable for controlled environments where the QR code will be displayed cleanly and scanned at close range on a stable surface.</p>
+      </div>
+      <div class="level-card level-m">
+        <div class="level-badge">M</div>
+        <div class="level-name">Medium</div>
+        <div class="recovery-bar"><div class="recovery-fill"></div></div>
+        <div class="recovery-label">Recovers up to 15% damage</div>
+        <p>The most common default level. Good balance of size and reliability for general print use — brochures, posters, cards. Not enough for logo overlays.</p>
+      </div>
+      <div class="level-card level-q">
+        <div class="level-badge">Q</div>
+        <div class="level-name">Quartile</div>
+        <div class="recovery-bar"><div class="recovery-fill"></div></div>
+        <div class="recovery-label">Recovers up to 25% damage</div>
+        <p>Higher redundancy for outdoor signage, mildly dirty environments, or small logo overlays. Code is noticeably more dense than M level.</p>
+      </div>
+      <div class="level-card level-h">
+        <div class="level-badge">H</div>
+        <div class="level-name">High</div>
+        <div class="recovery-bar"><div class="recovery-fill"></div></div>
+        <div class="recovery-label">Recovers up to 30% damage</div>
+        <p>Maximum redundancy. Required for logo-overlaid QR codes, outdoor contexts, product packaging, and anywhere damage or partial obscuration is likely.</p>
+      </div>
+    </div>
+
+    <p>The percentage figures (7%, 15%, 25%, 30%) refer to the maximum percentage of <strong>codeword data</strong> that can be corrupted or missing and still be fully reconstructed. According to QR Tiger testing, <strong>QR codes printed at Level H remain scannable even when up to 30% of the code surface is obscured or damaged</strong> — a finding consistent with the ISO/IEC 18004:2015 specification.</p>
+
+    <h2>Full Comparison Table</h2>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Level</th>
+          <th>Recovery</th>
+          <th>Code Size</th>
+          <th>Logo Overlay</th>
+          <th>Best For</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="badge-l">L</span> Low</td>
+          <td>7%</td>
+          <td>Smallest</td>
+          <td>No</td>
+          <td>Digital displays, screens, apps</td>
+        </tr>
+        <tr>
+          <td><span class="badge-m">M</span> Medium</td>
+          <td>15%</td>
+          <td>Small</td>
+          <td>Very small only</td>
+          <td>Standard print: brochures, flyers</td>
+        </tr>
+        <tr>
+          <td><span class="badge-q">Q</span> Quartile</td>
+          <td>25%</td>
+          <td>Medium</td>
+          <td>Small–medium</td>
+          <td>Outdoor signage, light logo use</td>
+        </tr>
+        <tr>
+          <td><span class="badge-h">H</span> High</td>
+          <td>30%</td>
+          <td>Largest</td>
+          <td>Yes (up to ~30%)</td>
+          <td>Logos overlaid, outdoor, packaging</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>When to Use Each Level</h2>
+
+    <h3>Level L — Digital screens only</h3>
+    <p>Use Level L when your QR code will only ever be displayed on a clean, high-resolution digital screen and scanned at close range: a presentation slide, a website, a digital signage display in ideal lighting. The code will be as compact as possible, which matters when space is tight on screen.</p>
+    <p>Never use Level L for print. Real-world printing introduces subtle imperfections, paper grain, and wear that can push a 7% tolerance code into failure territory quickly.</p>
+
+    <h3>Level M — Standard print (flyers, brochures, cards)</h3>
+    <p>Level M is the appropriate default for everyday print materials in clean, indoor environments: business cards, flyers, product inserts, and table cards. The 15% recovery tolerance handles typical print quality variation and minor wear without inflating the code's physical size too much.</p>
+    <p>If you're unsure whether you need M or Q, go with Q — the size increase is modest and the extra resilience is worth it in almost every print context.</p>
+
+    <h3>Level Q — Outdoor signage and light logo use</h3>
+    <p>Use Level Q for QR codes placed outdoors on signage, A-frames, or window stickers, where exposure to rain, dirt, direct sunlight, and physical contact will degrade the code surface over time. It's also the minimum for placing a very small logo (under 10% of the QR area) in the centre of the code.</p>
+
+    <h3>Level H — Logos, outdoor, product packaging</h3>
+    <p>Level H is the right choice whenever:</p>
+    <ul>
+      <li>You're placing a logo or image in the centre of the QR code</li>
+      <li>The code will be used outdoors and exposed to weather for weeks or months</li>
+      <li>The code is on product packaging that will be handled, stacked, and potentially scuffed</li>
+      <li>The code will be applied as a sticker that may peel at the edges</li>
+      <li>You want maximum reliability for any print context</li>
+    </ul>
+    <p>With Level H, a centred logo covering up to roughly 25–30% of the code's area can still be fully scanned. The logo does not need to be perfectly centred, but it should not touch the three finder pattern squares in the corners.</p>
+
+    <h2>How Error Correction Affects QR Code Size and Complexity</h2>
+    <p>Higher error correction means more modules (the small squares) in the QR code. For the same data payload, a Level H code will be larger and visually denser than a Level L code. Specifically:</p>
+    <ul>
+      <li>A short URL at Level L might generate a 25×25 module version-2 code</li>
+      <li>The same URL at Level H might require a 29×29 module version-3 code</li>
+      <li>Longer URLs at Level H may require version-5 or higher (37×37 modules)</li>
+    </ul>
+    <p>In practice for print use, this difference is small and rarely visible to the naked eye. The codes look similarly dense. The minimum print size changes slightly — see our <a href="/qr-code-size-guide/">QR code size guide</a> for exact print specifications.</p>
+    <p>For digital displays where space is truly at a premium (e.g., a small QR code in a mobile app UI), Level L is worth using to keep the code compact and render crisply at smaller pixel sizes. For everything else, err on the side of more error correction.</p>
+
+    <div class="qrmake-box">
+      <h3>QRMake uses Level H by default — here's why</h3>
+      <p>We generate all QR codes at <strong>Error Correction Level H</strong>. This means your codes can withstand up to 30% surface damage and fully support logo overlays in the centre. Most users are creating codes for print use — business cards, marketing materials, signage — where resilience and logo compatibility matter far more than the marginal size difference. Level H is the right default for real-world QR codes. Download as a high-res PNG (at least 1000px) for the cleanest print output — see our <a href="/qr-code-png-download/">PNG download guide</a> for best practices.</p>
+    </div>
+
+    <h2>Common Questions About Error Correction</h2>
+
+    <div class="faq-item">
+      <h3>What is QR code error correction?</h3>
+      <p>QR code error correction is a built-in mechanism that allows a QR code to be read correctly even when part of it is physically damaged, obscured, or dirty. It uses Reed-Solomon error correction — a mathematical algorithm first described by Irving Reed and Gustave Solomon in 1960 — to encode redundant data within the code. Even if a portion of the QR code is missing, a scanner can reconstruct the full data from the redundant copies.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>What are the four error correction levels in QR codes?</h3>
+      <p>According to ISO/IEC 18004:2015, QR codes support four error correction levels: L (Low) recovers up to 7% of damaged data and produces the smallest code; M (Medium) recovers up to 15% and is the most common default; Q (Quartile) recovers up to 25% and is suitable for outdoor use and small logo overlays; H (High) recovers up to 30% and is required for logo-overlaid codes, outdoor signage, and product packaging.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Which error correction level should I choose?</h3>
+      <p>For most print use cases — business cards, flyers, posters, and packaging — choose Level H. It provides maximum damage tolerance and supports logo overlays up to approximately 25–30% of the code area. Level L is only suitable for clean digital screens where damage is impossible. When in doubt, H is always the safe choice — the size difference compared to Level M is negligible in real print applications.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Can a damaged QR code still be scanned?</h3>
+      <p>Yes. QR Tiger testing found that QR codes printed at Level H remain scannable even when up to 30% of the code surface is obscured or damaged. A small tear, fold crease, or partial smudge that covers less than this threshold will typically still scan successfully. However, damage to the three square finder patterns in the corners is more critical — these orient the scanner and losing all three makes reading very difficult.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Why does a higher error correction level make the QR code more complex?</h3>
+      <p>Higher error correction means more redundant data modules must be packed into the code grid. For the same encoded data, a Level H code requires more squares (modules) than a Level L code — making it physically larger or more visually dense. For a short URL at Level L, a 25×25 module grid may suffice; the same URL at Level H may require a 29×29 or larger grid. In practice for print use, this difference is barely visible to the naked eye.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>What error correction level does QRMake use?</h3>
+      <p>QRMake generates all QR codes at Error Correction Level H by default. This ensures maximum damage tolerance (up to 30% of the code surface) and full support for logo overlays. Since most users create codes for print use — business cards, marketing materials, outdoor signage — Level H is the right default. The marginal size increase compared to lower levels is negligible in real-world print applications.</p>
+    </div>
+
+    <div class="cta-box">
+      <h3>Generate a Level H QR Code for Free</h3>
+      <p>All QRMake codes use maximum error correction by default — perfect for print, logos, and outdoor use.</p>
+      <div class="cta-links">
+        <a href="/" class="cta-btn">Free QR Generator →</a>
+        <a href="/qr-code-size-guide/" class="cta-btn secondary">QR Code Size Guide</a>
+        <a href="/qr-code-png-download/" class="cta-btn secondary">PNG Download Tips</a>
+      </div>
+    </div>
+  </article>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand"><div class="logo">QRMake</div><p>Free QR code generator. No sign-up, no limits, no watermarks.</p></div>
+      <div class="footer-col"><h4>QR Tools</h4><a href="/wifi-qr-code-generator/">WiFi QR Code</a><a href="/business-card-qr-code/">Business Card QR</a><a href="/restaurant-menu-qr-code/">Restaurant Menu QR</a><a href="/google-form-qr-code/">Google Form QR</a><a href="/vcard-qr-code-generator/">vCard QR Code</a><a href="/sms-qr-code-generator/">SMS QR Code</a><a href="/phone-number-qr-code/">Phone Number QR</a><a href="/pdf-qr-code-generator/">PDF QR Code</a><a href="/social-media-qr-code/">Social Media QR</a><a href="/whatsapp-qr-code/">WhatsApp QR Code</a><a href="/youtube-qr-code/">YouTube QR Code</a><a href="/linkedin-qr-code/">LinkedIn QR Code</a><a href="/email-qr-code-generator/">Email QR Code</a><a href="/qr-code-for-location/">Location QR Code</a><a href="/upi-qr-code-generator/">UPI QR Code</a><a href="/gpay-qr-code-generator/">Google Pay QR</a><a href="/phonepe-qr-code-generator/">PhonePe QR</a><a href="/bhim-qr-code-generator/">BHIM QR Code</a><a href="/whatsapp-qr-code/">WhatsApp QR Code</a><a href="/youtube-qr-code/">YouTube QR Code</a><a href="/linkedin-qr-code/">LinkedIn QR Code</a><a href="/email-qr-code-generator/">Email QR Code</a><a href="/qr-code-for-location/">Location QR Code</a></div>
+      <div class="footer-col"><h4>Guides</h4><a href="/how-to-scan-qr-code-iphone/">Scan QR on iPhone</a><a href="/dynamic-vs-static-qr-code/">Dynamic vs Static QR</a><a href="/qr-code-png-download/">QR Code PNG Download</a><a href="/qr-code-size-guide/">QR Code Size Guide</a><a href="/qr-code-for-google-reviews/">QR Code for Google Reviews</a><a href="/how-to-create-qr-code-for-pdf/">QR Code for PDF</a><a href="/qr-code-for-instagram/">QR Code for Instagram</a><a href="/how-to-make-qr-code-for-link/">QR Code for Any Link</a><a href="/qr-code-marketing/">QR Code Marketing</a><a href="/qr-code-vs-barcode/">QR Code vs Barcode</a><a href="/qr-code-on-business-card/">QR Code on Business Card</a><a href="/how-to-track-qr-code/">How to Track QR Code</a><a href="/qr-code-error-correction/">QR Code Error Correction</a></div>
+      <div class="footer-col"><h4>QRMake</h4><a href="/">Home</a><a href="mailto:hello@qrmake.org">Contact</a></div>
+    </div>
+    <div class="footer-bottom">© 2025 QRMake. Free QR Code Generator.</div>
+  </footer>
+</div>
+</body>
+</html>

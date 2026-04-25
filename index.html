@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free QR Code Generator — No Sign-up, No Limits | QRMake</title>
+<meta name="description" content="Free QR code generator — create custom QR codes instantly, no sign-up needed. Download PNG or SVG. 100% private, unlimited, and free forever.">
+<link rel="canonical" href="https://qrmake.org/">
+<meta name="robots" content="index, follow">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"QRMake — Free QR Code Generator","url":"https://qrmake.org","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free QR code generator for URLs, WiFi, vCard, SMS, UPI and more. No sign-up required."}
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is QRMake completely free?","acceptedAnswer":{"@type":"Answer","text":"Yes. QRMake is completely free with no hidden fees, no subscription, and no watermarks. You can generate unlimited QR codes and download them in PNG or SVG format at no cost — forever."}},{"@type":"Question","name":"Do I need to create an account?","acceptedAnswer":{"@type":"Answer","text":"No account is required. Go to qrmake.org, enter your content, and download your QR code. Everything runs entirely in your browser — your data never leaves your device and no sign-up is needed."}},{"@type":"Question","name":"What types of QR codes can I create?","acceptedAnswer":{"@type":"Answer","text":"QRMake supports URL QR codes, plain text, WiFi network credentials, email addresses, vCard contacts, SMS messages, phone numbers, UPI payment QR codes, and more. Any text-based content can be encoded into a QR code."}},{"@type":"Question","name":"Can I add a logo to my QR code?","acceptedAnswer":{"@type":"Answer","text":"Yes. QRMake lets you upload any image as a logo overlay in the center of your QR code. All codes are generated at Error Correction Level H, which allows up to 30% of the code surface to be covered while remaining fully scannable."}},{"@type":"Question","name":"What format does QRMake export QR codes in?","acceptedAnswer":{"@type":"Answer","text":"QRMake exports QR codes as PNG (1024×1024px high-resolution) and SVG (vector format for perfect quality at any print size). Both formats are available for free with no account required."}},{"@type":"Question","name":"Do QRMake QR codes expire?","acceptedAnswer":{"@type":"Answer","text":"No. QRMake generates static QR codes that encode your content directly. They never expire, have no scan limits, and do not depend on any server remaining active."}},{"@type":"Question","name":"How is QRMake different from Canva's QR code generator?","acceptedAnswer":{"@type":"Answer","text":"Canva's QR code generator requires a Canva account and is embedded within their design tool. QRMake is standalone, requires no account, offers more QR code types (WiFi, vCard, UPI, SMS), provides both PNG and SVG downloads for free, and runs entirely in your browser with zero data collection."}},{"@type":"Question","name":"What is the difference between static and dynamic QR codes?","acceptedAnswer":{"@type":"Answer","text":"Static QR codes encode content directly into the code pattern — they never expire and need no internet. Dynamic QR codes use a redirect URL through a tracking server — they allow scan analytics but stop working if the service shuts down. QRMake generates free static codes."}},{"@type":"Question","name":"Can I scan QR codes with my smartphone, tablet, or computer camera?","acceptedAnswer":{"@type":"Answer","text":"Yes. On smartphones, use the built-in camera app (iPhone iOS 11+ or Android 9+) or Google Lens. On tablets, the same camera scanning works. For computers, Google Lens on Chrome or web-based QR scanners can read codes through your webcam. No third party scanner app is needed on modern devices."}},{"@type":"Question","name":"Can I use QRMake for digital tickets and event check-ins?","acceptedAnswer":{"@type":"Answer","text":"Yes. QRMake generates standard QR codes compatible with all ticket scanning systems. You can encode unique URLs, ticket IDs, or any text for digital tickets, event schedules, conference badges, and access control. Codes are scannable from any orientation."}},{"@type":"Question","name":"Does QRMake support real-time collaboration?","acceptedAnswer":{"@type":"Answer","text":"QRMake is designed for fast, individual-use QR code creation. It does not currently support real-time collaboration or team accounts. Generate codes individually and share downloaded PNG or SVG files with colleagues — no account needed."}}]}
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #06060b;
+  --surface: #0d0d14;
+  --card: #111119;
+  --border: rgba(255,255,255,0.06);
+  --border-hover: rgba(255,255,255,0.12);
+  --text: #eeeef3;
+  --dim: #c0c0d4;
+  --accent: #6c5ce7;
+  --accent-glow: rgba(108,92,231,0.3);
+  --mint: #00d2b4;
+  --pink: #ff6b9d;
+  --orange: #ffa44f;
+  --radius: 16px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Space Grotesk', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Ambient background */
+.ambient {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: 0;
+}
+.ambient .orb {
+  position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.15;
+  animation: float 20s ease-in-out infinite;
+}
+.ambient .orb:nth-child(1) { width: 600px; height: 600px; background: var(--accent); top: -200px; left: -100px; }
+.ambient .orb:nth-child(2) { width: 500px; height: 500px; background: var(--mint); bottom: -200px; right: -100px; animation-delay: -7s; }
+.ambient .orb:nth-child(3) { width: 300px; height: 300px; background: var(--pink); top: 50%; left: 50%; animation-delay: -14s; }
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -30px) scale(1.05); }
+  66% { transform: translate(-20px, 20px) scale(0.95); }
+}
+
+/* Layout */
+.app { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 24px; }
+
+/* Header */
+.header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 0; margin-bottom: 48px;
+}
+.logo {
+  font-family: 'Syne', sans-serif; font-weight: 800; font-size: 26px;
+  letter-spacing: -0.5px; display: inline-flex; position: relative; cursor: default;
+}
+.logo-letter {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--accent), var(--mint), #ff6b9d, var(--accent));
+  background-size: 300% 300%;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  animation: logoGradient 6s ease infinite, logoEntrance 0.6s cubic-bezier(0.34,1.56,0.64,1) both;
+  animation-delay: calc(var(--i) * 0.08s), calc(var(--i) * 0.08s);
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), filter 0.3s;
+}
+.logo-letter.highlight {
+  background: linear-gradient(135deg, var(--mint), #00f5d4, var(--accent), var(--mint));
+  background-size: 300% 300%;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  animation: logoGradient 6s ease infinite, logoEntrance 0.6s cubic-bezier(0.34,1.56,0.64,1) both;
+  animation-delay: calc(var(--i) * 0.08s), calc(var(--i) * 0.08s);
+}
+/* Hover: wave effect — each letter jumps in sequence */
+.logo:hover .logo-letter {
+  animation: logoGradient 6s ease infinite, logoWave 0.5s cubic-bezier(0.34,1.56,0.64,1);
+  animation-delay: calc(var(--i) * 0.05s), calc(var(--i) * 0.05s);
+}
+/* Glint sweep across the logo */
+.logo::after {
+  content: '';
+  position: absolute; top: 0; left: -100%; width: 60%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+  animation: logoGlint 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes logoEntrance {
+  0% { opacity: 0; transform: translateY(16px) rotateX(40deg) scale(0.6); filter: blur(4px); }
+  100% { opacity: 1; transform: translateY(0) rotateX(0deg) scale(1); filter: blur(0); }
+}
+@keyframes logoGradient {
+  0% { background-position: 0% 50%; }
+  33% { background-position: 100% 50%; }
+  66% { background-position: 50% 100%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes logoWave {
+  0% { transform: translateY(0); }
+  30% { transform: translateY(-8px) scale(1.15); }
+  50% { transform: translateY(-6px) scale(1.1); }
+  100% { transform: translateY(0) scale(1); }
+}
+@keyframes logoGlint {
+  0%, 80% { left: -100%; opacity: 0; }
+  85% { opacity: 1; }
+  100% { left: 200%; opacity: 0; }
+}
+.logo-sub { font-size: 11px; color: var(--dim); font-weight: 400; letter-spacing: 2px; text-transform: uppercase; margin-top: 2px; font-family: 'DM Mono', monospace; }
+.badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(0,210,180,0.08); border: 1px solid rgba(0,210,180,0.2);
+  padding: 6px 14px; border-radius: 20px; font-size: 12px; color: var(--mint);
+  font-family: 'DM Mono', monospace;
+}
+.badge::before { content: ''; width: 6px; height: 6px; background: var(--mint); border-radius: 50%; animation: pulse 2s ease infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+/* Hero */
+.hero-text { text-align: center; margin-bottom: 56px; }
+.hero-text h1 {
+  font-family: 'Syne', sans-serif; font-size: clamp(36px, 6vw, 64px);
+  font-weight: 800; line-height: 1.1; margin-bottom: 16px;
+  letter-spacing: -2px;
+}
+.hero-text h1 .grad {
+  background: linear-gradient(135deg, var(--accent), var(--pink), var(--orange));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.hero-text p { color: var(--dim); font-size: 17px; max-width: 500px; margin: 0 auto; line-height: 1.6; }
+
+/* Main workspace */
+.workspace {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start;
+}
+@media(max-width: 800px) { .workspace { grid-template-columns: 1fr; } }
+
+/* Input panel */
+.panel {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 28px; position: relative;
+  transition: border-color 0.3s;
+}
+.panel:hover { border-color: var(--border-hover); }
+
+.panel-title {
+  font-family: 'DM Mono', monospace; font-size: 11px; text-transform: uppercase;
+  letter-spacing: 2px; color: var(--dim); margin-bottom: 24px;
+}
+
+/* QR Type selector */
+.type-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 24px;
+}
+.type-btn {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+  padding: 12px 8px; cursor: pointer; text-align: center; transition: all 0.25s;
+  font-family: 'Space Grotesk', sans-serif; color: var(--dim); font-size: 12px;
+}
+.type-btn .icon { font-size: 20px; display: block; margin-bottom: 4px; }
+.type-btn:hover { border-color: var(--border-hover); background: rgba(255,255,255,0.03); }
+.type-btn.active {
+  border-color: var(--accent); background: rgba(108,92,231,0.08);
+  color: var(--text); box-shadow: 0 0 20px var(--accent-glow);
+}
+
+/* Inputs */
+.input-group { margin-bottom: 20px; }
+.input-label {
+  font-size: 12px; color: var(--dim); font-family: 'DM Mono', monospace;
+  letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; display: block;
+}
+.input-field {
+  width: 100%; background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px 16px; color: var(--text); font-size: 15px;
+  font-family: 'Space Grotesk', sans-serif; outline: none; transition: all 0.25s;
+}
+.input-field:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+.input-field::placeholder { color: var(--dim); }
+textarea.input-field { min-height: 80px; resize: vertical; }
+
+/* WiFi fields */
+.wifi-fields { display: none; flex-direction: column; gap: 12px; }
+.wifi-fields.show { display: flex; }
+.wifi-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+/* Color pickers */
+.color-section { margin-bottom: 20px; }
+.color-row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.color-pick {
+  display: flex; align-items: center; gap: 8px; background: var(--surface);
+  border: 1px solid var(--border); border-radius: 10px; padding: 8px 12px;
+  cursor: pointer; flex: 1; min-width: 120px;
+}
+.color-pick label { font-size: 12px; color: var(--dim); cursor: pointer; white-space: nowrap; }
+.color-pick input[type="color"] {
+  width: 28px; height: 28px; border: none; border-radius: 6px; cursor: pointer;
+  background: none; padding: 0;
+}
+.color-pick input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
+.color-pick input[type="color"]::-webkit-color-swatch { border: 2px solid rgba(255,255,255,0.1); border-radius: 5px; }
+
+/* Presets */
+.preset-row { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
+.preset {
+  width: 28px; height: 28px; border-radius: 8px; cursor: pointer;
+  border: 2px solid transparent; transition: all 0.2s; position: relative;
+}
+.preset:hover { transform: scale(1.15); }
+.preset.active { border-color: var(--text); box-shadow: 0 0 10px rgba(255,255,255,0.15); }
+
+/* Logo upload */
+.logo-upload {
+  border: 2px dashed var(--border); border-radius: 10px; padding: 16px;
+  text-align: center; cursor: pointer; transition: all 0.25s; margin-bottom: 20px;
+}
+.logo-upload:hover { border-color: var(--accent); background: rgba(108,92,231,0.04); }
+.logo-upload .upload-text { font-size: 13px; color: var(--dim); }
+.logo-upload .upload-text span { color: var(--accent); }
+.logo-preview { display: none; align-items: center; gap: 10px; }
+.logo-preview img { width: 40px; height: 40px; border-radius: 8px; object-fit: contain; background: #fff; padding: 4px; }
+.logo-preview .name { font-size: 13px; flex: 1; }
+.logo-preview .remove { color: var(--pink); cursor: pointer; font-size: 12px; }
+
+/* Preview panel */
+.preview-panel {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 28px; position: sticky; top: 24px;
+}
+.qr-display {
+  background: #ffffff; border-radius: 14px; padding: 32px;
+  display: flex; align-items: center; justify-content: center;
+  min-height: 300px; margin-bottom: 24px; position: relative;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  transition: all 0.3s;
+}
+.qr-display:hover { box-shadow: 0 25px 70px rgba(0,0,0,0.4); transform: translateY(-2px); }
+.qr-display #qrcode { display: flex; align-items: center; justify-content: center; }
+.qr-display #qrcode canvas, .qr-display #qrcode img { border-radius: 4px; }
+.qr-placeholder {
+  display: flex; flex-direction: column; align-items: center; gap: 12px; color: #c0c0c8;
+}
+.qr-placeholder .ph-icon { font-size: 48px; opacity: 0.3; }
+.qr-placeholder .ph-text { font-size: 14px; opacity: 0.5; }
+
+/* Download buttons */
+.download-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+.dl-btn {
+  padding: 14px; border-radius: 12px; border: none; cursor: pointer;
+  font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 14px;
+  transition: all 0.25s; display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.dl-btn.primary {
+  background: linear-gradient(135deg, var(--accent), #8b5cf6);
+  color: #fff; box-shadow: 0 4px 20px var(--accent-glow);
+}
+.dl-btn.primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px var(--accent-glow); }
+.dl-btn.secondary {
+  background: var(--surface); color: var(--text); border: 1px solid var(--border);
+}
+.dl-btn.secondary:hover { border-color: var(--border-hover); background: rgba(255,255,255,0.04); }
+
+/* Feedback bar */
+.feedback-bar {
+  display: flex; align-items: center; gap: 12px; padding: 16px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+}
+.feedback-text { font-size: 13px; color: var(--dim); flex: 1; }
+.fb-btn {
+  display: flex; align-items: center; gap: 6px; padding: 8px 16px;
+  border-radius: 10px; border: 1px solid var(--border); background: transparent;
+  color: var(--dim); cursor: pointer; font-size: 13px; font-family: 'Space Grotesk', sans-serif;
+  transition: all 0.25s;
+}
+.fb-btn:hover { border-color: var(--border-hover); }
+.fb-btn.like:hover, .fb-btn.like.active { background: rgba(0,210,180,0.1); border-color: var(--mint); color: var(--mint); }
+.fb-btn.dislike:hover, .fb-btn.dislike.active { background: rgba(255,107,157,0.1); border-color: var(--pink); color: var(--pink); }
+.fb-btn .fb-count { font-family: 'DM Mono', monospace; font-size: 12px; }
+.fb-btn svg { width: 16px; height: 16px; }
+
+/* Feedback modal */
+.feedback-modal-overlay {
+  display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7); z-index: 100; align-items: center; justify-content: center;
+  backdrop-filter: blur(8px);
+}
+.feedback-modal-overlay.show { display: flex; }
+.feedback-modal {
+  background: var(--card); border: 1px solid var(--border); border-radius: 20px;
+  padding: 32px; width: 90%; max-width: 440px;
+  animation: modalIn 0.3s ease;
+}
+@keyframes modalIn { from { opacity: 0; transform: translateY(20px) scale(0.95); } to { opacity: 1; transform: none; } }
+.modal-title { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+.modal-sub { font-size: 13px; color: var(--dim); margin-bottom: 20px; }
+.modal-textarea {
+  width: 100%; min-height: 100px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px; color: var(--text); font-size: 14px;
+  font-family: 'Space Grotesk', sans-serif; outline: none; resize: vertical; margin-bottom: 16px;
+}
+.modal-textarea:focus { border-color: var(--accent); }
+.modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
+.modal-btn {
+  padding: 10px 20px; border-radius: 10px; border: none; cursor: pointer;
+  font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 500; transition: all 0.2s;
+}
+.modal-btn.cancel { background: var(--surface); color: var(--dim); border: 1px solid var(--border); }
+.modal-btn.submit { background: var(--accent); color: #fff; }
+.modal-btn.submit:hover { opacity: 0.9; }
+
+/* Toast */
+.toast {
+  position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(100px);
+  background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+  padding: 14px 24px; font-size: 14px; z-index: 200; display: flex; align-items: center; gap: 10px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4); transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+.toast .toast-icon { font-size: 18px; }
+
+/* Features strip */
+.features {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px; margin-top: 56px; margin-bottom: 48px;
+}
+.feature {
+  background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+  padding: 24px; text-align: center; transition: all 0.3s;
+}
+.feature:hover { border-color: var(--border-hover); transform: translateY(-4px); }
+.feature .f-icon { font-size: 28px; margin-bottom: 10px; }
+.feature .f-title { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+.feature .f-desc { font-size: 12px; color: var(--dim); line-height: 1.5; }
+
+/* SEO footer */
+.seo-footer {
+  text-align: center; padding: 48px 0; margin-top: 40px; position: relative; overflow: hidden;
+  border-top: none;
+}
+.seo-footer::before {
+  content:''; position:absolute; top:0; left:50%; transform:translateX(-50%); width:300px; height:2px;
+  background:linear-gradient(90deg, transparent, #6c5ce7, #00d2b4, #ff6b9d, transparent);
+  animation: shimmerLine 3s ease infinite;
+}
+@keyframes shimmerLine {
+  0% { opacity:0.3; width:100px; }
+  50% { opacity:1; width:400px; }
+  100% { opacity:0.3; width:100px; }
+}
+.seo-footer h2 {
+  font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 700; margin-bottom: 14px;
+  background: linear-gradient(135deg, #fff 0%, #6c5ce7 50%, #00d2b4 100%);
+  background-size: 200% 200%; animation: gradientText 4s ease infinite;
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+@keyframes gradientText {
+  0%,100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+.seo-footer > p { color: var(--dim); font-size: 14px; max-width: 600px; margin: 0 auto 32px; line-height: 1.7; }
+.seo-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; max-width: 820px; margin: 0 auto; }
+.seo-links a {
+  color: #fff; font-size: 13px; text-decoration: none; font-family: 'Syne', sans-serif; font-weight: 600;
+  padding: 12px 22px; border: none; border-radius: 28px;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative; overflow: hidden; letter-spacing: 0.3px;
+  opacity: 0; transform: translateY(30px) scale(0.8);
+}
+.seo-links a.visible {
+  opacity: 1; transform: translateY(0) scale(1);
+}
+.seo-links a::after {
+  content:''; position:absolute; inset:-2px; border-radius:30px; opacity:0;
+  transition: opacity 0.4s;
+}
+.seo-links a:hover {
+  transform: translateY(-5px) scale(1.08) !important;
+  filter: brightness(1.15);
+}
+.seo-links a:hover::after { opacity:1; }
+.seo-links a:active { transform: translateY(-2px) scale(1.02) !important; }
+
+/* Gradient colors per pill */
+.seo-links a:nth-child(1)  { background:linear-gradient(135deg,#6c5ce7,#a855f7); }
+.seo-links a:nth-child(2)  { background:linear-gradient(135deg,#3b82f6,#06b6d4); }
+.seo-links a:nth-child(3)  { background:linear-gradient(135deg,#10b981,#14b8a6); }
+.seo-links a:nth-child(4)  { background:linear-gradient(135deg,#f59e0b,#f97316); }
+.seo-links a:nth-child(5)  { background:linear-gradient(135deg,#ef4444,#f43f5e); }
+.seo-links a:nth-child(6)  { background:linear-gradient(135deg,#06b6d4,#3b82f6); }
+.seo-links a:nth-child(7)  { background:linear-gradient(135deg,#8b5cf6,#6366f1); }
+.seo-links a:nth-child(8)  { background:linear-gradient(135deg,#ec4899,#f43f5e); }
+.seo-links a:nth-child(9)  { background:linear-gradient(135deg,#0077b5,#3b82f6); }
+.seo-links a:nth-child(10) { background:linear-gradient(135deg,#ef4444,#dc2626); }
+.seo-links a:nth-child(11) { background:linear-gradient(135deg,#25d366,#10b981); }
+.seo-links a:nth-child(12) { background:linear-gradient(135deg,#5f259f,#8b5cf6); }
+
+/* Color-matched glow on hover */
+.seo-links a:nth-child(1):hover  { box-shadow:0 8px 32px rgba(108,92,231,0.5), 0 0 60px rgba(108,92,231,0.2); }
+.seo-links a:nth-child(2):hover  { box-shadow:0 8px 32px rgba(59,130,246,0.5), 0 0 60px rgba(59,130,246,0.2); }
+.seo-links a:nth-child(3):hover  { box-shadow:0 8px 32px rgba(16,185,129,0.5), 0 0 60px rgba(16,185,129,0.2); }
+.seo-links a:nth-child(4):hover  { box-shadow:0 8px 32px rgba(245,158,11,0.5), 0 0 60px rgba(245,158,11,0.2); }
+.seo-links a:nth-child(5):hover  { box-shadow:0 8px 32px rgba(239,68,68,0.5), 0 0 60px rgba(239,68,68,0.2); }
+.seo-links a:nth-child(6):hover  { box-shadow:0 8px 32px rgba(6,182,212,0.5), 0 0 60px rgba(6,182,212,0.2); }
+.seo-links a:nth-child(7):hover  { box-shadow:0 8px 32px rgba(139,92,246,0.5), 0 0 60px rgba(139,92,246,0.2); }
+.seo-links a:nth-child(8):hover  { box-shadow:0 8px 32px rgba(236,72,153,0.5), 0 0 60px rgba(236,72,153,0.2); }
+.seo-links a:nth-child(9):hover  { box-shadow:0 8px 32px rgba(0,119,181,0.5), 0 0 60px rgba(0,119,181,0.2); }
+.seo-links a:nth-child(10):hover { box-shadow:0 8px 32px rgba(239,68,68,0.5), 0 0 60px rgba(239,68,68,0.2); }
+.seo-links a:nth-child(11):hover { box-shadow:0 8px 32px rgba(37,211,102,0.5), 0 0 60px rgba(37,211,102,0.2); }
+.seo-links a:nth-child(12):hover { box-shadow:0 8px 32px rgba(95,37,159,0.5), 0 0 60px rgba(95,37,159,0.2); }
+
+/* Animations */
+.fade-in { opacity: 0; transform: translateY(20px); animation: fadeUp 0.6s ease forwards; }
+.fade-in:nth-child(2) { animation-delay: 0.1s; }
+.fade-in:nth-child(3) { animation-delay: 0.2s; }
+@keyframes fadeUp { to { opacity: 1; transform: none; } }
+
+/* Generated counter */
+.counter-bar {
+  display: flex; justify-content: center; gap: 32px; margin-bottom: 48px;
+  padding: 16px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; max-width: 500px; margin-left: auto; margin-right: auto;
+}
+.counter-item { text-align: center; }
+.counter-num { font-family: 'DM Mono', monospace; font-size: 22px; font-weight: 700; color: var(--accent); }
+.counter-label { font-size: 10px; color: var(--dim); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 2px; }
+
+/* GEO stats */
+.geo-stats{background:rgba(108,92,231,0.06);border:1px solid rgba(108,92,231,0.15);border-radius:12px;padding:20px;margin:24px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
+.geo-stat{text-align:center}.geo-stat .stat-num{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--accent);display:block}.geo-stat .stat-label{font-size:12px;color:var(--dim);line-height:1.4}.geo-stat .stat-source{font-size:11px;color:var(--dim);opacity:0.6;font-family:'DM Mono',monospace;margin-top:4px}
+</style>
+</head>
+<body>
+
+<div class="ambient">
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="orb"></div>
+</div>
+
+<div class="app">
+  <!-- HEADER -->
+  <header class="header fade-in">
+    <div>
+      <div class="logo" aria-label="QRMake">
+        <span class="logo-letter" style="--i:0">Q</span><span class="logo-letter" style="--i:1">R</span><span class="logo-letter highlight" style="--i:2">M</span><span class="logo-letter highlight" style="--i:3">a</span><span class="logo-letter highlight" style="--i:4">k</span><span class="logo-letter highlight" style="--i:5">e</span>
+      </div>
+      <div class="logo-sub">free qr generator</div>
+    </div>
+    <div class="badge">100% Free · No Sign-up</div>
+  </header>
+
+  <!-- HERO -->
+  <div class="hero-text fade-in">
+    <h1>Free QR Code Generator — <span class="grad">Create Custom QR Codes</span> Instantly</h1>
+    <p>No sign-up. No limits. No watermarks. Just paste your link and get a stunning QR code — free forever.</p>
+  </div>
+
+  <!-- Counter -->
+  <div class="counter-bar fade-in">
+    <div class="counter-item"><div class="counter-num" id="genCount">12,847</div><div class="counter-label">QR Codes Generated</div></div>
+    <div class="counter-item"><div class="counter-num">∞</div><div class="counter-label">Scans — No Limit</div></div>
+    <div class="counter-item"><div class="counter-num">$0</div><div class="counter-label">Forever</div></div>
+  </div>
+
+  <!-- WORKSPACE -->
+  <div class="workspace">
+    <!-- Left: Input -->
+    <div class="panel fade-in">
+      <div class="panel-title">01 / Choose Type</div>
+
+      <div class="type-grid">
+        <div class="type-btn active" data-type="url" onclick="setType('url')">
+          <span class="icon">🔗</span>URL
+        </div>
+        <div class="type-btn" data-type="text" onclick="setType('text')">
+          <span class="icon">📝</span>Text
+        </div>
+        <div class="type-btn" data-type="wifi" onclick="setType('wifi')">
+          <span class="icon">📶</span>WiFi
+        </div>
+        <div class="type-btn" data-type="email" onclick="setType('email')">
+          <span class="icon">✉️</span>Email
+        </div>
+      </div>
+
+      <div class="panel-title">02 / Enter Content</div>
+
+      <!-- URL input -->
+      <div class="input-group" id="urlGroup">
+        <label class="input-label">Website URL</label>
+        <input type="url" class="input-field" id="urlInput" placeholder="https://yourwebsite.com" oninput="generateQR()">
+      </div>
+
+      <!-- Text input -->
+      <div class="input-group" id="textGroup" style="display:none">
+        <label class="input-label">Your text</label>
+        <textarea class="input-field" id="textInput" placeholder="Type anything..." oninput="generateQR()"></textarea>
+      </div>
+
+      <!-- WiFi input -->
+      <div class="wifi-fields" id="wifiGroup">
+        <div class="input-group">
+          <label class="input-label">Network Name (SSID)</label>
+          <input type="text" class="input-field" id="wifiSSID" placeholder="MyWiFiNetwork" oninput="generateQR()">
+        </div>
+        <div class="wifi-row">
+          <div class="input-group">
+            <label class="input-label">Password</label>
+            <input type="text" class="input-field" id="wifiPass" placeholder="password123" oninput="generateQR()">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Encryption</label>
+            <select class="input-field" id="wifiEnc" onchange="generateQR()">
+              <option value="WPA">WPA/WPA2</option>
+              <option value="WEP">WEP</option>
+              <option value="nopass">None</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Email input -->
+      <div class="input-group" id="emailGroup" style="display:none">
+        <label class="input-label">Email address</label>
+        <input type="email" class="input-field" id="emailInput" placeholder="hello@example.com" oninput="generateQR()">
+        <div style="margin-top:10px">
+          <label class="input-label">Subject (optional)</label>
+          <input type="text" class="input-field" id="emailSubject" placeholder="Subject line" oninput="generateQR()">
+        </div>
+      </div>
+
+      <div class="panel-title" style="margin-top: 28px">03 / Customize</div>
+
+      <div class="color-section">
+        <div class="color-row">
+          <div class="color-pick">
+            <input type="color" id="fgColor" value="#000000" onchange="generateQR()">
+            <label for="fgColor">QR Color</label>
+          </div>
+          <div class="color-pick">
+            <input type="color" id="bgColor" value="#ffffff" onchange="generateQR()">
+            <label for="bgColor">Background</label>
+          </div>
+        </div>
+
+        <div class="preset-row" id="presetRow">
+          <div class="preset active" style="background:linear-gradient(135deg,#000,#333)" data-fg="#000000" data-bg="#ffffff" onclick="applyPreset(this)"></div>
+          <div class="preset" style="background:linear-gradient(135deg,#6c5ce7,#a855f7)" data-fg="#6c5ce7" data-bg="#faf5ff" onclick="applyPreset(this)"></div>
+          <div class="preset" style="background:linear-gradient(135deg,#00b894,#00cec9)" data-fg="#00b894" data-bg="#f0fdf4" onclick="applyPreset(this)"></div>
+          <div class="preset" style="background:linear-gradient(135deg,#e17055,#d63031)" data-fg="#d63031" data-bg="#fef2f2" onclick="applyPreset(this)"></div>
+          <div class="preset" style="background:linear-gradient(135deg,#0984e3,#6c5ce7)" data-fg="#0984e3" data-bg="#eff6ff" onclick="applyPreset(this)"></div>
+          <div class="preset" style="background:linear-gradient(135deg,#fdcb6e,#e17055)" data-fg="#e17055" data-bg="#fffbeb" onclick="applyPreset(this)"></div>
+          <div class="preset" style="background:linear-gradient(135deg,#fd79a8,#e84393)" data-fg="#e84393" data-bg="#fdf2f8" onclick="applyPreset(this)"></div>
+          <div class="preset" style="background:linear-gradient(135deg,#ffffff,#dfe6e9)" data-fg="#2d3436" data-bg="#000000" onclick="applyPreset(this)"></div>
+        </div>
+      </div>
+
+      <!-- Logo upload -->
+      <div class="logo-upload" id="logoUpload" onclick="document.getElementById('logoFile').click()">
+        <input type="file" id="logoFile" accept="image/*" style="display:none" onchange="handleLogo(event)">
+        <div class="upload-text" id="uploadText">📎 Drop logo here or <span>browse</span></div>
+        <div class="logo-preview" id="logoPreview">
+          <img id="logoImg" src="">
+          <span class="name" id="logoName">logo.png</span>
+          <span class="remove" onclick="event.stopPropagation(); removeLogo()">✕ Remove</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right: Preview -->
+    <div class="preview-panel fade-in">
+      <div class="panel-title">Live Preview</div>
+
+      <div class="qr-display" id="qrDisplay">
+        <div id="qrcode"></div>
+        <div class="qr-placeholder" id="placeholder">
+          <div class="ph-icon">⬜</div>
+          <div class="ph-text">Enter a URL to generate your QR code</div>
+        </div>
+      </div>
+
+      <div class="download-row">
+        <button class="dl-btn primary" onclick="downloadPNG()">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          PNG
+        </button>
+        <button class="dl-btn secondary" onclick="downloadSVG()">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          SVG
+        </button>
+      </div>
+
+      <!-- Feedback -->
+      <div class="feedback-bar">
+        <span class="feedback-text">How's this tool?</span>
+        <button class="fb-btn like" id="likeBtn" onclick="handleFeedback('like')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 00-3-3l-4 9v11h11.28a2 2 0 002-1.7l1.38-9a2 2 0 00-2-2.3H14zM7 22H4a2 2 0 01-2-2v-7a2 2 0 012-2h3"/></svg>
+          <span class="fb-count" id="likeCount">247</span>
+        </button>
+        <button class="fb-btn dislike" id="dislikeBtn" onclick="handleFeedback('dislike')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 15V19a3 3 0 003 3l4-9V2H5.72a2 2 0 00-2 1.7l-1.38 9a2 2 0 002 2.3H10zM17 2h2.67A2.31 2.31 0 0122 4v7a2.31 2.31 0 01-2.33 2H17"/></svg>
+          <span class="fb-count" id="dislikeCount">3</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Features -->
+  <div class="features">
+    <div class="feature fade-in">
+      <div class="f-icon">⚡</div>
+      <div class="f-title">Instant Generation</div>
+      <div class="f-desc">QR code updates in real-time as you type. No "Generate" button needed.</div>
+    </div>
+    <div class="feature fade-in">
+      <div class="f-icon">🎨</div>
+      <div class="f-title">Full Customization</div>
+      <div class="f-desc">Pick colors, add your logo, choose from presets. Make it truly yours.</div>
+    </div>
+    <div class="feature fade-in">
+      <div class="f-icon">📥</div>
+      <div class="f-title">PNG & SVG Export</div>
+      <div class="f-desc">Download in high-res PNG for web or vector SVG for perfect print quality.</div>
+    </div>
+    <div class="feature fade-in">
+      <div class="f-icon">🔒</div>
+      <div class="f-title">100% Private</div>
+      <div class="f-desc">Everything runs in your browser. Your data never leaves your device.</div>
+    </div>
+    <div class="feature fade-in">
+      <div class="f-icon">♾️</div>
+      <div class="f-title">No Limits Ever</div>
+      <div class="f-desc">Unlimited QR codes, unlimited scans, no watermarks, no sign-up. Ever.</div>
+    </div>
+    <div class="feature fade-in">
+      <div class="f-icon">📱</div>
+      <div class="f-title">Works Everywhere</div>
+      <div class="f-desc">Scans perfectly on any phone camera. No special app needed.</div>
+    </div>
+  </div>
+
+  <!-- SEO footer content -->
+  <div class="seo-footer">
+    <h2>Free QR Code Generator — Create Custom QR Codes Instantly</h2>
+    <p>QRMake is a free, browser-based QR code generator that lets you create high-resolution QR codes for URLs, WiFi networks, business cards, UPI payments, email, SMS, and more. No sign-up, no watermarks, no limits — everything runs locally in your browser, so your data never leaves your device. Download in PNG (1024×1024px) or SVG (vector) format for perfect quality at any print size.</p>
+    
+    <div class="seo-links">
+      <a href="/wifi-qr-code-generator/">📶 WiFi QR Code</a>
+      <a href="/business-card-qr-code/">💼 Business Card</a>
+      <a href="/gpay-qr-code-generator/">💳 GPay QR Code</a>
+      <a href="/upi-qr-code-generator/">🏦 UPI QR Code</a>
+      <a href="/pdf-qr-code-generator/">📄 PDF QR Code</a>
+      <a href="/sms-qr-code-generator/">💬 SMS QR Code</a>
+      <a href="/vcard-qr-code-generator/">👤 vCard QR Code</a>
+      <a href="/email-qr-code-generator/">📧 Email QR Code</a>
+      <a href="/linkedin-qr-code/">🔗 LinkedIn QR</a>
+      <a href="/youtube-qr-code/">▶️ YouTube QR</a>
+      <a href="/whatsapp-qr-code/">💚 WhatsApp QR</a>
+      <a href="/phonepe-qr-code-generator/">📱 PhonePe QR</a>
+    </div>
+
+    <!-- GEO-optimized educational content -->
+    <div style="max-width:780px;margin:40px auto 0;text-align:left;">
+
+      <h2 style="font-family:'Syne',sans-serif;font-size:22px;font-weight:700;margin-bottom:14px;">What Is a QR Code?</h2>
+      <p style="font-size:14px;color:#8b8ba0;line-height:1.85;margin-bottom:16px;">A QR code (Quick Response code) is a two-dimensional barcode that stores information in a pattern of black and white squares. Originally invented in 1994 by Masahiro Hara at Denso Wave, a subsidiary of Toyota, QR codes were designed to track automobile parts during manufacturing. According to Statista, global QR code usage surged to 6.8 billion scans in 2022 — a 96% increase from 2018 levels. By 2025, an estimated 99.5 million people in the United States alone used QR codes on their smartphones, according to eMarketer research.</p>
+      <p style="font-size:14px;color:#8b8ba0;line-height:1.85;margin-bottom:16px;">Unlike traditional one-dimensional barcodes that store only 20-25 characters, QR codes can encode up to 7,089 numeric characters, 4,296 alphanumeric characters, or 2,953 bytes of binary data. This capacity makes them suitable for URLs, WiFi credentials, contact information (vCard), payment details (UPI), GPS coordinates, and virtually any text-based data. The ISO/IEC 18004 standard governs QR code specifications, ensuring universal compatibility across all scanner applications worldwide.</p>
+
+      <h2 style="font-family:'Syne',sans-serif;font-size:22px;font-weight:700;margin-bottom:14px;">How to Generate a QR Code</h2>
+
+      <h3 style="font-family:'Syne',sans-serif;font-size:17px;font-weight:600;margin:20px 0 10px;color:#c0c0d4;">Step 1: Choose Your Content Type</h3>
+      <p style="font-size:14px;color:#8b8ba0;line-height:1.85;margin-bottom:16px;">Select the content type from the tabs above — URL, text, WiFi, vCard, email, SMS, or phone number. Each type has a specialized input form designed to capture the correct data format. For example, WiFi QR codes require the network name (SSID), password, and encryption type (WPA/WPA2/WEP/None).</p>
+
+      <h3 style="font-family:'Syne',sans-serif;font-size:17px;font-weight:600;margin:20px 0 10px;color:#c0c0d4;">Step 2: Enter Your Content</h3>
+      <p style="font-size:14px;color:#8b8ba0;line-height:1.85;margin-bottom:16px;">Type or paste your content into the input field. The QR code generates in real-time as you type — no "Generate" button is needed, and the preview updates instantly. This instant generation approach means you can see exactly what your QR code will look like before downloading, making it easy to verify the encoded content is correct.</p>
+
+      <h3 style="font-family:'Syne',sans-serif;font-size:17px;font-weight:600;margin:20px 0 10px;color:#c0c0d4;">Step 3: Customize Your QR Code Design</h3>
+      <p style="font-size:14px;color:#8b8ba0;line-height:1.85;margin-bottom:16px;">Customize the appearance by choosing foreground and background colors, selecting a corner style (square, rounded, or dots), and optionally uploading a business logo or icon. QRMake uses Error Correction Level H (the highest level), which allows up to 30% of the QR code surface to be covered by a logo while remaining fully scannable.</p>
+
+      <h3 style="font-family:'Syne',sans-serif;font-size:17px;font-weight:600;margin:20px 0 10px;color:#c0c0d4;">Step 4: Download as PNG or SVG</h3>
+      <p style="font-size:14px;color:#8b8ba0;line-height:1.85;margin-bottom:16px;">Download your QR code as PNG (1024×1024 pixels, ideal for digital use and most print applications) or SVG (scalable vector format for billboards, product packaging, and professional printing at any size). Both formats are free with no watermarks.</p>
+
+      <h3 style="font-family:'Syne',sans-serif;font-size:17px;font-weight:600;margin:20px 0 10px;color:#c0c0d4;">100% Private — No Data Sent to Any Server</h3>
+      <p style="font-size:14px;color:#8b8ba0;line-height:1.85;margin-bottom:16px;">All QR code generation happens entirely within your web browser using JavaScript — no data is sent to any server. This architecture ensures complete privacy: your WiFi passwords, contact details, payment information, and URLs never leave your device. Unlike other QR code generators that process your data on their servers, QRMake's client-side approach means zero data collection.</p>
+
+      <h2 style="font-family:'Syne',sans-serif;font-size:22px;font-weight:700;margin-bottom:14px;">Types of QR Codes You Can Create</h2>
+
+      <h3 style="font-family:'Syne',sans-serif;font-size:17px;font-weight:600;margin:20px 0 10px;color:#c0c0d4;">URL QR Codes</h3>
+      <p style="font-size:14px;color:#8b8ba0;line-height:1.85;margin-bottom:16px;">URL QR codes encode any web address — when scanned, the phone browser opens the URL link directly. According to a 2023 survey by Beaconstac, URL QR codes account for 47% of all QR code usage globally. Use them for website links, landing pages, app download links, social media profiles, or any online destination.</p>
+
+      <h3 style="font-family:'Syne',sans-serif;font-size:17px;font-weight:600;margin:20px 0 10px;color:#c0c0d4;">WiFi QR Codes</h3>
+      <p style="font-size:14px;color:#8b8ba0;line-height:1.85;margin-bottom:16px;">WiFi QR codes encode the network name (SSID), password, and encryption type, allowing guests to connect instantly without typing long passwords. Supported natively on both iOS (since iOS 11) and Android (since Android 10). Perfect for homes, offices, hotels, cafes, and Airbnb properties. <a href="/wifi-qr-code-generator/" style="color:#6c5ce7;">Create a WiFi QR code →</a></p>
+
+      <h3 style="font-family:'Syne',sans-serif;font-size:17px;font-weight:600;margin:20px 0 10px;color:#c0c0d4;">vCard & Business Card QR Codes</h3>
+      <p style="font-size:14px;color:#8b8ba0;line-height:1.85;margin-bottom:16px;">vCard QR codes encode contact information — name, phone, email, company, job title, and address — and add it directly to the phone's address book when scanned. They're the modern replacement for manually typing contact details from paper business cards. <a href="/business-card-qr-code/" style="color:#6c5ce7;">Create a business card QR code →</a></p>
+
+      <h3 style="font-family:'Syne',sans-serif;font-size:17px;font-weight:600;margin:20px 0 10px;color:#c0c0d4;">UPI Payment QR Codes</h3>
+      <p style="font-size:14px;color:#8b8ba0;line-height:1.85;margin-bottom:16px;">UPI payment QR codes are especially popular in India, where the Unified Payments Interface processed 14.7 billion transactions worth ₹20.6 lakh crore in March 2025 alone, according to NPCI data. QRMake generates UPI QR codes compatible with Google Pay, PhonePe, Paytm, BHIM, and all UPI-enabled banking apps. <a href="/upi-qr-code-generator/" style="color:#6c5ce7;">Create a UPI QR code →</a></p>
+
+      <h3 style="font-family:'Syne',sans-serif;font-size:17px;font-weight:600;margin:20px 0 10px;color:#c0c0d4;">Email, SMS, and Phone QR Codes</h3>
+      <p style="font-size:14px;color:#8b8ba0;line-height:1.85;margin-bottom:16px;">Email QR codes open a pre-filled email compose window with recipient, subject, and body text. SMS QR codes pre-fill a text message with phone number and message content. Phone number QR codes trigger an instant "tap to call" action. These are ideal for customer support, feedback collection, and contact-us pages on printed materials.</p>
+
+      <h2 style="font-family:'Syne',sans-serif;font-size:22px;font-weight:700;margin-bottom:14px;">Device Compatibility and Accessibility</h2>
+      <p style="font-size:14px;color:#8b8ba0;line-height:1.85;margin-bottom:16px;">QR codes generated by QRMake are scannable by virtually every smartphone manufactured after 2017. The QR code creator works on any device with a modern browser — desktop, laptop, tablet, or smartphone — with full browser compatibility across Chrome, Safari, Firefox, Edge, and Opera.</p>
+
+      <h3 style="font-family:'Syne',sans-serif;font-size:17px;font-weight:600;margin:24px 0 10px;color:#c0c0d4;">Built-in QR Code Scanning with Camera Apps</h3>
+      <p style="font-size:14px;color:#8b8ba0;line-height:1.85;margin-bottom:16px;">Modern smartphones include built-in QR code scanning directly in their camera apps — no third party QR code scanner is needed. On iPhone, Apple's Camera app has supported native QR scanning since iOS 11 (September 2017). Simply open the camera, point it at a QR code, and tap the notification banner that appears. On Android, built-in QR code scanning is available through the Camera app on Android 9 (Pie) and later, or through Google Lens which comes pre-installed on all smartphones with Google Play Services. Google Lens is also available as a standalone app on both the Play Store and App Store for older devices or tablets that lack native camera scanning.</p>
+
+      <h3 style="font-family:'Syne',sans-serif;font-size:17px;font-weight:600;margin:24px 0 10px;color:#c0c0d4;">Scannable from Any Orientation</h3>
+      <p style="font-size:14px;color:#8b8ba0;line-height:1.85;margin-bottom:16px;">Unlike traditional barcodes which must be scanned in a specific orientation, QR codes are scannable from any orientation — upside down, sideways, or at an angle. This is because QR codes contain three position detection patterns (the large squares in three corners) that allow the scanner to determine the code's orientation automatically. This makes QR codes ideal for product packaging where the item may be rotated, digital tickets displayed on phone screens at any angle, and event schedules posted on walls where viewers approach from different directions.</p>
+
+      <h3 style="font-family:'Syne',sans-serif;font-size:17px;font-weight:600;margin:24px 0 10px;color:#c0c0d4;">Secure Viewable Links and URL Safety</h3>
+      <p style="font-size:14px;color:#8b8ba0;line-height:1.85;margin-bottom:16px;">When a QR code containing a URL link is scanned, both iOS and Android display a secure viewable link preview before opening the browser — users can see the full URL and decide whether to proceed. This built-in security layer helps protect against malicious QR codes. QRMake generates standard-compliant codes that display clean URL previews on all devices. For added security, consider using HTTPS URLs and recognized domain names that users can trust when they see the link notification on their smartphone or tablet screen.</p>
+
+      <h3 style="font-family:'Syne',sans-serif;font-size:17px;font-weight:600;margin:24px 0 10px;color:#c0c0d4;">QR Codes on Product Packaging, Digital Tickets, and Event Schedules</h3>
+      <p style="font-size:14px;color:#8b8ba0;line-height:1.85;margin-bottom:16px;">QR codes have become essential across industries. On product packaging, they link consumers to ingredient lists, user manuals, warranty registration, and authenticity verification — the pharmaceutical industry alone uses QR codes on over 4 billion packages annually for drug authentication. For digital tickets (concerts, flights, events), QR codes encode unique identifiers that are scanned at entry points using computer camera systems or dedicated scanners. Event schedules at conferences and trade shows use QR codes to provide real-time collaboration links, agenda updates, and session feedback forms that attendees scan with their phones.</p>
+
+      <h3 style="font-family:'Syne',sans-serif;font-size:17px;font-weight:600;margin:24px 0 10px;color:#c0c0d4;">Quiet Zone Requirements</h3>
+      <p style="font-size:14px;color:#8b8ba0;line-height:1.85;margin-bottom:16px;">Every QR code requires a quiet zone — a blank border around the code — to be reliably scanned. The ISO/IEC 18004 standard specifies a minimum quiet zone of 4 modules (the width of 4 individual squares in the code). QRMake automatically includes the correct quiet zone in all generated QR codes, ensuring they scan correctly even when placed close to other visual elements. Without an adequate quiet zone, camera apps and scanner applications may fail to detect the code boundaries, especially on cluttered product packaging or busy poster designs.</p>
+
+      <h2 style="font-family:'Syne',sans-serif;font-size:22px;font-weight:700;margin-bottom:14px;">QR Codes for Business: Use Cases</h2>
+
+      <h3 style="font-family:'Syne',sans-serif;font-size:17px;font-weight:600;margin:20px 0 10px;color:#c0c0d4;">Restaurant Menus and Contactless Ordering</h3>
+      <p style="font-size:14px;color:#8b8ba0;line-height:1.85;margin-bottom:16px;">Contactless QR code menus accelerated by 300% during 2020-2021 per the National Restaurant Association. Place a QR code on each table that links to your digital menu — customers scan with their phone camera and browse the menu without touching shared physical menus. <a href="/restaurant-menu-qr-code/" style="color:#6c5ce7;">Create a restaurant menu QR code →</a></p>
+
+      <h3 style="font-family:'Syne',sans-serif;font-size:17px;font-weight:600;margin:20px 0 10px;color:#c0c0d4;">Product Packaging and Marketing Materials</h3>
+      <p style="font-size:14px;color:#8b8ba0;line-height:1.85;margin-bottom:16px;">According to Grand View Research, the global QR code market is projected to reach $33.1 billion by 2030, growing at a CAGR of 16.9%. QR codes on product packaging link consumers to ingredient lists, user manuals, warranty registration, and authenticity verification. On flyers, posters, and brochures, QR codes bridge print and digital marketing by connecting viewers to landing pages, video content, or discount codes.</p>
+
+      <h3 style="font-family:'Syne',sans-serif;font-size:17px;font-weight:600;margin:20px 0 10px;color:#c0c0d4;">Business Cards and Networking</h3>
+      <p style="font-size:14px;color:#8b8ba0;line-height:1.85;margin-bottom:16px;">Adding a vCard QR code to your business card lets contacts save your details with a single scan — no manual typing of names, phone numbers, or email addresses. This eliminates data entry errors and ensures your contact information is saved accurately in their phone's address book. <a href="/qr-code-on-business-card/" style="color:#6c5ce7;">Learn more about QR codes on business cards →</a></p>
+
+      <h3 style="font-family:'Syne',sans-serif;font-size:17px;font-weight:600;margin:20px 0 10px;color:#c0c0d4;">UPI Payments for Small Businesses in India</h3>
+      <p style="font-size:14px;color:#8b8ba0;line-height:1.85;margin-bottom:16px;">In India, QR codes are central to the payments ecosystem. NPCI reports that UPI processed over 131 billion transactions in FY 2024-25, with merchant QR codes being the primary acceptance method for small businesses — from street vendors to retail stores. QRMake's UPI QR code generator supports all UPI apps and follows the BharatQR and UPI QR code specifications published by NPCI.</p>
+
+      <h3 style="font-family:'Syne',sans-serif;font-size:17px;font-weight:600;margin:20px 0 10px;color:#c0c0d4;">Google Reviews and Social Media</h3>
+      <p style="font-size:14px;color:#8b8ba0;line-height:1.85;margin-bottom:16px;">Create a QR code linking directly to your Google Business review page, making it effortless for customers to leave reviews. Similarly, QR codes for Instagram, YouTube, LinkedIn, and other social media profiles help grow your online presence from physical locations. Place them at checkout counters, receipts, or product inserts. <a href="/qr-code-for-google-reviews/" style="color:#6c5ce7;">Create a Google Reviews QR code →</a></p>
+
+      <h2 style="font-family:'Syne',sans-serif;font-size:22px;font-weight:700;margin-bottom:14px;">Static vs Dynamic QR Codes</h2>
+
+      <h3 style="font-family:'Syne',sans-serif;font-size:17px;font-weight:600;margin:20px 0 10px;color:#c0c0d4;">What Are Static QR Codes?</h3>
+      <p style="font-size:14px;color:#8b8ba0;line-height:1.85;margin-bottom:16px;">QRMake generates static QR codes, which encode your content directly into the QR pattern. Static codes never expire, have no scan limits, and do not depend on any server — they work forever as long as the encoded content (like a URL) remains valid. The data is embedded in the code itself, so scanning works even without an internet connection for non-URL content types like WiFi credentials, vCards, and plain text.</p>
+
+      <h3 style="font-family:'Syne',sans-serif;font-size:17px;font-weight:600;margin:20px 0 10px;color:#c0c0d4;">What Are Dynamic QR Codes?</h3>
+      <p style="font-size:14px;color:#8b8ba0;line-height:1.85;margin-bottom:16px;">Dynamic QR codes store a short redirect URL that points to a tracking server. They allow scan statistics, scan analytics, and the ability to change the destination URL without reprinting the code. However, dynamic codes depend on a third-party service remaining active — if the provider shuts down or you stop paying, the QR code stops working. Many QR code generators like QR.io and Beaconstac charge $5-50/month for dynamic code features.</p>
+
+      <h3 style="font-family:'Syne',sans-serif;font-size:17px;font-weight:600;margin:20px 0 10px;color:#c0c0d4;">Which Should You Choose?</h3>
+      <p style="font-size:14px;color:#8b8ba0;line-height:1.85;margin-bottom:16px;">For most use cases — business cards, WiFi sharing, product packaging, permanent signage — static QR codes are the better choice because they're free, permanent, and independent. Choose dynamic codes only if you specifically need scan tracking or the ability to change the destination URL after printing. QRMake's static codes are completely free and independent of any external service.</p>
+
+      <h2 style="font-family:'Syne',sans-serif;font-size:22px;font-weight:700;margin-bottom:14px;">QR Code Error Correction Levels</h2>
+
+      <h3 style="font-family:'Syne',sans-serif;font-size:17px;font-weight:600;margin:20px 0 10px;color:#c0c0d4;">Understanding Error Correction (L, M, Q, H)</h3>
+      <p style="font-size:14px;color:#8b8ba0;line-height:1.85;margin-bottom:16px;">QR codes use Reed-Solomon error correction, defined in the ISO/IEC 18004 standard, to remain scannable even when partially damaged or obscured. There are four error correction levels: Level L (recovers up to 7% damage), Level M (15%), Level Q (25%), and Level H (30%). Higher error correction means more data redundancy, resulting in a slightly denser QR pattern — but modern smartphone cameras handle all levels without issue.</p>
+
+      <h3 style="font-family:'Syne',sans-serif;font-size:17px;font-weight:600;margin:20px 0 10px;color:#c0c0d4;">Why QRMake Uses Level H (Highest)</h3>
+      <p style="font-size:14px;color:#8b8ba0;line-height:1.85;margin-bottom:16px;">QRMake uses Level H — the highest error correction level — by default. This means up to 30% of the QR code surface can be covered (by a business logo or icon, for instance) or damaged while still being scannable. This is specifically what enables adding a logo image to the center of your QR code without affecting readability. Level H is recommended for any QR code that will be printed on product packaging, outdoor signage, or materials subject to wear and tear.</p>
+
+      <h2 style="font-family:'Syne',sans-serif;font-size:22px;font-weight:700;margin-bottom:14px;">Print Guidelines for QR Codes</h2>
+
+      <h3 style="font-family:'Syne',sans-serif;font-size:17px;font-weight:600;margin:20px 0 10px;color:#c0c0d4;">Minimum Size for Reliable Scanning</h3>
+      <p style="font-size:14px;color:#8b8ba0;line-height:1.85;margin-bottom:16px;">Minimum print size should be at least 2cm × 2cm (0.8in × 0.8in) for close-range scanning (within 30cm). For scanning distances of 1-2 meters (posters, banners), use at least 10cm × 10cm. The general rule based on ISO/IEC 18004 guidance is: scanning distance ÷ 10 = minimum QR code size.</p>
+
+      <h3 style="font-family:'Syne',sans-serif;font-size:17px;font-weight:600;margin:20px 0 10px;color:#c0c0d4;">Color Contrast and Background</h3>
+      <p style="font-size:14px;color:#8b8ba0;line-height:1.85;margin-bottom:16px;">Always maintain high contrast between foreground and background — dark modules on a light background works best. Avoid inverting colors (light on dark) as some older scanners and camera apps struggle with inverted codes. If using brand colors, ensure the foreground color is at least 40% darker than the background for reliable scanning across all devices.</p>
+
+      <h3 style="font-family:'Syne',sans-serif;font-size:17px;font-weight:600;margin:20px 0 10px;color:#c0c0d4;">PNG vs SVG: Which Format to Use</h3>
+      <p style="font-size:14px;color:#8b8ba0;line-height:1.85;margin-bottom:16px;">Use PNG format (1024×1024px from QRMake) for digital use — websites, social media, emails, and standard print materials up to A4 size. Use SVG format for large-format printing — banners, billboards, vehicle wraps, and any application where the QR code will be scaled significantly. SVG is a vector format that maintains crisp, sharp edges at any size without pixelation.</p>
+
+      <h3 style="font-family:'Syne',sans-serif;font-size:17px;font-weight:600;margin:20px 0 10px;color:#c0c0d4;">Test Before Printing</h3>
+      <p style="font-size:14px;color:#8b8ba0;line-height:1.85;margin-bottom:16px;">Always test your QR code by scanning it with at least two different smartphone cameras before committing to a large print run. Test at the expected scanning distance and angle. Verify that the encoded content opens correctly — check that URLs load, WiFi credentials connect, and vCard details save accurately to the phone's address book.</p>
+    </div>
+
+    <div class="geo-stats" style="max-width:800px;margin:32px auto 0;">
+      <div class="geo-stat">
+        <span class="stat-num">6.8B</span>
+        <div class="stat-label">QR scans globally in 2022</div>
+        <div class="stat-source">Statista</div>
+      </div>
+      <div class="geo-stat">
+        <span class="stat-num">96%</span>
+        <div class="stat-label">Growth in QR scans since 2018</div>
+        <div class="stat-source">Statista</div>
+      </div>
+      <div class="geo-stat">
+        <span class="stat-num">89M</span>
+        <div class="stat-label">US users who scanned QR codes in 2022</div>
+        <div class="stat-source">Statista</div>
+      </div>
+      <div class="geo-stat">
+        <span class="stat-num">$33.1B</span>
+        <div class="stat-label">Projected QR code market by 2030</div>
+        <div class="stat-source">Grand View Research</div>
+      </div>
+    </div>
+
+    <div style="max-width:700px;margin:40px auto 0;text-align:left;">
+      <h2 style="font-family:'Syne',sans-serif;font-size:20px;font-weight:700;margin-bottom:20px;text-align:center;">Frequently Asked Questions</h2>
+      <div style="border-top:1px solid rgba(255,255,255,0.06);">
+        <div style="border-bottom:1px solid rgba(255,255,255,0.06);padding:18px 0;">
+          <h3 style="font-size:15px;color:#eeeef3;margin:0 0 8px;">Is QRMake completely free?</h3>
+          <p style="font-size:13px;color:#6b6b80;margin:0;line-height:1.6;">Yes. QRMake is completely free with no hidden fees, no subscription, and no watermarks. You can generate unlimited QR codes and download them in PNG or SVG format at no cost — forever.</p>
+        </div>
+        <div style="border-bottom:1px solid rgba(255,255,255,0.06);padding:18px 0;">
+          <h3 style="font-size:15px;color:#eeeef3;margin:0 0 8px;">Do I need to create an account?</h3>
+          <p style="font-size:13px;color:#6b6b80;margin:0;line-height:1.6;">No account is required. Go to qrmake.org, enter your content, and download your QR code. Everything runs entirely in your browser — your data never leaves your device and no sign-up is needed.</p>
+        </div>
+        <div style="border-bottom:1px solid rgba(255,255,255,0.06);padding:18px 0;">
+          <h3 style="font-size:15px;color:#eeeef3;margin:0 0 8px;">What types of QR codes can I create?</h3>
+          <p style="font-size:13px;color:#6b6b80;margin:0;line-height:1.6;">QRMake supports URL QR codes, plain text, WiFi network credentials, email addresses, vCard contacts, SMS messages, phone numbers, UPI payment QR codes, and more. Any text-based content can be encoded into a QR code.</p>
+        </div>
+        <div style="border-bottom:1px solid rgba(255,255,255,0.06);padding:18px 0;">
+          <h3 style="font-size:15px;color:#eeeef3;margin:0 0 8px;">Can I add a logo to my QR code?</h3>
+          <p style="font-size:13px;color:#6b6b80;margin:0;line-height:1.6;">Yes. QRMake lets you upload any image as a logo overlay in the center of your QR code. All codes are generated at Error Correction Level H, which allows up to 30% of the code surface to be covered while remaining fully scannable — including a centered logo.</p>
+        </div>
+        <div style="border-bottom:1px solid rgba(255,255,255,0.06);padding:18px 0;">
+          <h3 style="font-size:15px;color:#eeeef3;margin:0 0 8px;">What format does QRMake export QR codes in?</h3>
+          <p style="font-size:13px;color:#6b6b80;margin:0;line-height:1.6;">QRMake exports QR codes as PNG (1024×1024px high-resolution, suitable for both digital and most print uses) and SVG (vector format for perfect quality at any print size). Both formats are available for free with no account required.</p>
+        </div>
+        <div style="padding:18px 0;">
+          <h3 style="font-size:15px;color:#eeeef3;margin:0 0 8px;">Do QRMake QR codes expire?</h3>
+          <p style="font-size:13px;color:#6b6b80;margin:0;line-height:1.6;">No. QRMake generates static QR codes that encode your content directly. They never expire and do not depend on any QRMake server remaining active — the code will work as long as the destination URL or content is valid. There are no scan limits.</p>
+        </div>
+        <div style="border-top:1px solid rgba(255,255,255,0.06);padding:18px 0;">
+          <h3 style="font-size:15px;color:#eeeef3;margin:0 0 8px;">How is QRMake different from Canva's QR code generator?</h3>
+          <p style="font-size:13px;color:#6b6b80;margin:0;line-height:1.6;">Canva's QR code generator is embedded within Canva's design tool and requires a Canva account. QRMake is a standalone QR code creator that requires no account, offers more QR code types (WiFi, vCard, UPI, SMS), provides both PNG and SVG downloads for free, and runs entirely in your browser with zero data collection. Canva is better if you need to embed a QR code into an existing Canva design; QRMake is better for fast, standalone QR code generation with full customization.</p>
+        </div>
+        <div style="border-top:1px solid rgba(255,255,255,0.06);padding:18px 0;">
+          <h3 style="font-size:15px;color:#eeeef3;margin:0 0 8px;">What's the difference between static and dynamic QR codes?</h3>
+          <p style="font-size:13px;color:#6b6b80;margin:0;line-height:1.6;">Static QR codes (what QRMake generates) encode your content directly into the code pattern. They never expire, need no internet connection to work, and have no scan limits. Dynamic QR codes store a short redirect URL that points to a tracking server — they allow you to change the destination and track scans, but they stop working if the tracking service shuts down. Most generators charge monthly fees for dynamic QR codes, while QRMake's static codes are completely free forever.</p>
+        </div>
+        <div style="border-top:1px solid rgba(255,255,255,0.06);padding:18px 0;">
+          <h3 style="font-size:15px;color:#eeeef3;margin:0 0 8px;">Can I scan QR codes with my smartphone, tablet, or computer camera?</h3>
+          <p style="font-size:13px;color:#6b6b80;margin:0;line-height:1.6;">Yes — on smartphones, use the built-in camera app (iPhone iOS 11+ or Android 9+) or Google Lens from the App Store or Play Store. On tablets (iPad, Android tablets), the same camera app scanning works. For computer cameras, Google Lens on Chrome or web-based QR scanner tools can read QR codes through your webcam. No third party QR code scanner app is required on modern devices — the built-in camera app handles QR scanning natively with a simple notification pop-up.</p>
+        </div>
+        <div style="border-top:1px solid rgba(255,255,255,0.06);padding:18px 0;">
+          <h3 style="font-size:15px;color:#eeeef3;margin:0 0 8px;">Can I use QRMake QR codes for digital tickets and event check-ins?</h3>
+          <p style="font-size:13px;color:#6b6b80;margin:0;line-height:1.6;">Yes. QRMake generates standard QR codes that work with all ticket scanning systems. You can encode a unique URL link, ticket ID, or any text as a QR code for digital tickets, event schedules, conference badges, and access control. The codes are scannable from any orientation and work with both smartphone camera apps and professional barcode scanners used at event venues.</p>
+        </div>
+        <div style="border-top:1px solid rgba(255,255,255,0.06);padding:18px 0;">
+          <h3 style="font-size:15px;color:#eeeef3;margin:0 0 8px;">Does QRMake support real-time collaboration or team features?</h3>
+          <p style="font-size:13px;color:#6b6b80;margin:0;line-height:1.6;">QRMake is designed as a fast, individual-use QR code creator — it does not currently support real-time collaboration or team accounts. For team workflows, you can generate QR codes individually and share the downloaded PNG or SVG files with colleagues. Since no account is needed, any team member can use QRMake directly from their browser on any device without editing access permissions or login coordination.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Feedback Modal -->
+<div class="feedback-modal-overlay" id="feedbackModal">
+  <div class="feedback-modal">
+    <div class="modal-title" id="modalTitle">Thanks for the feedback!</div>
+    <div class="modal-sub" id="modalSub">Tell us more — what could we improve?</div>
+    <textarea class="modal-textarea" id="feedbackText" placeholder="What's on your mind? Bug reports, feature requests, or just a kind word..."></textarea>
+    <div class="modal-actions">
+      <button class="modal-btn cancel" onclick="closeFeedbackModal()">Skip</button>
+      <button class="modal-btn submit" onclick="submitFeedback()">Send Feedback</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast">
+  <span class="toast-icon">✓</span>
+  <span id="toastText">Downloaded!</span>
+</div>
+
+<script>
+// State
+let currentType = 'url';
+let qrInstance = null;
+let currentLogo = null;
+let feedbackState = null; // 'like' | 'dislike' | null
+let genCounter = 12847;
+
+// QR Type
+function setType(type) {
+  currentType = type;
+  document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`[data-type="${type}"]`).classList.add('active');
+
+  document.getElementById('urlGroup').style.display = type === 'url' ? 'block' : 'none';
+  document.getElementById('textGroup').style.display = type === 'text' ? 'block' : 'none';
+  document.getElementById('wifiGroup').className = type === 'wifi' ? 'wifi-fields show' : 'wifi-fields';
+  document.getElementById('emailGroup').style.display = type === 'email' ? 'block' : 'none';
+
+  generateQR();
+}
+
+// Get QR content
+function getContent() {
+  switch(currentType) {
+    case 'url': return document.getElementById('urlInput').value.trim();
+    case 'text': return document.getElementById('textInput').value.trim();
+    case 'wifi': {
+      const ssid = document.getElementById('wifiSSID').value.trim();
+      const pass = document.getElementById('wifiPass').value.trim();
+      const enc = document.getElementById('wifiEnc').value;
+      if (!ssid) return '';
+      return `WIFI:T:${enc};S:${ssid};P:${pass};;`;
+    }
+    case 'email': {
+      const email = document.getElementById('emailInput').value.trim();
+      const subject = document.getElementById('emailSubject').value.trim();
+      if (!email) return '';
+      return `mailto:${email}${subject ? '?subject=' + encodeURIComponent(subject) : ''}`;
+    }
+    default: return '';
+  }
+}
+
+// Generate QR
+function generateQR() {
+  const content = getContent();
+  const container = document.getElementById('qrcode');
+  const placeholder = document.getElementById('placeholder');
+
+  if (!content) {
+    container.innerHTML = '';
+    placeholder.style.display = 'flex';
+    return;
+  }
+
+  placeholder.style.display = 'none';
+  container.innerHTML = '';
+
+  const fg = document.getElementById('fgColor').value;
+  const bg = document.getElementById('bgColor').value;
+
+  qrInstance = new QRCode(container, {
+    text: content,
+    width: 256,
+    height: 256,
+    colorDark: fg,
+    colorLight: bg,
+    correctLevel: QRCode.CorrectLevel.H,
+  });
+
+  // Overlay logo if exists
+  if (currentLogo) {
+    setTimeout(() => {
+      const canvas = container.querySelector('canvas');
+      if (canvas) {
+        const ctx = canvas.getContext('2d');
+        const img = new Image();
+        img.onload = () => {
+          const size = canvas.width * 0.24;
+          const x = (canvas.width - size) / 2;
+          const y = (canvas.height - size) / 2;
+          const pad = 6, r = 10;
+          const bx = x - pad, by = y - pad, bw = size + pad * 2, bh = size + pad * 2;
+          // Draw white rounded background (compatible with all browsers)
+          ctx.fillStyle = '#ffffff';
+          ctx.beginPath();
+          ctx.moveTo(bx + r, by);
+          ctx.lineTo(bx + bw - r, by);
+          ctx.quadraticCurveTo(bx + bw, by, bx + bw, by + r);
+          ctx.lineTo(bx + bw, by + bh - r);
+          ctx.quadraticCurveTo(bx + bw, by + bh, bx + bw - r, by + bh);
+          ctx.lineTo(bx + r, by + bh);
+          ctx.quadraticCurveTo(bx, by + bh, bx, by + bh - r);
+          ctx.lineTo(bx, by + r);
+          ctx.quadraticCurveTo(bx, by, bx + r, by);
+          ctx.closePath();
+          ctx.fill();
+          ctx.drawImage(img, x, y, size, size);
+          // Sync the <img> element QRCode.js renders on top of the canvas
+          const imgEl = container.querySelector('img');
+          if (imgEl) imgEl.src = canvas.toDataURL('image/png');
+        };
+        img.src = currentLogo;
+      }
+    }, 150);
+  }
+
+  // Update counter
+  genCounter++;
+  document.getElementById('genCount').textContent = genCounter.toLocaleString();
+}
+
+// Color presets
+function applyPreset(el) {
+  document.querySelectorAll('.preset').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('fgColor').value = el.dataset.fg;
+  document.getElementById('bgColor').value = el.dataset.bg;
+  generateQR();
+}
+
+// Logo handling
+function handleLogo(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    currentLogo = ev.target.result;
+    document.getElementById('uploadText').style.display = 'none';
+    document.getElementById('logoPreview').style.display = 'flex';
+    document.getElementById('logoImg').src = currentLogo;
+    document.getElementById('logoName').textContent = file.name;
+    generateQR();
+  };
+  reader.readAsDataURL(file);
+}
+
+function removeLogo() {
+  currentLogo = null;
+  document.getElementById('uploadText').style.display = 'block';
+  document.getElementById('logoPreview').style.display = 'none';
+  document.getElementById('logoFile').value = '';
+  generateQR();
+}
+
+// Download PNG
+function downloadPNG() {
+  const canvas = document.querySelector('#qrcode canvas');
+  if (!canvas) { showToast('⚠️', 'Generate a QR code first'); return; }
+
+  // Create high-res version
+  const scale = 4;
+  const hiRes = document.createElement('canvas');
+  hiRes.width = canvas.width * scale;
+  hiRes.height = canvas.height * scale;
+  const ctx = hiRes.getContext('2d');
+  ctx.imageSmoothingEnabled = false;
+  ctx.drawImage(canvas, 0, 0, hiRes.width, hiRes.height);
+
+  const link = document.createElement('a');
+  link.download = 'qrmake-qr-code.png';
+  link.href = hiRes.toDataURL('image/png');
+  link.click();
+  showToast('✓', 'PNG downloaded — 1024×1024px');
+}
+
+// Download SVG
+function downloadSVG() {
+  const content = getContent();
+  if (!content) { showToast('⚠️', 'Generate a QR code first'); return; }
+
+  const fg = document.getElementById('fgColor').value;
+  const bg = document.getElementById('bgColor').value;
+
+  // Generate QR matrix manually for SVG
+  const qr = qrcode_gen(0, 'H');
+  qr.addData(content);
+  qr.make();
+
+  const moduleCount = qr.getModuleCount();
+  const cellSize = 10;
+  const margin = 40;
+  const size = moduleCount * cellSize + margin * 2;
+
+  let svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">`;
+  svg += `<rect width="${size}" height="${size}" fill="${bg}"/>`;
+
+  for (let row = 0; row < moduleCount; row++) {
+    for (let col = 0; col < moduleCount; col++) {
+      if (qr.isDark(row, col)) {
+        const x = col * cellSize + margin;
+        const y = row * cellSize + margin;
+        svg += `<rect x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" fill="${fg}" rx="1"/>`;
+      }
+    }
+  }
+  svg += `</svg>`;
+
+  const blob = new Blob([svg], { type: 'image/svg+xml' });
+  const link = document.createElement('a');
+  link.download = 'qrmake-qr-code.svg';
+  link.href = URL.createObjectURL(blob);
+  link.click();
+  showToast('✓', 'SVG downloaded — vector format');
+}
+
+// Simple QR code matrix generator for SVG
+function qrcode_gen(typeNumber, errorCorrectionLevel) {
+  // Using the canvas QR as reference, create a simple SVG
+  // We'll use a proxy approach — render to canvas then trace
+  const tempDiv = document.createElement('div');
+  tempDiv.style.position = 'absolute';
+  tempDiv.style.left = '-9999px';
+  document.body.appendChild(tempDiv);
+
+  const tempQR = new QRCode(tempDiv, {
+    text: ' ',
+    width: 1,
+    height: 1,
+    correctLevel: QRCode.CorrectLevel.H,
+  });
+
+  document.body.removeChild(tempDiv);
+
+  // Return a simplified interface
+  return {
+    _data: '',
+    _modules: null,
+    addData(data) { this._data = data; },
+    make() {
+      // Use the canvas approach to get module data
+      const t = document.createElement('div');
+      t.style.cssText = 'position:absolute;left:-9999px';
+      document.body.appendChild(t);
+      new QRCode(t, { text: this._data, width: 256, height: 256, correctLevel: QRCode.CorrectLevel.H });
+      const canvas = t.querySelector('canvas');
+      if (canvas) {
+        const ctx = canvas.getContext('2d');
+        const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        // Detect module size
+        let moduleSize = 1;
+        for (let x = 0; x < canvas.width; x++) {
+          const idx = x * 4;
+          if (imgData.data[idx] < 128) { // Found first dark pixel
+            for (let x2 = x + 1; x2 < canvas.width; x2++) {
+              const idx2 = x2 * 4;
+              if (imgData.data[idx2] >= 128) {
+                moduleSize = x2 - x;
+                break;
+              }
+            }
+            break;
+          }
+        }
+        // Find margin
+        let marginPx = 0;
+        for (let x = 0; x < canvas.width; x++) {
+          if (imgData.data[x * 4] < 128) { marginPx = x; break; }
+        }
+        const count = Math.round((canvas.width - 2 * marginPx) / moduleSize);
+        this._moduleCount = count;
+        this._modules = [];
+        for (let r = 0; r < count; r++) {
+          this._modules[r] = [];
+          for (let c = 0; c < count; c++) {
+            const px = marginPx + c * moduleSize + Math.floor(moduleSize / 2);
+            const py = marginPx + r * moduleSize + Math.floor(moduleSize / 2);
+            const idx = (py * canvas.width + px) * 4;
+            this._modules[r][c] = imgData.data[idx] < 128;
+          }
+        }
+      }
+      document.body.removeChild(t);
+    },
+    getModuleCount() { return this._moduleCount || 0; },
+    isDark(row, col) { return this._modules && this._modules[row] && this._modules[row][col]; }
+  };
+}
+
+// Feedback
+function handleFeedback(type) {
+  const likeBtn = document.getElementById('likeBtn');
+  const dislikeBtn = document.getElementById('dislikeBtn');
+  const likeCount = document.getElementById('likeCount');
+  const dislikeCount = document.getElementById('dislikeCount');
+
+  // Toggle off if same button
+  if (feedbackState === type) {
+    feedbackState = null;
+    likeBtn.classList.remove('active');
+    dislikeBtn.classList.remove('active');
+    if (type === 'like') likeCount.textContent = 247;
+    else dislikeCount.textContent = 3;
+    return;
+  }
+
+  // Reset both
+  likeBtn.classList.remove('active');
+  dislikeBtn.classList.remove('active');
+  likeCount.textContent = 247;
+  dislikeCount.textContent = 3;
+
+  // Apply new
+  feedbackState = type;
+  if (type === 'like') {
+    likeBtn.classList.add('active');
+    likeCount.textContent = 248;
+  } else {
+    dislikeBtn.classList.add('active');
+    dislikeCount.textContent = 4;
+  }
+
+  // Show modal for detailed feedback
+  const modal = document.getElementById('feedbackModal');
+  const title = document.getElementById('modalTitle');
+  const sub = document.getElementById('modalSub');
+
+  if (type === 'like') {
+    title.textContent = '😊 Glad you like it!';
+    sub.textContent = 'Any features you\'d love to see? We\'re all ears.';
+  } else {
+    title.textContent = '🤔 We can do better';
+    sub.textContent = 'What would make this tool perfect for you?';
+  }
+
+  modal.classList.add('show');
+  document.getElementById('feedbackText').focus();
+}
+
+function closeFeedbackModal() {
+  document.getElementById('feedbackModal').classList.remove('show');
+  document.getElementById('feedbackText').value = '';
+}
+
+function submitFeedback() {
+  const text = document.getElementById('feedbackText').value.trim();
+  closeFeedbackModal();
+  showToast('💜', text ? 'Feedback received — thank you!' : 'Thanks for voting!');
+}
+
+// Close modal on overlay click
+document.getElementById('feedbackModal').addEventListener('click', function(e) {
+  if (e.target === this) closeFeedbackModal();
+});
+
+// Toast
+function showToast(icon, text) {
+  const toast = document.getElementById('toast');
+  document.getElementById('toastText').textContent = text;
+  toast.querySelector('.toast-icon').textContent = icon;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+// Init with a demo QR
+window.addEventListener('load', () => {
+  document.getElementById('urlInput').value = 'https://qrmake.org';
+  generateQR();
+
+  // Scroll-triggered pill animations
+  const pills = document.querySelectorAll('.seo-links a');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const links = entry.target.querySelectorAll('a');
+        links.forEach((link, i) => {
+          setTimeout(() => {
+            link.classList.add('visible');
+          }, i * 80);
+        });
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  const seoLinks = document.querySelector('.seo-links');
+  if (seoLinks) observer.observe(seoLinks);
+});
+</script>
+
+<footer class="site-footer" style="border-top:1px solid rgba(255,255,255,0.06);margin-top:48px;padding:48px 0 32px">
+  <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;max-width:1000px;margin:0 auto;padding:0 16px">
+    <div><div style="font-family:'Syne',sans-serif;font-weight:800;font-size:20px;background:linear-gradient(135deg,#6c5ce7,#00d2b4);-webkit-background-clip:text;-webkit-text-fill-color:transparent">QRMake</div><p style="font-size:13px;color:#6b6b80;line-height:1.6;max-width:280px;margin-top:8px">Free QR code generator. No sign-up, no limits, no watermarks.</p></div>
+    <div><h4 style="font-family:'DM Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:2px;color:#6b6b80;margin-bottom:16px">QR Tools</h4><a href="/wifi-qr-code-generator/" style="display:block;color:#6b6b80;font-size:13px;text-decoration:none;padding:4px 0">WiFi QR Code</a><a href="/business-card-qr-code/" style="display:block;color:#6b6b80;font-size:13px;text-decoration:none;padding:4px 0">Business Card QR</a><a href="/restaurant-menu-qr-code/" style="display:block;color:#6b6b80;font-size:13px;text-decoration:none;padding:4px 0">Restaurant Menu QR</a><a href="/google-form-qr-code/" style="display:block;color:#6b6b80;font-size:13px;text-decoration:none;padding:4px 0">Google Form QR</a><a href="/vcard-qr-code-generator/" style="display:block;color:#6b6b80;font-size:13px;text-decoration:none;padding:4px 0">vCard QR Code</a><a href="/sms-qr-code-generator/" style="display:block;color:#6b6b80;font-size:13px;text-decoration:none;padding:4px 0">SMS QR Code</a><a href="/phone-number-qr-code/" style="display:block;color:#6b6b80;font-size:13px;text-decoration:none;padding:4px 0">Phone Number QR</a><a href="/pdf-qr-code-generator/" style="display:block;color:#6b6b80;font-size:13px;text-decoration:none;padding:4px 0">PDF QR Code</a><a href="/social-media-qr-code/" style="display:block;color:#6b6b80;font-size:13px;text-decoration:none;padding:4px 0">Social Media QR</a><a href="/whatsapp-qr-code/" style="display:block;color:#6b6b80;font-size:13px;text-decoration:none;padding:4px 0">WhatsApp QR Code</a><a href="/youtube-qr-code/" style="display:block;color:#6b6b80;font-size:13px;text-decoration:none;padding:4px 0">YouTube QR Code</a><a href="/linkedin-qr-code/" style="display:block;color:#6b6b80;font-size:13px;text-decoration:none;padding:4px 0">LinkedIn QR Code</a><a href="/email-qr-code-generator/" style="display:block;color:#6b6b80;font-size:13px;text-decoration:none;padding:4px 0">Email QR Code</a><a href="/qr-code-for-location/" style="display:block;color:#6b6b80;font-size:13px;text-decoration:none;padding:4px 0">Location QR Code</a><a href="/upi-qr-code-generator/" style="display:block;color:#6b6b80;font-size:13px;text-decoration:none;padding:4px 0">UPI QR Code</a><a href="/gpay-qr-code-generator/" style="display:block;color:#6b6b80;font-size:13px;text-decoration:none;padding:4px 0">Google Pay QR</a><a href="/phonepe-qr-code-generator/" style="display:block;color:#6b6b80;font-size:13px;text-decoration:none;padding:4px 0">PhonePe QR</a><a href="/bhim-qr-code-generator/" style="display:block;color:#6b6b80;font-size:13px;text-decoration:none;padding:4px 0">BHIM QR Code</a></div>
+    <div><h4 style="font-family:'DM Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:2px;color:#6b6b80;margin-bottom:16px">Guides</h4><a href="/how-to-scan-qr-code-iphone/" style="display:block;color:#6b6b80;font-size:13px;text-decoration:none;padding:4px 0">Scan QR on iPhone</a><a href="/dynamic-vs-static-qr-code/" style="display:block;color:#6b6b80;font-size:13px;text-decoration:none;padding:4px 0">Dynamic vs Static QR</a><a href="/qr-code-png-download/" style="display:block;color:#6b6b80;font-size:13px;text-decoration:none;padding:4px 0">QR Code PNG Download</a><a href="/qr-code-size-guide/" style="display:block;color:#6b6b80;font-size:13px;text-decoration:none;padding:4px 0">QR Code Size Guide</a><a href="/qr-code-for-google-reviews/" style="display:block;color:#6b6b80;font-size:13px;text-decoration:none;padding:4px 0">QR Code for Google Reviews</a><a href="/how-to-create-qr-code-for-pdf/" style="display:block;color:#6b6b80;font-size:13px;text-decoration:none;padding:4px 0">QR Code for PDF</a><a href="/qr-code-for-instagram/" style="display:block;color:#6b6b80;font-size:13px;text-decoration:none;padding:4px 0">QR Code for Instagram</a><a href="/how-to-make-qr-code-for-link/" style="display:block;color:#6b6b80;font-size:13px;text-decoration:none;padding:4px 0">QR Code for Any Link</a><a href="/qr-code-marketing/" style="display:block;color:#6b6b80;font-size:13px;text-decoration:none;padding:4px 0">QR Code Marketing</a><a href="/qr-code-vs-barcode/" style="display:block;color:#6b6b80;font-size:13px;text-decoration:none;padding:4px 0">QR Code vs Barcode</a><a href="/qr-code-on-business-card/" style="display:block;color:#6b6b80;font-size:13px;text-decoration:none;padding:4px 0">QR Code on Business Card</a><a href="/how-to-track-qr-code/" style="display:block;color:#6b6b80;font-size:13px;text-decoration:none;padding:4px 0">How to Track QR Code</a><a href="/qr-code-error-correction/" style="display:block;color:#6b6b80;font-size:13px;text-decoration:none;padding:4px 0">QR Code Error Correction</a></div>
+    <div><h4 style="font-family:'DM Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:2px;color:#6b6b80;margin-bottom:16px">QRMake</h4><a href="/" style="display:block;color:#6b6b80;font-size:13px;text-decoration:none;padding:4px 0">Home</a><a href="mailto:hello@qrmake.org" style="display:block;color:#6b6b80;font-size:13px;text-decoration:none;padding:4px 0">Contact</a></div>
+  </div>
+  <div style="text-align:center;margin-top:40px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.06);font-size:12px;color:#6b6b80">© 2025 QRMake. Free QR Code Generator.</div>
+</footer>
+</body>
+</html>

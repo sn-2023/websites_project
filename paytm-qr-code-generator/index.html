@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M6169WPEGY"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-M6169WPEGY');</script>
+<title>Free Paytm QR Code Generator — Paytm UPI QR Code | QRMake</title>
+<meta name="description" content="Generate a Paytm QR code instantly. Enter your Paytm UPI ID (number@paytm), name and optional amount. Works with all UPI apps — free, no sign-up.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://qrmake.org/paytm-qr-code-generator/">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Paytm QR Code Generator","description":"Free online tool to generate Paytm UPI QR codes. Scan with Paytm, Google Pay, PhonePe, BHIM and all UPI apps.","url":"https://qrmake.org/paytm-qr-code-generator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"},"publisher":{"@type":"Organization","name":"QRMake","url":"https://qrmake.org"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a Paytm QR code?","acceptedAnswer":{"@type":"Answer","text":"A Paytm QR code is a standard UPI QR code linked to your Paytm UPI ID. When scanned with Paytm, Google Pay, PhonePe, or any UPI app, your payment details are pre-filled instantly. Paytm UPI IDs end in @paytm — for example 9876543210@paytm."}},{"@type":"Question","name":"What is my Paytm UPI ID?","acceptedAnswer":{"@type":"Answer","text":"Your Paytm UPI ID ends in @paytm and looks like 9876543210@paytm. To find it: open Paytm → tap your profile photo (top-left) → scroll to UPI ID or tap 'UPI & Payment Settings'. You can also see it in Paytm → Pay → 'Scan any QR' section."}},{"@type":"Question","name":"Can I accept payments from Google Pay users using a Paytm QR?","acceptedAnswer":{"@type":"Answer","text":"Yes. A Paytm QR code uses the standard NPCI upi:// format, so anyone with any UPI app — Google Pay, PhonePe, BHIM, Amazon Pay — can scan it and pay. According to NPCI, UPI processed 14.87 billion transactions in March 2025 across all apps."}},{"@type":"Question","name":"Is a Paytm QR code different from a Paytm wallet QR?","acceptedAnswer":{"@type":"Answer","text":"Yes. A Paytm UPI QR code (ending in @paytm) is a universal NPCI standard that works with all UPI apps. A Paytm wallet QR is a proprietary format that only works within the Paytm app ecosystem. For maximum reach, always use a UPI QR code as generated here — not the wallet QR."}},{"@type":"Question","name":"Is it safe to display my Paytm QR code publicly?","acceptedAnswer":{"@type":"Answer","text":"Yes. A UPI QR code can only receive money — it cannot debit your account. Displaying your Paytm QR code at a shop counter is exactly what NPCI designed it for. The payer needs their own UPI PIN on their phone to authorize the payment."}},{"@type":"Question","name":"Does this Paytm QR code work offline?","acceptedAnswer":{"@type":"Answer","text":"The QR code image is generated in your browser and saved to your device — no internet is needed to display it. The customer scanning needs internet to complete the UPI payment. You can print the QR code and display it permanently at your shop."}}]}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--text:#3D1500;--dim:#7A4010;--card:rgba(255,255,255,0.58);--border:rgba(200,120,40,0.22);--border-hover:rgba(200,100,20,0.45);--accent:#D45000;--radius:20px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(165deg,#FFD4B0 0%,#FFE4A0 22%,#FFF4C0 44%,#F8FBBC 62%,#D4F0DC 80%,#B8EEE8 100%);background-attachment:fixed;color:var(--text);font-family:'Space Grotesk',sans-serif;min-height:100vh;overflow-x:hidden}
+
+/* Sparkle stars */
+.stars{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.star{position:absolute;border-radius:50%;background:rgba(255,160,60,0.35);animation:twinkle var(--d,3s) ease-in-out infinite var(--dl,0s)}
+@keyframes twinkle{0%,100%{opacity:0;transform:scale(0.5)}50%{opacity:var(--op,0.8);transform:scale(1)}}
+
+.ambient{position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:0}
+.orb{position:absolute;border-radius:50%;filter:blur(130px);animation:float 22s ease-in-out infinite}
+.orb:nth-child(1){width:600px;height:600px;background:#FFCC80;opacity:0.18;top:-250px;right:-150px}
+.orb:nth-child(2){width:450px;height:450px;background:#FFD54F;opacity:0.14;bottom:-200px;left:-120px;animation-delay:-9s}
+.orb:nth-child(3){width:300px;height:300px;background:#FFAB40;opacity:0.09;top:40%;left:40%;animation-delay:-4s}
+@keyframes float{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(25px,-25px) scale(1.06)}66%{transform:translate(-18px,18px) scale(0.94)}}
+
+.app{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:24px}
+
+/* Header */
+.header{display:flex;justify-content:space-between;align-items:center;padding:16px 0;margin-bottom:48px}
+.logo-link{text-decoration:none}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:24px;color:#C84000}
+.logo-sub{font-size:11px;color:var(--dim);letter-spacing:2px;text-transform:uppercase;margin-top:2px;font-family:'DM Mono',monospace}
+.breadcrumb{font-size:13px;color:var(--dim);font-family:'DM Mono',monospace}
+.breadcrumb a{color:var(--dim);text-decoration:none}.breadcrumb a:hover{color:#C84000}
+.breadcrumb span{color:var(--text)}
+
+/* Hero */
+.hero-text{text-align:center;margin-bottom:56px}
+.hero-text h1{font-family:'Syne',sans-serif;font-size:clamp(28px,5vw,56px);font-weight:800;line-height:1.1;margin-bottom:16px;letter-spacing:-2px;color:#3D1500}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,186,242,0.1);border:1px solid rgba(0,186,242,0.3);border-radius:99px;padding:6px 16px;font-size:12px;color:#007AAA;font-family:'DM Mono',monospace;letter-spacing:1px;text-transform:uppercase;margin-bottom:20px}
+.hero-text p{color:#5A3010;font-size:17px;max-width:560px;margin:0 auto;line-height:1.6}
+
+/* App pills */
+.app-pills{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
+.app-pill{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,0.62);border:1px solid var(--border);border-radius:99px;padding:6px 14px;font-size:13px;color:#5A3010;text-decoration:none;transition:none}
+.app-pill.current{background:rgba(255,255,255,0.85);border:1.5px solid rgba(0,186,242,0.45);color:#007AAA;font-weight:600}
+a.app-pill{text-decoration:none}
+a.app-pill:hover{background:rgba(255,255,255,0.9);border-color:rgba(200,100,0,0.45);color:#C84000;transform:translateY(-1px);box-shadow:0 4px 12px rgba(180,80,0,0.12)}
+.pill-dot{display:inline-block;width:9px;height:9px;border-radius:50%;flex-shrink:0}
+
+/* Workspace */
+.workspace{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+@media(max-width:900px){.workspace{grid-template-columns:1fr}}
+
+/* Panel */
+.panel{background:rgba(255,255,255,0.62);border:1px solid var(--border);border-radius:var(--radius);padding:28px;backdrop-filter:blur(12px)}
+.panel:hover{border-color:var(--border-hover)}
+.panel-title{font-family:'DM Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--dim);margin-bottom:24px}
+
+.input-group{margin-bottom:16px}
+.input-label{font-size:12px;color:var(--dim);font-family:'DM Mono',monospace;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;display:block}
+.input-field{width:100%;background:rgba(255,255,255,0.8);border:1px solid rgba(200,120,40,0.22);border-radius:10px;padding:12px 16px;color:#3D1500;font-size:14px;font-family:'Space Grotesk',sans-serif;outline:none;transition:all 0.25s}
+.input-field:focus{border-color:#D45000;box-shadow:0 0 0 3px rgba(212,80,0,0.12)}
+.input-field::placeholder{color:rgba(122,64,16,0.5)}
+.row-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+.tip-box{background:rgba(255,255,255,0.7);border:1px solid rgba(200,120,40,0.25);border-radius:10px;padding:14px;font-size:13px;color:#5A3010;line-height:1.5;margin-bottom:20px}
+.tip-box strong{color:#C84000}
+
+/* Preview */
+.preview-panel{background:rgba(255,255,255,0.62);border:1px solid var(--border);border-radius:var(--radius);padding:28px;position:sticky;top:24px;backdrop-filter:blur(12px)}
+.qr-display{background:linear-gradient(135deg,#fffdf8,#fff8f0);border-radius:14px;padding:32px;display:flex;align-items:center;justify-content:center;min-height:300px;margin-bottom:24px;box-shadow:0 4px 30px rgba(200,100,0,0.1),0 20px 60px rgba(180,80,0,0.08)}
+.qr-display #qrcode{display:flex;align-items:center;justify-content:center}
+.qr-placeholder{display:flex;flex-direction:column;align-items:center;gap:12px;color:#7A4010}
+.qr-placeholder .ph-icon{font-size:48px;opacity:0.5}
+.qr-placeholder .ph-text{font-size:14px;opacity:0.7;font-family:'DM Mono',monospace;text-align:center}
+
+.upi-apps-label{font-size:12px;color:var(--dim);text-align:center;margin-bottom:12px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:1px}
+.upi-apps-row{display:flex;justify-content:center;gap:10px;margin-bottom:20px}
+.qr-preset{width:24px;height:24px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all 0.2s;flex-shrink:0}
+.qr-preset:hover{transform:scale(1.2)}
+.qr-preset.active{border-color:#3D1500;box-shadow:0 0 0 2px rgba(61,21,0,0.25)}
+
+.download-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.dl-btn{padding:14px;border-radius:12px;border:none;cursor:pointer;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;transition:all 0.25s;display:flex;align-items:center;justify-content:center;gap:8px}
+.dl-btn.primary{background:linear-gradient(135deg,#E85500,#D44000);color:#fff;box-shadow:0 4px 20px rgba(212,80,0,0.3)}
+.dl-btn.primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(212,80,0,0.45)}
+.dl-btn.secondary{background:rgba(255,255,255,0.7);color:#C84000;border:1px solid rgba(200,100,20,0.25)}
+.dl-btn.secondary:hover{border-color:#C84000;background:rgba(255,255,255,0.9)}
+
+/* SEO content */
+.seo-content{max-width:1200px;margin:56px auto;padding:0 16px}
+.seo-content h2{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;margin-top:40px;margin-bottom:16px;color:#3D1500}
+.seo-content h2:first-child{margin-top:0}
+.seo-content h3{font-size:18px;font-weight:600;margin-top:28px;margin-bottom:10px;color:#3D1500}
+.seo-content p{color:#5A3010;font-size:15px;line-height:1.7;margin-bottom:14px}
+.seo-content strong{color:#3D1500}
+.seo-content a{color:#C84000;text-decoration:none}.seo-content a:hover{text-decoration:underline}
+.seo-content code{background:rgba(200,100,0,0.08);border:1px solid rgba(200,100,0,0.2);border-radius:6px;padding:2px 8px;font-family:'DM Mono',monospace;font-size:13px;color:#C84000}
+
+.step-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:24px 0}
+.step-card{background:rgba(255,255,255,0.62);border:1px solid rgba(200,120,40,0.18);border-radius:12px;padding:20px}
+.step-num{font-family:'DM Mono',monospace;font-size:11px;color:#C84000;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.step-card h4{font-size:15px;font-weight:600;margin-bottom:6px;color:#3D1500}
+.step-card p{font-size:13px;color:#7A4010;line-height:1.5;margin:0}
+
+.upi-format-box{background:rgba(255,255,255,0.7);border:1px solid rgba(200,100,0,0.22);border-radius:12px;padding:20px;margin:20px 0;font-family:'DM Mono',monospace;font-size:13px;color:#C84000;line-height:1.8;word-break:break-all}
+
+.cta-box{background:linear-gradient(135deg,rgba(255,200,120,0.18),rgba(255,160,60,0.12));border:1px solid rgba(200,120,40,0.22);border-radius:var(--radius);padding:32px;text-align:center;margin:40px 0}
+.cta-box h3{margin-top:0;font-size:20px;margin-bottom:8px;font-family:'Syne',sans-serif;font-weight:700;color:#3D1500}
+.cta-box p{margin-bottom:16px;color:#5A3010;font-size:15px}
+.cta-btn{display:inline-block;background:linear-gradient(135deg,#E85500,#D44000);color:#fff !important;padding:12px 28px;border-radius:12px;text-decoration:none;font-weight:700;transition:all 0.25s}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(212,80,0,0.35);text-decoration:none;color:#fff}
+
+/* Related tools */
+.related-tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:20px 0}
+.related-tool-link{display:block;background:rgba(255,255,255,0.62);border:1px solid rgba(200,120,40,0.18);border-radius:12px;padding:16px;color:#7A4010;text-decoration:none;font-size:14px;transition:all 0.25s}
+.related-tool-link:hover{border-color:#C84000;color:#C84000;text-decoration:none}
+
+/* Geo stats */
+.geo-stats{background:rgba(255,200,120,0.15);border:1px solid rgba(200,120,40,0.22);border-radius:12px;padding:20px;margin:24px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
+.geo-stat{text-align:center}
+.geo-stat .stat-num{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:#C84000;display:block}
+.geo-stat .stat-label{font-size:12px;color:#5A3010;line-height:1.4}
+.geo-stat .stat-source{font-size:11px;color:#7A4010;opacity:0.7;font-family:'DM Mono',monospace;margin-top:4px}
+
+/* Footer */
+.site-footer{border-top:1px solid rgba(200,120,40,0.18);margin-top:48px;padding:48px 0 32px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;max-width:1000px;margin:0 auto;padding:0 16px}
+@media(max-width:700px){.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.footer-grid{grid-template-columns:1fr}}
+.footer-brand p{font-size:13px;color:#7A4010;line-height:1.6}
+.footer-col h4{font-family:'DM Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:2px;color:#7A4010;margin-bottom:16px}
+.footer-col a{display:block;color:#7A4A20;font-size:13px;text-decoration:none;padding:4px 0}
+.footer-col a:hover{color:#C84000}
+.footer-bottom{text-align:center;margin-top:40px;padding-top:24px;border-top:1px solid rgba(200,120,40,0.12);font-size:12px;color:#7A4010}
+
+.toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(100px);background:rgba(255,255,255,0.92);border:1px solid rgba(200,120,40,0.25);border-radius:14px;padding:14px 24px;font-size:14px;z-index:200;display:flex;align-items:center;gap:10px;box-shadow:0 12px 40px rgba(180,80,0,0.15);transition:transform 0.4s cubic-bezier(0.16,1,0.3,1);color:#3D1500}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+.fade-in{opacity:0;transform:translateY(20px);animation:fadeUp 0.6s ease forwards}
+@keyframes fadeUp{to{opacity:1;transform:none}}
+
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:26px;letter-spacing:-0.5px;display:inline-flex;position:relative;cursor:default}
+.logo-letter{display:inline-block;background:linear-gradient(135deg,#6c5ce7,#00d2b4,#ff6b9d,#6c5ce7);background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:logoGradient 6s ease infinite,logoEntrance 0.6s cubic-bezier(0.34,1.56,0.64,1) both;animation-delay:calc(var(--i)*0.08s),calc(var(--i)*0.08s);transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1)}
+.logo-letter.highlight{background:linear-gradient(135deg,#00d2b4,#00f5d4,#6c5ce7,#00d2b4);background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:logoGradient 6s ease infinite,logoEntrance 0.6s cubic-bezier(0.34,1.56,0.64,1) both;animation-delay:calc(var(--i)*0.08s),calc(var(--i)*0.08s)}
+.logo:hover .logo-letter{animation:logoGradient 6s ease infinite,logoWave 0.5s cubic-bezier(0.34,1.56,0.64,1);animation-delay:calc(var(--i)*0.05s),calc(var(--i)*0.05s)}
+.logo::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.12),transparent);animation:logoGlint 4s ease-in-out infinite;pointer-events:none}
+@keyframes logoEntrance{0%{opacity:0;transform:translateY(16px) rotateX(40deg) scale(0.6);filter:blur(4px)}100%{opacity:1;transform:translateY(0) rotateX(0deg) scale(1);filter:blur(0)}}
+@keyframes logoGradient{0%{background-position:0% 50%}33%{background-position:100% 50%}66%{background-position:50% 100%}100%{background-position:0% 50%}}
+@keyframes logoWave{0%{transform:translateY(0)}30%{transform:translateY(-8px) scale(1.15)}50%{transform:translateY(-6px) scale(1.1)}100%{transform:translateY(0) scale(1)}}
+@keyframes logoGlint{0%,80%{left:-100%;opacity:0}85%{opacity:1}100%{left:200%;opacity:0}}
+
+</style>
+</head>
+<body>
+
+<!-- Sparkle stars -->
+<div class="stars" id="stars"></div>
+<div class="ambient"><div class="orb"></div><div class="orb"></div><div class="orb"></div></div>
+
+<div class="app">
+  <header class="header fade-in">
+    <a href="/" class="logo-link">
+      <div class="logo" aria-label="QRMake"><span class="logo-letter" style="--i:0">Q</span><span class="logo-letter" style="--i:1">R</span><span class="logo-letter highlight" style="--i:2">M</span><span class="logo-letter highlight" style="--i:3">a</span><span class="logo-letter highlight" style="--i:4">k</span><span class="logo-letter highlight" style="--i:5">e</span></div>
+      <div class="logo-sub">free qr generator</div>
+    </a>
+    <nav class="breadcrumb"><a href="/">Home</a> / <span>Paytm QR Code</span></nav>
+  </header>
+
+  <div class="hero-text fade-in">
+    <div class="hero-badge">🔵 Paytm QR Code</div>
+    <h1>Paytm QR Code Generator</h1>
+    <p>Create a Paytm UPI QR code for instant payments. Works with Paytm, Google Pay, PhonePe and all UPI apps. Free — no sign-up needed.</p>
+  </div>
+
+  <div class="app-pills fade-in">
+    <a href="/gpay-qr-code-generator/" class="app-pill">
+      <span class="pill-dot" style="background:#34A853"></span> Google Pay
+    </a>
+    <a href="/phonepe-qr-code-generator/" class="app-pill">
+      <span class="pill-dot" style="background:#6739B7"></span> PhonePe
+    </a>
+    <div class="app-pill current">
+      <span class="pill-dot" style="background:#00BAF2"></span> Paytm
+    </div>
+    <a href="/bhim-qr-code-generator/" class="app-pill">
+      <span class="pill-dot" style="background:#FF6600"></span> BHIM
+    </a>
+    <div class="app-pill">
+      <span class="pill-dot" style="background:#AAB0BC"></span> All UPI Apps
+    </div>
+  </div>
+
+  <div class="workspace">
+    <div class="panel fade-in">
+      <div class="panel-title">Your Paytm UPI Details</div>
+      <div class="tip-box"><strong>Paytm UPI ID:</strong> Find it in Paytm → Profile → UPI &amp; Payment Settings. Looks like 9876543210@paytm</div>
+      <div class="input-group">
+        <label class="input-label">Paytm UPI ID *</label>
+        <input class="input-field" id="upiId" placeholder="9876543210@paytm" oninput="gen()">
+      </div>
+      <div class="input-group">
+        <label class="input-label">Your Name (Payee Name) *</label>
+        <input class="input-field" id="upiName" placeholder="Rahul Sharma / Shop Name" oninput="gen()">
+      </div>
+      <div class="row-2">
+        <div class="input-group">
+          <label class="input-label">Amount ₹ (optional)</label>
+          <input class="input-field" id="upiAmount" placeholder="500" type="number" min="0" oninput="gen()">
+        </div>
+        <div class="input-group">
+          <label class="input-label">Currency</label>
+          <input class="input-field" value="INR" readonly style="opacity:0.6;cursor:not-allowed">
+        </div>
+      </div>
+      <div class="input-group">
+        <label class="input-label">Transaction Note (optional)</label>
+        <input class="input-field" id="upiNote" placeholder="Payment for order #123" oninput="gen()">
+      </div>
+    </div>
+
+    <div class="preview-panel fade-in">
+      <div class="panel-title">Your Paytm QR Code</div>
+      <div class="qr-display">
+        <div id="qrcode"></div>
+        <div class="qr-placeholder" id="ph">
+          <div class="ph-icon">🔵</div>
+          <div class="ph-text">Enter your Paytm UPI ID to generate</div>
+        </div>
+      </div>
+      <div class="upi-apps-label">QR Color</div>
+      <div class="upi-apps-row">
+        <div class="qr-preset active" style="background:#000000" data-fg="#000000" data-bg="#ffffff" onclick="applyColor(this)" title="Classic Black"></div>
+        <div class="qr-preset" style="background:#6739B7" data-fg="#6739B7" data-bg="#faf5ff" onclick="applyColor(this)" title="Purple"></div>
+        <div class="qr-preset" style="background:#0055CC" data-fg="#0055CC" data-bg="#eff6ff" onclick="applyColor(this)" title="Blue"></div>
+        <div class="qr-preset" style="background:#C84000" data-fg="#C84000" data-bg="#fff8f0" onclick="applyColor(this)" title="Orange"></div>
+        <div class="qr-preset" style="background:#C0206A" data-fg="#C0206A" data-bg="#fff0f6" onclick="applyColor(this)" title="Pink"></div>
+        <div class="qr-preset" style="background:#1A6B2A" data-fg="#1A6B2A" data-bg="#f0fff4" onclick="applyColor(this)" title="Dark Green"></div>
+      </div>
+      <div class="download-row">
+        <button class="dl-btn primary" onclick="dlPNG('paytm-qr')">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          Download PNG
+        </button>
+        <button class="dl-btn secondary" onclick="dlPNG('paytm-qr')">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          Save SVG
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="seo-content">
+    <h2>What Is a Paytm QR Code?</h2>
+    <p>A Paytm QR code is a <strong>standard UPI QR code</strong> linked to your Paytm UPI ID — which ends in <code>@paytm</code>. When someone scans it with Paytm, Google Pay, PhonePe, BHIM, or any UPI app, your payment details are pre-filled and they can pay you in seconds. Paytm was India's first major digital payment app, founded in 2010, and according to Statista, <strong>Paytm had over 350 million registered users</strong> as of 2024.</p>
+    <p>The QR code stores a standard UPI deep link in this format:</p>
+    <div class="upi-format-box">upi://pay?pa=9876543210@paytm&amp;pn=YOUR_NAME&amp;am=AMOUNT&amp;cu=INR&amp;tn=NOTE</div>
+    <p>This <code>upi://</code> URI format is defined and governed by <strong>NPCI (National Payments Corporation of India)</strong>. The <code>upi://</code> format ensures full interoperability — any certified UPI app can scan and process payments from your Paytm QR code. You are not locked into the Paytm ecosystem.</p>
+
+    <div class="geo-stats">
+      <div class="geo-stat">
+        <span class="stat-num">350M+</span>
+        <div class="stat-label">Paytm registered users</div>
+        <div class="stat-source">Source: Statista 2024</div>
+      </div>
+      <div class="geo-stat">
+        <span class="stat-num">14.87B</span>
+        <div class="stat-label">UPI transactions in March 2025</div>
+        <div class="stat-source">Source: NPCI 2025</div>
+      </div>
+      <div class="geo-stat">
+        <span class="stat-num">@paytm</span>
+        <div class="stat-label">Paytm's primary UPI handle</div>
+        <div class="stat-source">Source: NPCI</div>
+      </div>
+      <div class="geo-stat">
+        <span class="stat-num">2010</span>
+        <div class="stat-label">Year Paytm launched — India's first major payment app</div>
+        <div class="stat-source">Source: Paytm</div>
+      </div>
+    </div>
+
+    <h2>How to Find Your Paytm UPI ID</h2>
+    <p>Your Paytm UPI ID is what goes into the generator above. It looks like <code>9876543210@paytm</code> — your mobile number followed by <code>@paytm</code>. Here's how to find it in four steps:</p>
+    <div class="step-cards">
+      <div class="step-card"><div class="step-num">Step 01</div><h4>Open Paytm app</h4><p>Launch Paytm on your Android or iOS device.</p></div>
+      <div class="step-card"><div class="step-num">Step 02</div><h4>Tap Profile (top-left)</h4><p>Tap your profile photo or avatar at the top-left corner of the Paytm home screen.</p></div>
+      <div class="step-card"><div class="step-num">Step 03</div><h4>UPI &amp; Payment Settings</h4><p>Scroll down to "UPI &amp; Payment Settings" to see all your linked UPI IDs.</p></div>
+      <div class="step-card"><div class="step-num">Step 04</div><h4>Copy your @paytm UPI ID</h4><p>Copy the UPI ID ending in @paytm and paste it into the generator above.</p></div>
+    </div>
+
+    <h3>Paytm UPI QR vs Paytm Wallet QR</h3>
+    <p>There are two types of QR codes in the Paytm app, and it's important to know the difference. A <strong>Paytm UPI QR code</strong> (the type generated here) uses the standard NPCI <code>upi://</code> format linked to your <code>@paytm</code> UPI ID — it works with every UPI app including Google Pay, PhonePe, BHIM, and Amazon Pay. A <strong>Paytm wallet QR</strong>, by contrast, is a proprietary format that routes payments through the Paytm wallet system and can only be scanned within the Paytm ecosystem.</p>
+    <p>For merchants and shop owners, <strong>always use a UPI QR code</strong> — not the wallet QR. A UPI QR reaches 100% of your customers regardless of which app they use, while a wallet QR limits you to only Paytm users. The generator on this page creates a proper UPI QR code.</p>
+
+    <h3>Using Your Paytm QR Code for Business</h3>
+    <p>Whether you run a shop counter, a restaurant, a home business, or freelance — a Paytm QR code makes accepting payments effortless. <strong>Print and laminate it at your billing desk.</strong> Place it on restaurant tables alongside the menu. Add it to your digital invoices as an embedded PNG. Share the downloaded image directly over <strong>WhatsApp</strong> to clients — they screenshot it, open their UPI app, scan from gallery, and pay instantly.</p>
+    <p>With over 350 million Paytm users and the <code>upi://</code> standard ensuring interoperability, customers on Google Pay, PhonePe, BHIM, Amazon Pay, and any UPI-certified app can all pay you with the same QR code. One QR. Every customer. No transaction fees on the receiver's end.</p>
+
+    <div class="cta-box">
+      <h3>Also generate QR codes for WiFi, vCards and more</h3>
+      <p>QRMake offers free QR generators for every use case — no sign-up, no watermarks, no limits.</p>
+      <a href="/" class="cta-btn">Open QR Code Generator →</a>
+    </div>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <h3>What is a Paytm QR code?</h3>
+    <p>A Paytm QR code is a standard UPI QR code linked to your Paytm UPI ID. When scanned with Paytm, Google Pay, PhonePe, or any UPI app, your payment details are pre-filled instantly. Paytm UPI IDs end in <code>@paytm</code> — for example <code>9876543210@paytm</code>. The QR code encodes the standard NPCI <code>upi://</code> URI, which all certified UPI apps across India can scan and process.</p>
+
+    <h3>What is my Paytm UPI ID?</h3>
+    <p>Your Paytm UPI ID ends in <code>@paytm</code> and looks like <code>9876543210@paytm</code>. To find it: open Paytm → tap your profile photo (top-left) → scroll to UPI ID or tap 'UPI &amp; Payment Settings'. You can also see it in Paytm → Pay → 'Scan any QR' section, where your UPI ID is displayed below your name and QR code.</p>
+
+    <h3>Can I accept payments from Google Pay users using a Paytm QR?</h3>
+    <p>Yes. A Paytm QR code uses the standard NPCI <code>upi://</code> format, so anyone with any UPI app — Google Pay, PhonePe, BHIM, Amazon Pay — can scan it and pay. UPI is interoperable by design: NPCI mandates that all certified UPI apps accept payments to any UPI VPA regardless of which bank or app it belongs to. According to NPCI, UPI processed <strong>14.87 billion transactions in March 2025</strong> across all apps.</p>
+
+    <h3>Is a Paytm QR code different from a Paytm wallet QR?</h3>
+    <p>Yes. A Paytm UPI QR code (ending in <code>@paytm</code>) is a universal NPCI standard that works with all UPI apps. A Paytm wallet QR is a proprietary format that only works within the Paytm app ecosystem. For maximum reach — especially at a shop counter or for invoicing — always use a UPI QR code as generated here, not the wallet QR. The UPI QR ensures every customer, regardless of their app, can pay you.</p>
+
+    <h3>Is it safe to display my Paytm QR code publicly?</h3>
+    <p>Yes. A UPI QR code can only <em>receive</em> money — it cannot debit your account. Displaying your Paytm QR code at a shop counter is exactly what NPCI designed it for. The payer needs their own UPI PIN on their phone to authorize the payment, and that PIN never leaves their device. Your Paytm QR code is as safe to display publicly as printing your bank account number for incoming transfers.</p>
+
+    <h3>Does this Paytm QR code work offline?</h3>
+    <p>The QR code image is generated entirely in your browser and saved to your device — <strong>no internet is needed to display it</strong>. You can print it, show it on a screen, or share it as a saved image file without any connectivity. The customer scanning needs internet to complete the UPI payment — the actual transaction happens via the UPI network in real time and requires the payer to be online.</p>
+
+    <h2>Related QR Tools</h2>
+    <p>Need QR codes for other UPI apps or use cases? These free tools are built on the same standard:</p>
+    <div class="related-tools">
+      <a href="/upi-qr-code-generator/" class="related-tool-link">UPI QR Code</a>
+      <a href="/gpay-qr-code-generator/" class="related-tool-link">Google Pay QR Code</a>
+      <a href="/phonepe-qr-code-generator/" class="related-tool-link">PhonePe QR Code</a>
+      <a href="/bhim-qr-code-generator/" class="related-tool-link">BHIM QR Code</a>
+      <a href="/whatsapp-qr-code/" class="related-tool-link">WhatsApp QR</a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand"><div class="logo">QRMake</div><p>Free QR code generator. No sign-up, no limits, no watermarks.</p></div>
+      <div class="footer-col"><h4>QR Tools</h4>
+        <a href="/wifi-qr-code-generator/">WiFi QR Code</a>
+        <a href="/business-card-qr-code/">Business Card QR</a>
+        <a href="/restaurant-menu-qr-code/">Restaurant Menu QR</a>
+        <a href="/google-form-qr-code/">Google Form QR</a>
+        <a href="/vcard-qr-code-generator/">vCard QR Code</a>
+        <a href="/sms-qr-code-generator/">SMS QR Code</a>
+        <a href="/phone-number-qr-code/">Phone Number QR</a>
+        <a href="/pdf-qr-code-generator/">PDF QR Code</a>
+        <a href="/social-media-qr-code/">Social Media QR</a>
+        <a href="/whatsapp-qr-code/">WhatsApp QR Code</a>
+        <a href="/youtube-qr-code/">YouTube QR Code</a>
+        <a href="/linkedin-qr-code/">LinkedIn QR Code</a>
+        <a href="/email-qr-code-generator/">Email QR Code</a>
+        <a href="/qr-code-for-location/">Location QR Code</a>
+        <a href="/upi-qr-code-generator/">UPI QR Code</a>
+        <a href="/gpay-qr-code-generator/">Google Pay QR Code</a>
+        <a href="/phonepe-qr-code-generator/">PhonePe QR Code</a>
+        <a href="/bhim-qr-code-generator/">BHIM QR Code</a>
+        <a href="/paytm-qr-code-generator/">Paytm QR Code</a>
+      </div>
+      <div class="footer-col"><h4>Guides</h4>
+        <a href="/how-to-scan-qr-code-iphone/">Scan QR on iPhone</a>
+        <a href="/dynamic-vs-static-qr-code/">Dynamic vs Static QR</a>
+        <a href="/qr-code-png-download/">QR Code PNG Download</a>
+        <a href="/qr-code-size-guide/">QR Code Size Guide</a>
+        <a href="/qr-code-for-google-reviews/">QR Code for Google Reviews</a>
+        <a href="/how-to-create-qr-code-for-pdf/">QR Code for PDF</a>
+        <a href="/qr-code-for-instagram/">QR Code for Instagram</a>
+        <a href="/how-to-make-qr-code-for-link/">QR Code for Any Link</a>
+        <a href="/qr-code-marketing/">QR Code Marketing</a>
+        <a href="/qr-code-vs-barcode/">QR Code vs Barcode</a>
+        <a href="/qr-code-on-business-card/">QR Code on Business Card</a>
+        <a href="/how-to-track-qr-code/">How to Track QR Code</a>
+        <a href="/qr-code-error-correction/">QR Code Error Correction</a>
+      </div>
+      <div class="footer-col"><h4>QRMake</h4><a href="/">Home</a><a href="mailto:hello@qrmake.org">Contact</a></div>
+    </div>
+    <div class="footer-bottom">© 2025 QRMake. Free QR Code Generator.</div>
+  </footer>
+</div>
+
+<div class="toast" id="toast"><span class="toast-icon">✓</span><span id="toastText">Done</span></div>
+
+<script>
+let qrFg='#000000',qrBg='#ffffff';
+function applyColor(el){
+  document.querySelectorAll('.qr-preset').forEach(p=>p.classList.remove('active'));
+  el.classList.add('active');
+  qrFg=el.dataset.fg;qrBg=el.dataset.bg;
+  gen();
+}
+// Sparkle stars
+(function(){
+  const container = document.getElementById('stars');
+  for(let i=0;i<60;i++){
+    const s=document.createElement('div');
+    s.className='star';
+    const size=Math.random()*3+1;
+    s.style.cssText=`width:${size}px;height:${size}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--d:${2+Math.random()*4}s;--dl:${Math.random()*5}s;--op:${0.4+Math.random()*0.6}`;
+    container.appendChild(s);
+  }
+})();
+
+function gen(){
+  const id=document.getElementById('upiId').value.trim();
+  const name=document.getElementById('upiName').value.trim();
+  if(!id||!name){
+    document.getElementById('qrcode').innerHTML='';
+    document.getElementById('ph').style.display='flex';
+    return;
+  }
+  document.getElementById('ph').style.display='none';
+  document.getElementById('qrcode').innerHTML='';
+  const amt=document.getElementById('upiAmount').value.trim();
+  const note=document.getElementById('upiNote').value.trim();
+  let upi=`upi://pay?pa=${encodeURIComponent(id)}&pn=${encodeURIComponent(name)}&cu=INR`;
+  if(amt&&parseFloat(amt)>0)upi+=`&am=${parseFloat(amt).toFixed(2)}`;
+  if(note)upi+=`&tn=${encodeURIComponent(note)}`;
+  new QRCode(document.getElementById('qrcode'),{
+    text:upi,width:256,height:256,
+    colorDark:qrFg,colorLight:qrBg,
+    correctLevel:QRCode.CorrectLevel.H
+  });
+}
+
+function dlPNG(name){
+  const c=document.querySelector('#qrcode canvas');
+  if(!c){showToast('⚠️','Enter your Paytm UPI ID and name first');return;}
+  const s=4,h=document.createElement('canvas');
+  h.width=c.width*s;h.height=c.height*s;
+  const x=h.getContext('2d');
+  x.fillStyle=qrBg;x.fillRect(0,0,h.width,h.height);
+  x.imageSmoothingEnabled=false;
+  x.drawImage(c,0,0,h.width,h.height);
+  const a=document.createElement('a');
+  a.download=name+'-qrmake.png';
+  a.href=h.toDataURL('image/png');a.click();
+  showToast('✓','Paytm QR code downloaded!');
+}
+
+function showToast(i,t){
+  const toast=document.getElementById('toast');
+  document.getElementById('toastText').textContent=t;
+  toast.querySelector('.toast-icon').textContent=i;
+  toast.classList.add('show');
+  setTimeout(()=>toast.classList.remove('show'),3000);
+}
+</script>
+</body>
+</html>
